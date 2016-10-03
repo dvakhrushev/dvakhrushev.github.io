@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://cicero.brightpattern.com/app/lib/servicepatternapi-dev.js"></script>
+    <script src="../../js/jqery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $("#recorddatcall").click(function() {
+          returnCallStatus();
+      });
+      function returnCallStatus() {
+        var statusofcall = getCallRecordingStatus(callback);
+        $("#callstatus").html(statusofcall);
+      };
+    </script>
+  </head>
+  <body>
+    <button id="recorddatcall" type="button">Record Dat Call</button>
+    <p id="callstatus"></p>
+  </body>
