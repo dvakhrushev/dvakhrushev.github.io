@@ -1,0 +1,37 @@
+<!-- You have to put this piece of JavaScript code into your web page
+Note: Use <!DOCTYPE html> on the page where snippet located for better rendering
+-->
+
+<script type="text/javascript">
+    SERVICE_PATTERN_CHAT_CONFIG = {
+        appId: 'new',
+        clientId: 'WebChat',
+        apiUrl: 'https://new.brightpattern.com:9443/clientweb/api/v1',
+        tenantUrl: 'new.brightpattern.com',
+        width: 300,
+        chatPath: 'https://new.brightpattern.com:9443/clientweb/chat-client-v2/',
+        callback: false,
+        hidden: false,
+        subject: '',
+        sound_notification: false,
+        logging: false,
+        sound_notification_file: 'https://new.brightpattern.com:9443/clientweb/chat-client-v2/media/ding.mp3'
+
+        /* Default customer data, it can be collected on current site's context*/
+        /* Customer data also can be requested via "Request Input" block + "MobileChatCustomerData" formName */
+/*
+         first_name: '',
+         last_name: '',
+         email: '',
+         account_number: '',
+         phone_number: '', /
+         location : {
+             latitude: 37.5151481,
+             longitude: -122.4183997
+         }
+ */
+    };
+</script>
+
+<script type="text/javascript" src="https://new.brightpattern.com:9443/clientweb/chat-client-v2/js/snippet.js"></script>
+ 
