@@ -643,7 +643,7 @@
 
     $(document).ready(function() {
 	
-		$('#first_name3').keyup(function(){
+		$('#name3').keyup(function(){
 			if($(this).val().length>0){
 				$('#submit4').attr('href','sms:+14155551212&body=Hi,%20my%20name%20is%20'+encodeURIComponent($(this).val())+'%20I%20would%20like%20to%20'+encodeURIComponent($('input[name="action3"]').val()));
 			} else{
@@ -651,7 +651,7 @@
 			}
 		});
 		
-		$('#message_textarea, #form-action4 input, #first_name4, #email3, #phone3, #extension3, #copy_wrapper').bind('keyup change',function(){
+		$('#message_textarea, #form-action4 input, #name4, #email3, #phone3, #extension3, #copy_wrapper').bind('keyup change',function(){
 			if($("#extension3").val().length>0){
 				ext=" Ext."+$("#extension3").val();
 			} else {
@@ -662,7 +662,7 @@
 			} else {
 				copy="";
 			}
-			$('#submit5').attr('href','mailto:mail@digiterra.pro?subject=Chat message from '+encodeURIComponent($("#first_name3").val())+'&amp;body=<strong>Subject:</strong>'+encodeURIComponent($('input[name="action4"]').val())+'</br/><strong>Name:</strong>'+encodeURIComponent($("#first_name4").val())+'<br/><strong>Phone:</strong>'+encodeURIComponent($("#phone3").val())+encodeURIComponent(ext)+'<br/><strong>Message:</strong>'+encodeURIComponent($('#message_textarea').val())+copy);
+			$('#submit5').attr('href','mailto:mail@digiterra.pro?subject=Chat message from '+encodeURIComponent($("#name3").val())+'&amp;body=<strong>Subject:</strong>'+encodeURIComponent($('input[name="action4"]').val())+'</br/><strong>Name:</strong>'+encodeURIComponent($("#name4").val())+'<br/><strong>Phone:</strong>'+encodeURIComponent($("#phone3").val())+encodeURIComponent(ext)+'<br/><strong>Message:</strong>'+encodeURIComponent($('#message_textarea').val())+copy);
 			
 		});
 	
