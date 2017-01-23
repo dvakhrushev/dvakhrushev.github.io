@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Test Page</title>
+</head>
+<body>
+
+<!-- You have to put this piece of JavaScript code into your web page -->
+
+<script type="text/javascript">
+    SERVICE_PATTERN_CHAT_CONFIG = {
+        appId: '123',                   /* Unique identifier of Mobile/Web record of Portal Tenant Management   */
+        clientId: 'WebChat',            /* no need to change this */
+        apiUrl: 'https://new.brightpattern.com:9443/clientweb/api/v1',    /* path to public API can be absolute like http://example.brightpattern.com:98/clientweb/api/v1 or relative*/
+        tenantUrl: 'example.com',
+        width: 300,                     /* chat width */
+        chatPath: '',                    /* relative path to client-chat-page.html i.e empty here because snippet-page.html and client-chat-page.html in same directory */
+        callback:false,
+        subject: 'TEST SUBJECT',
+        sound_notification: true,
+        sound_notification_file: 'media/ding.mp3'
+
+        /* Default customer data, it can be collected on current site's context*/
+        /* Customer data also can be requested via "Request Input" block + "MobileChatCustomerData" formName */
+/*
+        first_name: '',
+        last_name: '',
+        from: '',
+        email: '',
+        account_number: '',
+        phone_number: 91001,
+        location : {
+            latitude: 37.5151481,
+            longitude: -122.4183997
+        }
+*/
+
+    };
+</script>
+<script type="text/javascript" src="js/snippet.js"></script>
+</body>
+</html>
