@@ -689,7 +689,7 @@
 		$('#questionForm .section:visible input[data-required="1"]').attr('required','required');
 		
 		$('input[name="tabs"]').change(function(){
-		if(window.chatSession.sessionStatus){
+		if(window.chatSession.internalParty){
 			if($(this).val()=='call' || $(this).val()=='sms'){
 				$('#offline-form').show();
 				$('#questionForm').show();
