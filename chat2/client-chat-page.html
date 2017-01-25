@@ -729,14 +729,19 @@
 			$('#section-phone .standby').removeClass('momentarily');
 			$('#section-phone .standby').addClass('interval');
 		});
+
 		$('#submit2').click(function(){
 			$('#section-phone .params-wrapper').hide();
 			$('#section-phone .standby').show();
 			$('#section-phone .standby').addClass('momentarily');
 			$('#section-phone .standby').removeClass('interval');
-                if(window.chatSession.internalParty) {
-                    window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone2').val());
+            if(window.chatSession.internalParty) {
+                window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone2').val());
+            } else {
+                if(currentForm && typeof currentForm.onSubmit === 'function') {
+                    currentForm.onSubmit();
                 }
+            }
 		});
 		
 		$('.submit_standby').click(function(){
