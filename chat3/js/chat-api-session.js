@@ -398,6 +398,10 @@
                 send({type: "REQUEST_PHONE_CALL", number: number});
             };
 
+            var requestSms = function(number) {
+                send({type: "REQUEST_SMS", number: number});
+            };
+
             var endCall = function() {
                 send({type: "END_CALL"});
             };
@@ -423,6 +427,7 @@
             return {
                 requestCall : requestCall,
                 requestPhoneCall : requestPhoneCall,
+                requestSms : requestSms,
                 answerCall : answerCall,
                 offerCall : offerCall,
                 sendIceCandidate : sendIceCandidate,

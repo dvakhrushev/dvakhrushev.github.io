@@ -762,7 +762,7 @@
 				}
 				
 				if(window.chatSession.internalParty) {
-					window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone2').val()+' in 5 minutes');
+					window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone2').val());
 				} else {
 					if(currentForm && typeof currentForm.onSubmit === 'function') {
 						currentForm.onSubmit();
@@ -858,7 +858,7 @@
 				$('#section-sms .params-wrapper').hide();
 				$('#section-sms .standby').show();
 				if(window.chatSession.internalParty) {
-					window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone3').val()+' text');
+					window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestSms($('#phone3').val());
 				} else {
 					if(currentForm && typeof currentForm.onSubmit === 'function') {
 						currentForm.onSubmit();
