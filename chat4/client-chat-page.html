@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat</title>
+<meta name="HandheldFriendly" content="True" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/wrong.css" rel="stylesheet" type="text/css">
+<link href="css/override.css" rel="stylesheet" type="text/css">
+<!--link href="js/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" type="text/css"-->
+
+<script type="text/javascript" src="js/json2.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/datetime.min.js"></script>
+<script type="text/javascript" src="js/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="js/jQuery.XDomainRequest.min.js"></script>
+<script type="text/javascript" src="js/chat-api-session.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch-punch.vertical-scroll-fix.min.js"></script>
+<script type="text/javascript" src="js/client-chat-ui.js"></script>
+<script type="text/javascript" src="js/autosize.min.js"></script>
+<script type="text/javascript"> (function(){    
+
+    var cp = {};
+    var currentFormName = '';
+    var currentFormRequestId = '';
+    var currentForm = null;
+    var extChatData = {};
+
+    var getUrlVars = function(url) {
+        var vars = {}, hash;
+        var hashes = url.slice(url.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars[hash[0]] = decodeURIComponent(hash[1]);
+        }
+        return vars;
+    };
+
+    var makeid = function () {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    };
+
+    var mobileCheck = function() {
+        var check = false;
+        (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+        return check;
+    };
+
+    var updateScrollbar = function() {
+        var outer = $('#messages-div-outer');
+        var inner = $('#messages-div-inner');
+        var ih = inner.height();
+        var oh = outer.height();
+        outer.perfectScrollbar('update');
+
+        inner.css("bottom", ih > oh ? "auto" : "0" );
+
+        inner.css("top", ih > oh ? "0" : "auto" );
+
+        if(ih > oh) {
+            outer.scrollTop(ih);
+        }
+    };
+
+    var safeEndSession = function() {
+        if(!window.chatSession) {
+            window.parent.postMessage("sp-session-end", "*");
+        } else if(window.chatSession.sessionStatus == 'connected') {
+            //session queued or connected, need disconnect
+            var confirm = window.confirm("Do you want to end the chat session?");
+            if(confirm) {
+                window.chatSession.sessionStatus = undefined;
+                window.chatSession.disconnectSession();
+            }
+        } else if(!window.chatSession.sessionEnded) {
+            window.chatSession.endSession();
+        } else {
+            window.chatSession.uiCallbacks.onSessionEnded();
+        }
+    };
+	
+	var safeEndSessionWithoutRedirect = function() {
+        if(!window.chatSession) {
+            window.parent.postMessage("sp-session-end", "*");
+        } else if(window.chatSession.sessionStatus == 'connected') {
+            //session queued or connected, need disconnect
+            var confirm = window.confirm("Do you want to end the chat session?");
+            if(confirm) {
+                window.chatSession.sessionStatus = undefined;
+                window.chatSession.disconnectSession();
+            }
+        } else if(!window.chatSession.sessionEnded) {
+            window.chatSession.endSessionWithoutRedirect();
+        } else {
+            window.chatSession.uiCallbacks.onSessionEnded();
+        }
+    };
+
+    $(window).on("message", function(event) {
+        var data = '' + event.originalEvent.data;
+        if(data.indexOf("sp-") == 0) {
+            if(data == 'sp-dragged') {
+                updateScrollbar();
+            } else if(data == 'sp-disconnect') {
+                safeEndSession();
+            } else if(data == 'share-screen') {
+//                window.chatSession.send(event.data.data);
+            } else if(data =='sp-req-notification') {
+                $('#notification-prompt').css("display", "block");
+            } else if(data =='sp-req-notification-end') {
+                $('#notification-prompt').css("display", "none");
+            }
+        }
+    });
+
+    var forms = {
+        //deprecated form
+        question_form: {
+            html: '',
+
+            onShow: function() {
+
+                window.parent.postMessage("sp-chat-init", "*");
+
+                $('#offline-form').show();
+                $('#questionForm').show();
+
+                if (window.chatSession) {
+                    window.chatSession.reassignUICallbacks({
+                        onLogEvent: function(event) {
+                            $.chatUI.appendLog(event);
+                            updateScrollbar();
+                        }
+                    });
+                }
+            },
+            onHide: function() {
+                $('#offline-form').hide();
+                $('#questionForm').hide();
+            },
+            onSubmit: function() {}
+        },
+        MobileChatCustomerData: {
+            html: '',
+
+            onShow: function() {
+
+                window.parent.postMessage("sp-chat-init", "*");
+
+                //$('#offline-form').show();
+                //$('#questionForm').show();
+
+                if (window.chatSession) {
+                    window.chatSession.reassignUICallbacks({
+                        onLogEvent: function(event) {
+                            $.chatUI.appendLog(event);
+                            updateScrollbar();
+                        }
+                    });
+                }
+            },
+            onHide: function() {
+                $('#offline-form').hide();
+                $('#questionForm').hide();
+            },
+            onSubmit: function() {}
+        },
+        find_agent_form: {
+            html: '',
+            onShow: function() {
+                //$.chatUI.alignChatControls();
+                window.chatSession.sessionStatus = 'queued';
+
+                window.parent.postMessage("sp-chat-drag", "*");
+
+               // $('#agent-name').text("Waiting for agent...");
+                $('#header-title').text("Waiting for agent...");
+                $('#header-title').attr("title", $('#header-title').text());
+
+                $('#chat-body').show();
+                $('#chat-body').removeClass("sp-readonly");
+
+                $('#messages-div-outer').perfectScrollbar({useBothWheelAxes: false});
+
+                if (window.chatSession) {
+                    window.chatSession.reassignUICallbacks({
+                        onLogEvent: function(event) {
+                            $.chatUI.appendLog(event);
+                            updateScrollbar();
+							$('.connecting').hide();
+                            if(window.chatSession.internalParty) {
+                                $('.agent-name-prefix').text('You now chatting with');
+                                $('.agent-name').text(window.chatSession.internalParty.displayName);
+                                $('#header-title').text('Active chat');
+								$('#header-title').attr("title", $('#header-title').text());
+                                $('.agent-name').attr("title", window.chatSession.internalParty.displayName);
+                                var url = window.chatSession.getProfilePhotoUrl(window.chatSession.internalParty.id);
+                               $('.avatar-image').attr("style", 'background-image:url('+url+')');
+                            } else {
+                                $('.agent-name').text("Waiting for agent...");
+								$('#header-title').text('Active chat');
+								$('#header-title').attr("title", $('#header-title').text());
+                                $('.agent-name').attr("title", $('#agent-name').text());
+                               $('.avatar-image').attr("style", '');
+                            }
+                        }
+                    });
+                }
+                window.setTimeout(function() {autosize($('#input-field'));}, 400);
+            },
+            onHide: function() {
+                window.chatSession.sessionStatus = undefined;
+                $('#chat-body').hide();
+            },
+            onSubmit: function() {}
+        },
+
+        start_form: {
+            html: '',
+            onShow: function() {
+
+                window.parent.postMessage("sp-chat-drag", "*");
+
+                $('#chat-body').show();
+                $('#chat-body').removeClass("sp-readonly");
+
+                $('#messages-div-outer').perfectScrollbar({useBothWheelAxes: false});
+
+                if (window.chatSession) {
+                    window.chatSession.reassignUICallbacks({
+                        onLogEvent: function(event) {
+                            $.chatUI.appendLog(event);
+                            updateScrollbar();
+                        }
+                    });
+                }
+            },
+            onHide: function() {
+                $('#chat-body').hide();
+            },
+            onSubmit: function() {}
+        },
+
+
+        connect_chat_form: {
+            html: '',
+
+            onShow: function() {
+                window.chatSession.sessionStatus = 'connected';
+                $('#chat-body').show();
+                $('#callme').css("display", (window.mozRTCPeerConnection || window.webkitRTCPeerConnection) ? "block" : "none");
+                $('#callme').removeClass('hang-up');
+//                $('#shareScreen').css("display", "block");
+                $('#endChat').show();
+                $('#chat-body').removeClass("sp-readonly");
+
+                $('#agent-title').text("Consultant");
+
+                $('#messages-div-inner').css("bottom", "0");
+                $('#messages-div-inner').css("top", "auto");
+
+                $('#messages-div-outer').perfectScrollbar({useBothWheelAxes: false});
+
+                if (window.chatSession) {
+
+                    window.parent.postMessage("sp-session-start", "*");//request web notifications
+
+                    window.chatSession.reassignUICallbacks({
+                        onLogEvent: function(event) {
+                            if(event.msg == "/ban") {
+                                var store = {
+                                    action: "sp-storage",
+                                    key: "bp-bc",
+                                    value: "1"
+                                };
+                                window.parent.postMessage(JSON.stringify(store), "*");
+                                window.chatSession.disconnectSession();
+                                window.chatSession.endSession();
+                                return;
+                            }
+                            var event = $.chatUI.appendLog(event);
+                            var history = !window.chatSession.historyReceived || window.chatSession.historyRendered;
+                            if(history && event.fromClass !== 'me' && event.fromClass !== 'sys') {
+                                var a = {
+                                    action: "sp-notification",
+                                    photo: event.profilePhotoUrl,
+                                    msg: event.originalMsg,
+                                    name: event.fromName
+                                }
+                                window.parent.postMessage(JSON.stringify(a), "*");
+                            }
+
+                            if(window.chatSession.internalParty) {
+                                $('#agent-name').text(window.chatSession.internalParty.displayName);
+                                $('#agent-name').attr("title", $('#agent-name').text());
+                                var url = window.chatSession.getProfilePhotoUrl(window.chatSession.internalParty.id);
+                                $('.avatar-image').attr("style", 'background-image:url('+url+')');
+                            }
+                            updateScrollbar();
+                        },
+                        onSessionTyping: function(a) {
+                            $('#agent-typing').css('display', 'block');
+                            $('.agent-typing-wrapper').text(a.displayName + ' is typing');
+                        },
+                        onSessionNotTyping: function() {
+                            $('#agent-typing').css('display', 'none');
+                        },
+                        onAddStream: function(src) {
+                            var video = $('#video');
+                            video.attr('src', src);
+                            video.css('display', 'block');
+                            $('#callme').addClass('hang-up');
+                            $('#servicepattern-chat').css('top', '120px');
+                            updateScrollbar();
+                        }
+                    });
+                }
+            },
+            onHide: function() {
+                window.chatSession.sessionStatus = undefined;
+                $('#endChat').css("display", "none");
+                $('#chat-body').css("display", "none");
+                $('#video').css("display", "none");
+                $('#servicepattern-chat').css('top', '0');
+                $('#callme').css("display", "none");
+                $('#shareScreen').css("display", "none");
+                $('#agent-title').text("");
+                //$('.avatar-image').attr("src", 'images/logo-big.png');
+                updateScrollbar();
+            },
+            onSubmit: function() {
+                this.submitForm();
+            },
+            submitForm: function() {
+                window.chatSession.sendFormData(currentFormRequestId, currentFormName, {});
+            }
+        },
+        chat_unavailable_form: {
+            html: '',
+            onShow: function() {
+                window.chatSession.sessionStatus = undefined;
+                window.parent.postMessage("sp-chat-init", "*");
+
+                //$('#agent-name').text("Send us a message");
+                $('#header-title').text("Send us a message");
+                //$('#agent-name').attr("title", $('#agent-name').text());
+                $('#header-title').attr("title", $('#header-title').text());
+                $('#offline-form').show();
+                $('#unavailableForm').show();
+            },
+            onHide:     function() {
+                $('#offline-form').hide();
+                $('#unavailableForm').hide();
+            },
+            onSubmit:   function() {}
+        },
+        survey_form: {
+            html: '',
+            onShow: function() {
+
+                window.parent.postMessage("sp-chat-init", "*");
+
+                $('#offline-form').show();
+                $('#surveyForm').show();
+
+                //$('#agent-name').text("Please leave us a feedback");
+                $('#header-title').text("Please leave us a feedback");
+                //$('#agent-name').attr("title", $('#agent-name').text());
+                $('#header-title').attr("title", $('#header-title').text());
+
+                $("#transcriptEmail").val(extChatData.email);
+            },
+            onHide: function() {
+                $('#offline-form').hide();
+                $('#surveyForm').hide();
+            },
+            onSubmit: function() { },
+            submitForm: function() { }
+        },
+        MobileChatSurvey: {
+            html: '',
+            onShow: function() {
+
+                window.parent.postMessage("sp-chat-init", "*");
+
+                $('#offline-form').show();
+                $('#surveyForm').show();
+
+                //$('#agent-name').text("Please leave us a feedback");
+                $('#header-title').text("Please leave us a feedback");
+                //$('#agent-name').attr("title", $('#agent-name').text());
+                $('#header-title').attr("title", $('#header-title').text());
+
+                $("#transcriptEmail").val(extChatData.email);
+            },
+            onHide: function() {
+                $('#offline-form').hide();
+                $('#surveyForm').hide();
+            },
+            onSubmit: function() { },
+            submitForm: function() { }
+        },
+
+        callback_form: {
+            html: '',
+            onShow: function() {
+                window.parent.postMessage("sp-chat-init", "*");
+
+                $('#agent-name').text("Request a call back");
+                $('#offline-form').show();
+                $('#callbackForm').show();
+            },
+            onHide:     function() {
+                $('#offline-form').hide();
+                $('#callbackForm').hide();
+            },
+            onSubmit:   function() {}
+        }
+    };
+
+    var showForm = function(fn, frId) {
+        var nf = forms[fn];
+        if(nf) {
+            var frm = document.getElementById('content-form');
+            if(frm) {
+                if(currentForm && typeof currentForm.onHide === 'function') {
+                    currentForm.onHide();
+                }
+
+                frm.innerHTML = nf.html;
+                currentForm = nf;
+
+                if(frId) {
+                    currentFormName = fn;
+                    currentFormRequestId = frId;
+                }
+
+                if(typeof currentForm.onShow === 'function') {
+                    currentForm.onShow();
+                }
+            }
+        }
+    };
+
+    var onFormSubmit = function(e) {
+        e.preventDefault();
+
+        if(currentForm && typeof currentForm.onSubmit === 'function') {
+            currentForm.onSubmit();
+        }
+    };
+
+	var addSessionFlag = function(){
+		window.sessionStorage.setItem("chatConnected", true);
+	}
+	var removeSessionFlag = function(){
+		window.sessionStorage.removeItem("chatConnected", true);
+	}
+	
+    var connect = function() {
+        $.chat.createSession({
+            url: cp.webServer,
+            crossDomain: true,
+            tenantUrl: cp.tenantUrl,
+            appId: cp.appId,
+            clientId: 'WebChat',
+            phone_number: cp.phone_number,
+			from: cp.from,
+            parameters: cp.parameters || {}
+        }).fail(function(e) {
+                    $('#error').text(e.text + ". Retrying...");
+//            $('#error').css('display', 'block');
+                    window.setTimeout(connect, 4000);
+                }).done(function(o) {
+
+                    $('#error').css('display', 'none');
+                    window.sessionStorage.setItem("sp-chat-session", o.session.sessionId);
+
+                    //showForm('start_form', '');
+                    initDragAndDrop();
+                    o.session.assignUICallbacks({
+                        onFormShow: function(f) { showForm(f.form_name, f.form_request_id);},
+                        onChatConnected: function() { 
+                            //showForm('find_agent_form', '');
+                            showForm('connect_chat_form', '');
+                        },
+                        onChatQueued: function() { 
+                            showForm('find_agent_form', '');
+                            addSessionFlag();
+                            if(typeof wait!=='undefined'){
+                                clearInterval (wait);
+                            }
+                        },
+                        onLogEvent: function(event) {
+                            $.chatUI.appendLog(event);
+                            updateScrollbar();
+
+                        },
+                        onSessionEnded: function() {
+                            if(!o.is_new_chat && !o.session.historyReceived) {
+                                /*history has not been received, we should connect again*/
+                                connect();
+                            } else {
+                                if(o.session.sessionStatus) {
+                                    o.session.sessionStatus = undefined;
+                                    //the session is ended, but there is no party
+                                    //it occurs when no agent available, no need to close chat
+                                    //there is some messages, chat closed bu customer
+
+                                    $('#callme').css("display", "none");
+                                    $('#chat-body').addClass("sp-readonly");
+                                    //$('#agent-name').text("Session completed");
+                                    $('#header-title').text("Session completed");
+                                    $('.avatar-image').attr("style", '');
+                                    //$('#agent-title').text("");
+                                    $('#header-title').text("");
+                                    updateScrollbar();
+                                    return;
+                                }
+                                if(mobileCheck()) {
+                                    window.location.replace(getUrlVars(window.location.href)['referrer']);
+                                } else {
+                                    window.setTimeout(function() {
+                                        window.parent.postMessage("sp-session-end", "*");
+                                    }, 50);
+                                }
+                            }
+                        }});
+
+                    if (!o.is_new_chat) {
+                        o.session.getHistory();
+                    }
+                    window.chatSession = o.session;
+                    var urlVars = getUrlVars(window.location.href); 
+                    $.chatUI.sendNavigation(o.session, urlVars['referrer'], urlVars['referrerTitle']);
+                });
+    };
+
+    var preconnect = function() {
+
+        var fail = function(e) {
+            safeEndSession()
+        };
+
+        var done = function(e) {
+            if(e.hasOwnProperty("parameters")) {
+                var list = e.parameters;
+                for (var i = 0; i < list.length; i++) {
+                    $('#cb-' + list[i].type).show();
+                    $('#cb-' + list[i].type).attr("name", list[i].name);
+                }
+            }
+            showForm('callback_form', '');
+        };
+
+        $.chat.getExpectedParameters({
+            url: cp.webServer,
+            crossDomain: true,
+            tenantUrl: cp.tenantUrl,
+            appId: cp.appId,
+            clientId: 'WebChat',
+            phone_number: cp.phone_number,
+            from: cp.from,
+            parameters: cp.parameters || {}
+        }).fail(fail).done(done);
+    };
+
+    var uploadFile = function(file) {
+        var formData = new FormData();
+        formData.append("file-upload-input", file);
+
+        var id = makeid();
+
+        $.chatUI.appendLog({fromClass: "me", msg: "Uploading \"" + file.name + "\"", msgId: id});
+        $.chat.uploadFiles(window.chatSession.cp, formData)
+                .fail(function(fail) {
+                    $('#'+id).detach();
+                    $.chatUI.appendLog({fromClass: "sys", msg: "Error: " + fail.responseJSON.error_message});
+                })
+                .done(function (done) {
+                    $('#'+id).detach();
+                    if (done && done.file_id) {
+                        if (window.chatSession) {
+                            var type = 'attachment';
+                            if(file.type.match('image.*')) {
+                                type = 'image';
+                            } else {
+                                updateScrollbar();
+                            }
+
+                            window.chatSession.fileUploaded(done.file_id, type, done.file_name);
+                        }
+                    }
+                });
+    };
+
+    var uploadFiles = function(files) {
+        for (var i = 0, item; item = files[i]; i++) {
+            uploadFile(item);
+        }
+    };
+
+    var initDragAndDrop = function() {
+        var obj = $("#chat-body");
+
+        var timeoutID;
+
+
+        obj.on('dragenter dragleave dragover drop', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        obj.on('dragenter', function (e) {
+            if($('#attachFile').is(':visible')) {
+                obj.attr("dnd", "1");
+
+                if(timeoutID) {
+                    window.clearTimeout(timeoutID);
+                    timeoutID = null;
+                }
+            }
+        });
+        obj.on('dragleave', function (e) {
+            if(timeoutID) {
+                window.clearTimeout(timeoutID);
+                timeoutID = null;
+            } else {
+                timeoutID = window.setTimeout(function() {obj.attr("dnd", null);}, 200);
+            }
+        });
+
+        obj.on('dragover', function (e) {
+            obj.attr("dnd", "1");
+            if(timeoutID) {
+                window.clearTimeout(timeoutID);
+                timeoutID = null;
+            }
+        });
+        obj.on('drop', function (e) {
+            uploadFiles(e.originalEvent.dataTransfer.files);
+            obj.attr("dnd", null);
+            if(timeoutID) {
+                window.clearTimeout(timeoutID);
+                timeoutID = null;
+            }
+        });
+    };
+
+    $.support.cors = true;
+
+    $(document).ready(function() {
+	
+		$('#name3').keyup(function(){
+			if($(this).val().length>0){
+				$('#submit4').attr('href','sms:+12622609966&body=Hi,%20my%20name%20is%20'+encodeURIComponent($(this).val())+'%20I%20would%20like%20to%20'+encodeURIComponent($('input[name="action3"]').val()));
+			} else{
+				$('#submit4').attr('href','')
+			}
+		});
+		
+		$('#message_textarea, #form-action4 input, #name4, #email3, #phone3, #extension3, #copy_wrapper').bind('keyup change',function(){
+			if($("#extension3").val().length>0){
+				ext=" Ext."+$("#extension3").val();
+			} else {
+				ext="";
+			}
+			if ($('#copy').is(':checked') && $("#email3").val().length>0) {
+				copy='&amp;cc='+$("#email3").val();
+			} else {
+				copy="";
+			}
+			$('#submit5').attr('href','mailto:mail@digiterra.pro?subject=Chat message from '+encodeURIComponent($("#name3").val())+'&amp;body=<strong>Subject:</strong>'+encodeURIComponent($('input[name="action4"]').val())+'</br/><strong>Name:</strong>'+encodeURIComponent($("#name4").val())+'<br/><strong>Phone:</strong>'+encodeURIComponent($("#phone3").val())+encodeURIComponent(ext)+'<br/><strong>Message:</strong>'+encodeURIComponent($('#message_textarea').val())+copy);
+			
+		});
+	
+		$('#rates input').change(function(){
+			console.log($('#rates input:checked').index());
+			rating=$('#rates input:checked').index()/2;
+			$('#rates input').removeClass('active');
+			for(i=0;i<rating;i++){
+				$('#rates input').eq(i).addClass('active');
+			}
+			$('#surveyForm .content').hide();
+			$('#surveyForm .buttons').show();
+			$('#surveyForm').addClass('thanks');
+		});
+		
+		$('.prefer_email').click(function(){
+			$('#tab-email').attr('checked','checked');
+			$("#offline-form-inner").scrollTop(0);
+		});
+		$('#surveyForm .pseudolink').click(function(){
+			$('#servicepattern_end_button').trigger('click');
+		});
+		
+		$('#questionForm .section:visible input[data-required="1"]').attr('required','required');
+		
+		$('input[name="tabs"]').change(function(){
+		if(window.chatSession){
+			
+			if($(this).val()=='call' || $(this).val()=='sms'){
+			
+				$('.description_switched').show();
+				$('#offline-form').show();
+				$('.params-wrapper').show();
+				$('#questionForm').show();
+				$('#offline-form .section').removeClass('switched');
+				$('#offline-form .section:visible').addClass('switched');
+				$('#offline-form .standby').hide();
+
+				$('#questionForm input[data-required="1"]').attr('required',false);
+				$('#questionForm .section:visible input').attr('required',false);
+				$('#name2_wrapper').hide();
+				if($(this).val()=='call'){
+					$('#header-title').text("Switch to call...");
+					$('#phone2').attr('required','required');
+					$('#phone3').attr('required',false);
+				}
+				if($(this).val()=='sms'){
+					$('#header-title').text("Switch to text...");
+					$('#phone3').attr('required','required');
+					$('#phone2').attr('required',false);
+					$('#submit5').show();
+					$('#submit4').hide();
+				}
+			}
+			else{
+				$('#offline-form').hide();
+				$('#questionForm').show();
+				$('#header-title').text("active chat");
+				$('.description_switched').hide();
+			}
+			} else {
+                $('#offline-form').show();
+                $('#questionForm').show();
+                $('#questionForm input[data-required="1"]').attr('required',false);
+                $('#questionForm .section:visible input[data-required="1"]').attr('required','required');
+                $('.description_switched').hide();
+            }
+		});
+		
+		$('#submit3').click(function(){
+		
+			var noError = true;
+			
+
+            $('#questionForm').find('.input-field[required]').each(function() {
+                if(!$(this).val() ) {
+                    $('#error-' + $(this).attr("id")).css("display", "block");
+					
+                    noError = false;
+                }
+            });
+			
+			if($('#questionForm').find('.error-balloon:visible').length>0){
+				var offset_child=$(".error-balloon:visible").eq(0).offset().top;
+				
+				var offset_parent=$(".input-field[required]:eq(0)").parents('.section').offset().top;
+				var offset_div=offset_child-offset_parent-5;
+				$("#offline-form-inner").animate({scrollTop: offset_div});
+			}
+
+            if(noError) {
+				if(window.chatSession){
+					$('#section-phone .params-wrapper,#section-phone .field-wrapper,#section-phone .description').hide();
+					$('#section-phone .standby').show();
+					$('#section-phone .standby').removeClass('momentarily');
+					$('#section-phone .standby').addClass('interval');
+					
+					if(window.chatSession.internalParty) {
+						window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone2').val());
+					} else {
+						if(currentForm && typeof currentForm.onSubmit === 'function') {
+							currentForm.onSubmit();
+						}
+					}
+				}
+
+
+				
+			}
+		});
+		
+		
+
+		$('#submit2').click(function(){
+		
+			var noError = true;
+			
+
+            $('#questionForm').find('.input-field[required]').each(function() {
+                if(!$(this).val() ) {
+                    $('#error-' + $(this).attr("id")).css("display", "block");
+					
+                    noError = false;
+                }
+            });
+			
+			if($('#questionForm').find('.error-balloon:visible').length>0){
+				var offset_child=$(".error-balloon:visible").eq(0).offset().top;
+				
+				var offset_parent=$(".input-field[required]:eq(0)").parents('.section').offset().top;
+				var offset_div=offset_child-offset_parent-5;
+				$("#offline-form-inner").animate({scrollTop: offset_div});
+			}
+
+            if(noError) {
+				if(window.chatSession){
+					$('#section-phone .params-wrapper,#section-phone .field-wrapper,#section-phone .description').hide();
+					$('#section-phone .standby').show();
+					$('#section-phone .standby').addClass('momentarily');
+					$('#section-phone .standby').removeClass('interval');
+					
+					if(window.chatSession.internalParty) {
+						window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestPhoneCall($('#phone2').val());
+					} else {
+						if(currentForm && typeof currentForm.onSubmit === 'function') {
+							currentForm.onSubmit();
+						}
+					}
+				}
+				
+				
+			}
+		});
+		
+		$('#section-phone .submit_standby').click(function(){
+		
+			$('.params-wrapper').show();
+			$('#section-phone .standby').hide();
+			$('.error-balloon').hide();
+			$('#section-phone .standby').removeClass('momentarily');
+			$('#section-phone .standby').removeClass('interval');
+
+		});
+		
+		$('#section-sms .submit_standby').click(function(){
+			$('.params-wrapper').show();
+			$('#section-sms .standby').hide();
+			$('.error-balloon').hide();
+		});
+		
+		
+		
+		$('#submit5').click(function(e){
+		
+		
+			var noError = true;
+			
+
+            $('#questionForm').find('.input-field[required]').each(function() {
+				
+                if(!$(this).val() ) {
+                    $('#error-' + $(this).attr("id")).css("display", "block");
+					
+                    noError = false;
+                }
+            });
+			
+			if($('#questionForm').find('.error-balloon:visible').length>0){
+				var offset_child=$(".error-balloon:visible").eq(0).offset().top;
+				
+				var offset_parent=$(".input-field[required]:eq(0)").parents('.section').offset().top;
+				var offset_div=offset_child-offset_parent-5;
+				$("#offline-form-inner").animate({scrollTop: offset_div});
+			}
+			
+            if(noError) {
+				$('#section-sms .params-wrapper').hide();
+				$('#section-sms .standby').show();
+				if(window.chatSession.internalParty) {
+					window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestSms($('#phone3').val());
+				} else {
+					if(currentForm && typeof currentForm.onSubmit === 'function') {
+						currentForm.onSubmit();
+					}
+				}
+
+			}
+		});
+		
+		
+	
+		$("#sliderRent").slider({
+			min: 0,
+			max: 3000,
+			values: [400,2200],
+			range: true,
+			create: function(event, ui) {
+				$('#price_min-label').css({left : '13.3333%'});
+				$('#price_max-label').css({left : '73.33333333333333%'});
+				$('#price_min-label').html('$'+addCommas($("#sliderRent").slider("values",0)));
+				$('#price_max-label').html('$'+addCommas($("#sliderRent").slider("values",1)));
+				
+			},
+			stop: function(event, ui) {
+				$("input#price_min").val($("#sliderRent").slider("values",0));
+				$("input#price_max").val($("#sliderRent").slider("values",1));
+				left1=parseInt($('#rent_wrapper .ui-slider-handle:eq(0)').css("left"))+5;
+				left2=parseInt($('#rent_wrapper .ui-slider-handle:eq(1)').css("left"))+28;
+				$('#price_min-label').css({left : left1+"px"});
+				$('#price_max-label').css({left : left2+"px"});
+				
+			},
+			slide: function(event, ui){
+				$("input#price_min").val($("#sliderRent").slider("values",0));
+				$("input#price_max").val($("#sliderRent").slider("values",1));
+				left1=parseInt($('#rent_wrapper .ui-slider-handle:eq(0)').css("left"))+5;
+				left2=parseInt($('#rent_wrapper .ui-slider-handle:eq(1)').css("left"))+28;
+				$('#price_min-label').css({left : left1+"px"});
+				$('#price_max-label').css({left : left2+"px"});
+				$('#price_min-label').html('$'+addCommas($("#sliderRent").slider("values",0)));
+				$('#price_max-label').html('$'+addCommas($("#sliderRent").slider("values",1)));
+			}
+		});
+
+	
+		function addCommas(nStr) {
+			nStr += '';
+			var x = nStr.split('.');
+			var x1 = x[0];
+			var x2 = x.length > 1 ? '.' + x[1] : '';
+			var rgx = /(\d+)(\d{3})/;
+			while (rgx.test(x1)) {
+				x1 = x1.replace(rgx, '$1' + ',' + '$2');
+			}
+			return x1 + x2;
+		}
+		
+		$( "#movein" ).datepicker({showAnim: "slideDown"});
+		$( "#movein" ).click(function(){
+			$('.selectbox-list').slideUp(200);
+		});
+		d=$( "#ui-datepicker-div" ).detach();
+		$( "#movein" ).after(d);
+		
+
+        var args = getUrlVars(window.location.href);
+        for (var arg in args) if (args.hasOwnProperty(arg)) {
+            cp[arg] = args[arg];
+        }
+
+        if(mobileCheck()) {
+            $('#inner-chat').addClass("mobile-version");
+        }
+
+        if(navigator.userAgent.match(/iPhone/i)) {
+            $('#input-div').addClass("input-div-iphone");
+        }
+
+        $(document.getElementById('content-form')).on("submit", onFormSubmit);
+
+        cp.parameters = {};
+        cp.parameters.email            = cp.email;
+        cp.parameters.name       = cp.name;
+        cp.parameters.phone     		= cp.phone;
+        cp.parameters.extension       = cp.extension;
+        cp.parameters.price_min       = cp.price_min;
+        cp.parameters.price_max       = cp.price_max;
+        cp.parameters.bedrooms       = cp.bedrooms;
+        cp.parameters.bedrooms2       = cp.bedrooms2;
+        cp.parameters.bathroms       = cp.bathroms;
+        cp.parameters.movein     		  = cp.movein;
+        cp.parameters.flexible      	 = cp.flexible;
+        cp.parameters.cats      	 = cp.cats;
+        cp.parameters.dogs      	 = cp.dogs;
+        cp.parameters.action      	 = cp.action;
+        cp.parameters.action2      	 = cp.action2;
+        cp.parameters.name2      	 = cp.name2;
+        cp.parameters.country      	 = cp.country;
+        cp.parameters.phone2      	 = cp.phone2;
+        cp.parameters.extension2      	 = cp.extension2;
+        cp.parameters.action3      	 = cp.action3;
+        cp.parameters.name3      	 = cp.name3;
+		
+		
+		
+        cp.parameters.account_number   = cp.account_number;
+        cp.parameters.subject          = cp.subject;
+        cp.parameters.logging          = cp.logging;
+
+        cp.parameters.location         = {};
+        cp.parameters.location.latitude = cp.latitude;
+        cp.parameters.location.longitude = cp.longitude;
+
+        $('#servicepattern_close_button').bind('click', function() {
+            window.location.href = (decodeURIComponent(getUrlVars(window.location.href)['returnURL']));
+        });
+		
+        $('#servicepattern_end_button').bind('click', function() {
+            safeEndSession();
+			setTimeout(function() {
+			   window.location.href = (decodeURIComponent(getUrlVars(window.location.href)['returnURL']));
+		   }, 1000);
+			
+        });
+
+        $('#input-button').bind('click', function() {
+            $.chatUI.sendMessage(window.chatSession);
+        });
+
+        $('#uncancel').bind('click', function() {
+            window.chatSession.endSession();
+        });
+
+        $('#cb-cancel').bind('click', function() {
+            safeEndSession();
+        });
+
+        $('#offline-form-inner > div').each(function() {
+            $(this).hide();
+        });
+
+        $('#callbackForm').find('.input-field').each(function() {
+            $(this).hide();
+        });
+
+
+        $('#cb-submit').bind('click', function() {
+            $('#callbackForm').find('.input-field:visible').each(function() {
+                cp.parameters[$(this).attr("name")] = $(this).val();
+            });
+
+            var noError = true;
+
+
+            $('#callbackForm').find('.input-field[required]:visible').each(function() {
+                if(!$(this).val() ) {
+                    $('#error-' + $(this).attr("id")).css("display", "block");
+                    noError = false;
+                }
+            });
+
+            if(noError) {
+                connect();
+            }
+        });
+
+        $('#callbackForm').find('.input-field[required]').focus(function() {
+            $('#error-' + $(this).attr("id")).css("display", "none");
+        });
+
+        $("#submitSurvey").bind("click", function() {
+
+            var data = {};
+            var radios = $('input[name="service"]:checked');
+            if(radios.length > 0)
+                data.service = radios.get(0).value;
+
+            radios = $('input[name="helpful"]:checked');
+            if(radios.length > 0)
+                data.helpful = radios.get(0).value;
+
+            radios = $('input[name="recommend"]:checked');
+            if(radios.length > 0)
+                data.recommend = radios.get(0).value;
+
+            radios = $('input[name="transcript"]:checked');
+            if(radios.length > 0)
+                data.transcript = radios.get(0).value;
+
+            data.transcriptEmail = $('#transcriptEmail').val();
+
+            window.chatSession.sendFormData(currentFormRequestId, currentFormName, data);
+        });
+
+        $('#unsubmit').bind('click', function() {
+
+            extChatData = {
+                question: $('#unmessage').val(),
+                email: $('#unemail').val()
+            };
+
+            window.chatSession.sendFormData(currentFormRequestId, currentFormName, extChatData);
+        });
+
+        $('#input-field').bind('keypress', function(event) {
+            $.chatUI.msgKeyPress(event, window.chatSession);
+        });
+
+        $('#input-field').bind('blur', function(event) {
+            $.chatUI.notTyping(window.chatSession);
+        });
+
+        $('#questionForm').find('.input-field[required]').focus(function() {
+            $('#error-' + $(this).attr("id")).css("display", "none");
+        });
+
+        $('#endChat').bind('click',
+                function() {
+                    window.chatSession.disconnectSession();
+                });
+
+        $('#callme').bind('click', function() {
+            if($('#callme').hasClass("hang-up")) {
+                window.chatSession.webRTC.closeConnection();
+                $('#callme').removeClass("hang-up");
+                $('#video').css("display", "none");
+                $('#servicepattern-chat').css('top', '0');
+                updateScrollbar();
+            } else {
+                if(window.chatSession.internalParty) {
+                    window.chatSession.callPrompt = $('#call-prompt');
+                    window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestCall(true);
+                }
+            }
+        });
+
+        $('#shareScreen').bind('click', function() {
+            if($('#shareScreen').hasClass('stop-sharing')) {
+                $('#shareScreen').removeClass('stop-sharing');
+                window.parent.postMessage("sp-stop-screen-sharing", "*");
+            } else {
+                $('#shareScreen').addClass('stop-sharing');
+                window.parent.postMessage("sp-start-screen-sharing", "*");
+            }
+        });
+
+        $('#requestAudio').bind('click', function() {
+            if(window.chatSession.internalParty) {
+                window.chatSession.callPrompt = $('#call-prompt');
+                window.chatSession.webRTCSignaling(window.chatSession.internalParty.id).requestCall(false);
+            }
+        });
+		
+		$('.selectbox .arrow_down').bind('click', function() {
+			$(this).toggleClass('checked');
+			list=$(this).siblings('.selectbox-list');
+			list.slideToggle(200);
+			for(i=0;i<$('.selectbox-list').length;i++){
+				if($('.selectbox-list').eq(i).parents('.field-wrapper').attr('id')!=list.parents('.field-wrapper').attr('id')){
+					$('.selectbox-list').eq(i).slideUp(200);
+				}
+			}
+
+			
+		});
+		$('.selectbox li').bind('click', function() {
+			$(this).parent().siblings('input').val($(this).html());
+			$(this).siblings('li').removeClass('active');
+			$(this).addClass('active');
+			$(this).parent().slideUp(200);
+			$(this).parent().siblings('.arrow_down').removeClass('checked');
+
+
+		});
+
+
+
+
+
+        $('.submitbtn').bind('click', function() {
+            //window.sessionStorage.setItem("chatConnected", true);
+
+            if($('#dogs').is(':checked')){dogs_friendly="Dogs friendly - YES";} else {dogs_friendly="Dogs friendly - NO";}
+            if($('#cats').is(':checked')){cats_friendly="Cats friendly - YES";} else {cats_friendly="Cats friendly - NO";}
+            extChatData = {
+                name:     $('#name').val(),
+                name2:     $('#name2').val(),
+                email:          $('#email').val(),
+                phone:          $('#phone').val(),
+                phone2:          $('#phone2').val(),
+                extension:          $('#extension').val(),
+                price_min:          $('#price_min').val(),
+                price_max:          $('#price_max').val(),
+                bedrooms:          $('#bedrooms').val(),
+                bedrooms2:          $('#bedrooms2').val(),
+                bathroms:          $('#bathroms_wrapper input:checked').val(),
+                movein:          $('#movein').val(),
+                flexible:          $('#flexible').val(),
+                dogs:          dogs_friendly,
+                cats:          cats_friendly
+            };
+
+            var noError = true;
+
+
+            $('#questionForm').find('.input-field[required]').each(function() {
+                if(!$(this).val() ) {
+                    $('#error-' + $(this).attr("id")).css("display", "block");
+
+                    noError = false;
+                }
+            });
+
+			if($('#questionForm').find('.error-balloon:visible').length>0){
+				var offset_child=$(".error-balloon:visible").eq(0).offset().top;
+				
+				var offset_parent=$(".input-field[required]:eq(0)").parents('.section').offset().top;
+				var offset_div=offset_child-offset_parent-5;
+				$("#offline-form-inner").animate({scrollTop: offset_div});
+			}
+
+            if(noError) {
+                if(!window.chatSession){
+                    connect();
+                    $('#offline-form').hide();
+                    $('#chat-body').show();
+                    window.wait = setInterval(waitForElement, 1000);	
+                }
+                function waitForElement(){;
+                    if(window.chatSession){
+
+                        window.chatSession.sendFormData(currentFormRequestId, currentFormName, extChatData);
+                        window.chatSession.send(extChatData.question);
+                    }
+                }
+
+
+
+            }
+
+
+        });
+
+
+        $('#attachFile').bind('click', function() {
+            $('#file-upload-form').html('<input type="file" id="attach-file" name="file-upload-input"/>');
+            $('#attach-file').on('change', function(event) {
+                uploadFiles(event.target.files);
+            });
+            $('#attach-file').click();
+        });
+        
+        $('#sendLocation').bind('click', function() {
+        	$.chatUI.sendLocation(window.chatSession);  
+        });
+
+        if(cp.callback) {
+            var oldSession = window.sessionStorage.getItem("sp-chat-session");
+            if(oldSession) {
+                $.chat.checkSessionExists({
+                    url: cp.webServer,
+                    crossDomain: true,
+                    tenantUrl: cp.tenantUrl,
+                    appId: cp.appId,
+                    clientId: 'WebChat',
+                    sessionId: oldSession
+                }).fail(function(e) {
+                    window.sessionStorage.removeItem("sp-chat-session");
+                    preconnect();
+                }).done(function(o) {
+                    connect();
+                });
+            } else {
+                preconnect();
+            }
+        } else {
+            if(window.sessionStorage.getItem("chatConnected")=='true'){
+                connect();
+            }
+            else{
+                $('#offline-form').show();
+                $('#questionForm').show();
+            }
+        }
+    });
+})();    
+</script>    
+</head>
+        
+<body id="inner-chat">
+
+<div id="web_phone" class="phone_hidden">
+    <div id="rtc_placeholder"></div>
+    <div id="up_arrow"></div>
+    <div id="phone_hint">Click "Allow" to use microphone for the call.
+        <br>Your web cam will not be used</div>
+</div>
+
+<div id="sound_player" style="width: 0; height: 0;">
+    <img id="jp_poster_0" style="width: 0px; height: 0px; display: none;">
+    <audio id="jp_audio_0" preload="metadata" src=""></audio>
+</div>
+
+<div id="contents_placeholder"></div>
+<div id="servicepattern_action">
+	<div id="servicepattern_end_button"></div>
+    <div id="servicepattern_close_button"></div>
+   
+</div>
+
+<div id="servicepatternsite-iframe-chat">
+    <div id="header-avatar" class="header light">
+        <div id="header-avatar-container">
+            <div class="has-avatar">
+                <div class="avatar">
+                    <img src="images/ico.png">
+                </div>
+                <div class="info">
+                    <!-- <div id="agent-name" class="agent-name">Let's connect</div> -->
+                    <div id="header-title" class="header-title">Let's connect</div>
+                    <div id="agent-title" class="title" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="sound_player"></div>
+        <div id="callme" style="display: none;"><div></div></div>
+        <div id="shareScreen" style="display: none;"><div></div></div>
+        <div id="endChat" style="display: none;"><div></div></div>
+    </div>
+
+
+    <form id="content-form" method="POST">
+
+
+
+    </form>
+
+	<div id=content-wrapper>
+		<input type=radio value=chat name=tabs id=tab-chat class=tab-input checked><label class=tab-label id=label-chat for=tab-chat>Chat</label>
+		<input type=radio value=call name=tabs id=tab-call class=tab-input><label class=tab-label id=label-call for=tab-call>Call</label>
+		<input type=radio value=sms name=tabs id=tab-sms class=tab-input><label class=tab-label id=label-sms for=tab-sms>Text</label>
+		<input type=radio value=email name=tabs id=tab-email class=tab-input>
+		
+		<div id="chat-body" style="display: none;">
+			<hr/>
+			<video id="video" style="display: none; height: 100px; width: 100%" autoplay></video>
+			<div id="notification-prompt" style="display: none;" class="promptMessage">When prompted, please allow notifications from this window, so you could see responses when this window is hidden.</div>
+			<div id="call-prompt" style="display: none;" class="promptMessage">When prompted, please allow access to your camera and microphone.</div>
+			<div id="servicepattern-chat">
+				<div id="scrollbar-container">
+					<div id="messages-div" class="viewport">
+						<div id="messages-div-outer">
+							<div id="messages-div-inner" class="overview messages-div-inner">
+								<div class=description>
+									<div class=connecting>Connecting to Jefferson Stonebriar,<br/>
+									please wait a moment...</div>
+									
+								</div>
+								<div id="messages-div-inner-clear"></div>
+							</div>
+						 </div>
+						<div id="agent-typing" style="display: none;"><div class="agent-typing-wrapper"></div></div>
+					</div>
+				</div>
+			</div>
+
+			<div id="input-div" class="">
+				<div class="input-div-table">
+					<!-- <div id="attachFile"></div> -->
+					<!-- <div id="sendLocation"></div> -->
+					<div class="td-textarea">
+						<textarea id="input-field" rows="1" name="input-field" maxlength="1000" placeholder="Write a message" autocomplete="off" style="resize: none;line-height:52px;"></textarea>
+					</div>
+					<div class="td-button">
+						<input id="input-button" type="button" value="Send" class="servicepatternBtn accept">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div id="offline-form" style="display: none;" >
+			<hr/>
+			<div id="offline-form-inner" >
+
+				<div id="questionForm">
+					
+					<div id=section-chat class=section>
+						<div class="field-wrapper" id="form-action">
+							<label>I would like to...</label>
+							
+							<div class="selectbox">
+								<input type="text" name="action" disabled value="Get information about renting"/>
+								<div class="arrow_down"></div>
+								<ul class="selectbox-list">
+									<li class="active">Get information about renting</li>
+									<li>Schedule a tour</li>
+									<li>Submit a maintenance request</li>
+									<li>Contact the property manager</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class=params-wrapper>
+							
+							<div class=description>
+								By telling us a bit about you,<br/>
+								our agents can serve you better.
+							</div>
+							<div class=footnote>
+								<span class=red>*</span>required field
+							</div>
+							
+							<div class="field-wrapper" id="name_wrapper">
+								<label for="name">Name<span class=red>*</span></label>
+								<input id="name" type="text" class="input-field" name="name" required data-required="1">
+								<div id="error-name" class="error-balloon">Please, enter name</div>
+							</div>
+							<div class="field-wrapper" id="email_wrapper">
+								<label for="email">Email<span class=red>*</span></label>
+								<input id="email" type="email" class="input-field" name="email" required  data-required="1">
+								<div id="error-email" class="error-balloon">Please, enter email</div>
+							</div>
+							<div class="fields-row">
+								<div class="field-wrapper" id="phone_wrapper">
+									<label for="phone">Phone</label>
+									<input id="phone" type="text" class="input-field" name="phone">
+									<div id="error-phone" class="phone-balloon"></div>
+								</div>
+								<div class="field-wrapper" id="ext_wrapper">
+									<label for="extension">Ext</label>
+									<input id="extension" type="text" class="input-field" name="extension">
+									<div id="error-extension" class="extension-balloon"></div>
+								</div>
+							</div>
+							
+							
+
+							<div class="field-wrapper" id="rent_wrapper">
+								<label>Monthly Rent</label>
+								<div class=slider>
+									<input type="text" id="price_min" value="400"/>
+									<input type="text" id="price_max" value="2200"/>
+									<div class="slider_label" id=price_min-label>$400</div>
+									<div class="slider_label" id=price_max-label>$2,200</div>
+									<input type="text" id="price_max" value="2200"/>
+									<div id="sliderRent"></div>
+								</div>
+							</div>
+
+							<div class="fields-row">
+								<div class="field-wrapper" id="bedrooms_wrapper">
+									<label for="bedrooms">Bedrooms</label>
+									<div class="selectbox">
+										<input type="text" name="bedrooms" id="bedrooms" disabled value="Studio"/>
+										<div class="arrow_down"></div>
+										<ul class="selectbox-list">
+											<li class="active">Studio</li>
+											<li>Studio</li>
+											<li>Studio</li>
+											<li>Studio</li>
+										</ul>
+									</div>
+								</div>
+								<div class="field-wrapper" id="bedrooms2_wrapper">
+									<div class="selectbox">
+										<input type="text" name="bedrooms2" id="bedrooms2" disabled value="4 Bedrooms"/>
+										<div class="arrow_down"></div>
+										<ul class="selectbox-list">
+											<li class="active">4 Bedrooms</li>
+											<li>3 Bedrooms</li>
+											<li>2 Bedrooms</li>
+											<li>1 Bedroom</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<div class="field-wrapper" id="bathroms_wrapper">
+								<label for="bathroms">Bathrooms</label>
+								<div class="radios">
+									<input type="radio" checked name="bathroms" value="Any Number" id="bathroms-any"><label for="bathroms-any">Any Number</label>
+									<input type="radio" name="bathroms" value="1+" id="bathroms-1plus"><label for="bathroms-1plus">1+</label>
+									<input type="radio" name="bathroms" value="2+" id="bathroms-2plus"><label for="bathroms-2plus">2+</label>
+									<input type="radio" name="bathroms" value="3+" id="bathroms-3plus"><label for="bathroms-3plus">3+</label>
+								</div>
+							</div>
+							
+							<div class="field-wrapper" id="date_wrapper">
+									<label for="date">Move-In Date</label>								
+									<input type="text" class="input-field" name="date" value="05/19/2017" id="movein">
+									<div id="error-date" class="date-balloon"></div>
+								</div>
+							
+							<div class="field-wrapper" id="days_wrapper">
+								<label>Flexible Up To…</label>
+								<div class="selectbox">
+									<input type="text" id="flexible" name="days" disabled value="14 Days"/>
+									<div class="arrow_down"></div>
+									<ul class="selectbox-list">
+										<li class="active">14 Days</li>
+										<li>14 Days</li>
+										<li>14 Days</li>
+										<li>14 Days</li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="field-wrapper" id="bathroms_wrapper">
+								<label for="bathroms">Pets</label>
+								<div class="radios">
+									<input type="checkbox" name="pets" value="Dog Friendly" id="dogs"><label for="dogs">Dog Friendly</label>
+									<input type="checkbox" name="pets" value="Cat Friendly" id="cats"><label for="cats">Cat Friendly</label>
+
+								</div>
+							</div>
+							
+							<div class="buttons">
+								<input id="submit" type="button" value="Start chatting" class="submitbtn servicepatternBtn accept">
+							</div>
+							
+							<div class=prefer_email>
+								<div class=ico></div>Prefer to email?
+							</div>
+							
+						</div>
+					</div>
+					
+					<div id=section-phone class=section>
+						
+						<div class=description>
+							<div class=callus><span class=big>Call us:</span> <a href="tel:+18666424044">(866) 642-4044</a></div>
+							Want us to call you? Enter your number below. You'll need an open phone line.
+						</div>
+						
+						
+						
+						<div class="field-wrapper" id="form-action2">
+							<label>I would like to...</label>
+							
+							<div class="selectbox">
+								<input type="text" name="action2" disabled value="Get information about renting"/>
+								<div class="arrow_down"></div>
+								<ul class="selectbox-list">
+									<li class="active">Get information about renting</li>
+									<li>Schedule a tour</li>
+									<li>Submit a maintenance request</li>
+									<li>Contact the property manager</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class=params-wrapper>
+	
+							<div class=description>
+								By telling us a bit about you,<br/>
+								our agents can serve you better.
+							</div>
+							
+							<div class=description_switched>
+								<div class=big>Want to switch to a call?</div>
+								<div>Enter your phone number and we'll call you</div>
+							</div>
+							<div class=footnote>
+								<span class=red>*</span>required field
+							</div>
+							
+							<div class="field-wrapper" id="name2_wrapper">
+								<label for="name2">Name<span class=red>*</span></label>
+								<input id="name2" type="text" class="input-field" name="name2" data-required="1">
+								<div id="error-name2" class="error-balloon">Please, enter name</div>
+							</div>
+							<div class="field-wrapper" id="country_wrapper">
+								<label for="country">Country</label>
+								<div class="selectbox">
+									<input type="text" name="country" disabled value="United States"/>
+									<div class="arrow_down"></div>
+									<ul class="selectbox-list">
+										<li class="active">United States</li>
+										<li>Afghanistan
+										</li>
+										<li>Albania
+										</li>
+										<li>Algeria
+										</li>
+										<li>Andorra
+										</li>
+										<li>Angola
+										</li>
+										<li>Antigua and Barbuda
+										</li>
+										<li>Argentina
+										</li>
+										<li>Armenia
+										</li>
+										<li>Australia
+										</li>
+										<li>Austria
+										</li>
+										<li>Azerbaijan
+										</li>
+										<li>Bahamas
+										</li>
+										<li>Bahrain
+										</li>
+										<li>Bangladesh
+										</li>
+										<li>Barbados
+										</li>
+										<li>Belarus
+										</li>
+										<li>Belgium
+										</li>
+										<li>Belize
+										</li>
+										<li>Benin
+										</li>
+										<li>Bhutan
+										</li>
+										<li>Bolivia
+										</li>
+										<li>Bosnia and Herzegovina
+										</li>
+										<li>Botswana
+										</li>
+										<li>Brazil
+										</li>
+										<li>Brunei
+										</li>
+										<li>Bulgaria
+										</li>
+										<li>Burkina Faso
+										</li>
+										<li>Burundi
+										</li>
+										<li>Cabo Verde
+										</li>
+										<li>Cambodia
+										</li>
+										<li>Cameroon
+										</li>
+										<li>Canada
+										</li>
+										<li>Central African Republic (CAR)
+										</li>
+										<li>Chad
+										</li>
+										<li>Chile
+										</li>
+										<li>China
+										</li>
+										<li>Colombia
+										</li>
+										<li>Comoros
+										</li>
+										<li>Democratic Republic of the Congo
+										</li>
+										<li>Republic of the Congo
+										</li>
+										<li>Costa Rica
+										</li>
+										<li>Cote d'Ivoire
+										</li>
+										<li>Croatia
+										</li>
+										<li>Cuba
+										</li>
+										<li>Cyprus
+										</li>
+										<li>Czech Republic
+										</li>
+										<li>Denmark
+										</li>
+										<li>Djibouti
+										</li>
+										<li>Dominica
+										</li>
+										<li>Dominican Republic
+										</li>
+										<li>Ecuador
+										</li>
+										<li>Egypt
+										</li>
+										<li>El Salvador
+										</li>
+										<li>Equatorial Guinea
+										</li>
+										<li>Eritrea
+										</li>
+										<li>Estonia
+										</li>
+										<li>Ethiopia
+										</li>
+										<li>Fiji
+										</li>
+										<li>Finland
+										</li>
+										<li>France
+										</li>
+										<li>Gabon
+										</li>
+										<li>Gambia
+										</li>
+										<li>Georgia
+										</li>
+										<li>Germany
+										</li>
+										<li>Ghana
+										</li>
+										<li>Greece
+										</li>
+										<li>Grenada
+										</li>
+										<li>Guatemala
+										</li>
+										<li>Guinea
+										</li>
+										<li>Guinea-Bissau
+										</li>
+										<li>Guyana
+										</li>
+										<li>Haiti
+										</li>
+										<li>Honduras
+										</li>
+										<li>Hungary
+										</li>
+										<li>Iceland
+										</li>
+										<li>India
+										</li>
+										<li>Indonesia
+										</li>
+										<li>Iran
+										</li>
+										<li>Iraq
+										</li>
+										<li>Ireland
+										</li>
+										<li>Israel
+										</li>
+										<li>Italy
+										</li>
+										<li>Jamaica
+										</li>
+										<li>Japan
+										</li>
+										<li>Jordan
+										</li>
+										<li>Kazakhstan
+										</li>
+										<li>Kenya
+										</li>
+										<li>Kiribati
+										</li>
+										<li>Kosovo
+										</li>
+										<li>Kuwait
+										</li>
+										<li>Kyrgyzstan
+										</li>
+										<li>Laos
+										</li>
+										<li>Latvia
+										</li>
+										<li>Lebanon
+										</li>
+										<li>Lesotho
+										</li>
+										<li>Liberia
+										</li>
+										<li>Libya
+										</li>
+										<li>Liechtenstein
+										</li>
+										<li>Lithuania
+										</li>
+										<li>Luxembourg
+										</li>
+										<li>Macedonia
+										</li>
+										<li>Madagascar
+										</li>
+										<li>Malawi
+										</li>
+										<li>Malaysia
+										</li>
+										<li>Maldives
+										</li>
+										<li>Mali
+										</li>
+										<li>Malta
+										</li>
+										<li>Marshall Islands
+										</li>
+										<li>Mauritania
+										</li>
+										<li>Mauritius
+										</li>
+										<li>Mexico
+										</li>
+										<li>Micronesia
+										</li>
+										<li>Moldova
+										</li>
+										<li>Monaco
+										</li>
+										<li>Mongolia
+										</li>
+										<li>Montenegro
+										</li>
+										<li>Morocco
+										</li>
+										<li>Mozambique
+										</li>
+										<li>Myanmar (Burma)
+										</li>
+										<li>Namibia
+										</li>
+										<li>Nauru
+										</li>
+										<li>Nepal
+										</li>
+										<li>Netherlands
+										</li>
+										<li>New Zealand
+										</li>
+										<li>Nicaragua
+										</li>
+										<li>Niger
+										</li>
+										<li>Nigeria
+										</li>
+										<li>North Korea
+										</li>
+										<li>Norway
+										</li>
+										<li>Oman
+										</li>
+										<li>Pakistan
+										</li>
+										<li>Palau
+										</li>
+										<li>Palestine
+										</li>
+										<li>Panama
+										</li>
+										<li>Papua New Guinea
+										</li>
+										<li>Paraguay
+										</li>
+										<li>Peru
+										</li>
+										<li>Philippines
+										</li>
+										<li>Poland
+										</li>
+										<li>Portugal
+										</li>
+										<li>Qatar
+										</li>
+										<li>Romania
+										</li>
+										<li>Russia
+										</li>
+										<li>Rwanda
+										</li>
+										<li>Saint Kitts and Nevis
+										</li>
+										<li>Saint Lucia
+										</li>
+										<li>Saint Vincent and the Grenadines
+										</li>
+										<li>Samoa
+										</li>
+										<li>San Marino
+										</li>
+										<li>Sao Tome and Principe
+										</li>
+										<li>Saudi Arabia
+										</li>
+										<li>Senegal
+										</li>
+										<li>Serbia
+										</li>
+										<li>Seychelles
+										</li>
+										<li>Sierra Leone
+										</li>
+										<li>Singapore
+										</li>
+										<li>Slovakia
+										</li>
+										<li>Slovenia
+										</li>
+										<li>Solomon Islands
+										</li>
+										<li>Somalia
+										</li>
+										<li>South Africa
+										</li>
+										<li>South Korea
+										</li>
+										<li>South Sudan
+										</li>
+										<li>Spain
+										</li>
+										<li>Sri Lanka
+										</li>
+										<li>Sudan
+										</li>
+										<li>Suriname
+										</li>
+										<li>Swaziland
+										</li>
+										<li>Sweden
+										</li>
+										<li>Switzerland
+										</li>
+										<li>Syria
+										</li>
+										<li>Taiwan
+										</li>
+										<li>Tajikistan
+										</li>
+										<li>Tanzania
+										</li>
+										<li>Thailand
+										</li>
+										<li>Timor-Leste
+										</li>
+										<li>Togo
+										</li>
+										<li>Tonga
+										</li>
+										<li>Trinidad and Tobago
+										</li>
+										<li>Tunisia
+										</li>
+										<li>Turkey
+										</li>
+										<li>Turkmenistan
+										</li>
+										<li>Tuvalu
+										</li>
+										<li>Uganda
+										</li>
+										<li>Ukraine
+										</li>
+										<li>United Arab Emirates (UAE)
+										</li>
+										<li>United Kingdom (UK)
+										</li>
+										<li>Uruguay
+										</li>
+										<li>Uzbekistan
+										</li>
+										<li>Vanuatu
+										</li>
+										<li>Vatican City (Holy See)
+										</li>
+										<li>Venezuela
+										</li>
+										<li>Vietnam
+										</li>
+										<li>Yemen
+										</li>
+										<li>Zambia
+										</li>
+										<li>Zimbabwe
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="fields-row">
+								<div class="field-wrapper" id="phone2_wrapper">
+									<label for="phone2">Phone<span class=red>*</span></label>
+									<input id="phone2" type="text" class="input-field" name="phone2" data-required="1">
+									<div id="error-phone2" class="error-balloon">Please, fill</div>
+								</div>
+								<div class="field-wrapper" id="ext2_wrapper">
+									<label for="extension2">Ext</label>
+									<input id="extension2" type="text" class="input-field" name="extension2">
+									<div id="error-extension2" class="extension2-balloon"></div>
+								</div>
+							</div>
+							
+							<div class="buttons">
+								<input id="submit2" class="submitbtn" type="button" value="Call Me Now" class="submitbtn servicepatternBtn accept">
+								<input id="submit3" class="submitbtn" type="button" value="Call Me in 5 Min" class="submitbtn servicepatternBtn accept">
+							</div>
+							
+							<div class=description>
+								Click the "Call Me Now" button to talk to an agent. If your call is disconnected, we may use rhe number you are contacting us from to call you back immediately.
+							</div>
+							
+							<div class=prefer_email>
+								<div class=ico></div>Prefer to email?
+							</div>
+						</div>
+						<div class=standby>
+							<div class=big>Stand By!</div>
+							<div class=momentarily>An agent will contact you momentarily...</div>
+							<div class=interval>An agent will contact you directly in approximately 5 minutes.</div>
+							<div class="submit_standby pseudobutton servicepatternBtn accept">Return to Property Details</div>
+						</div>
+						
+					</div>
+					
+					<div id=section-sms class=section>
+						
+						<div class="field-wrapper" id="form-action3">
+							<label>I would like to...</label>
+							
+							<div class="selectbox">
+								<input type="text" name="action3" disabled value="Get information about renting"/>
+								<div class="arrow_down"></div>
+								<ul class="selectbox-list">
+									<li class="active">Get information about renting</li>
+									<li>Schedule a tour</li>
+									<li>Submit a maintenance request</li>
+									<li>Contact the property manager</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class=params-wrapper>
+							<div class=description>
+								By telling us a bit about you,<br/>
+								our agents can serve you better.
+							</div>
+							
+							<div class=description_switched>
+								<div class=big>Want to switch to a text?</div>
+								<div>Let us know your number and an agent will text you to resume the conversation</div>
+							</div>
+							<div class=footnote>
+								<span class=red>*</span>required field
+							</div>
+							
+							<div class="field-wrapper" id="name3_wrapper">
+								<label for="name3">Name<span class=red>*</span></label>
+								<input id="name3" type="text" class="input-field" name="name3" data-required="1">
+								<div id="error-name3" class="error-balloon">Please, enter name</div>
+							</div>
+							
+							<div class="field-wrapper" id="phone3_wrapper">
+								<label for="phone3">Mobile Number<span class=red>*</span></label>
+								<input id="phone3" type="text" class="input-field" name="phone3">
+								<div id="error-phone3" class="error-balloon">Please, enter number</div>
+							</div>
+							
+							<div class="buttons">
+								<a id="submit4" href="" class="pseudobutton servicepatternBtn accept">Start Texting</a>
+								<input id="submit5" class="submitbtn2" type="button" value="Start Texting" class="submitbtn servicepatternBtn accept">
+							</div>
+							
+							<div class=description>
+								Standard message and data rates my apply. Text "STOP" to cancel.
+							</div>
+							
+							<div class=prefer_email>
+								<div class=ico></div>Prefer to email?
+							</div>
+							
+						</div>
+						
+						<div class="standby momentarily">
+							<div class=big>Stand By!</div>
+							<div class=momentarily>An agent will send tou a text message momentarily...</div>
+							<div class="submit_standby pseudobutton servicepatternBtn accept">Return to Property Details</div>
+						</div>
+						
+					
+					</div>
+					
+					<div id=section-email class=section>
+						
+						<div class="field-wrapper" id="form-action4">
+							<label>I would like to...</label>
+							
+							<div class="selectbox">
+								<input type="text" name="action4" disabled value="Get information about renting"/>
+								<div class="arrow_down"></div>
+								<ul class="selectbox-list">
+									<li class="active">Get information about renting</li>
+									<li>Schedule a tour</li>
+									<li>Submit a maintenance request</li>
+									<li>Contact the property manager</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class=params-wrapper>
+							<div class=description>
+								By telling us a bit about you,<br/>
+								our agents can serve you better.
+							</div>
+							<div class=footnote>
+								<span class=red>*</span>required field
+							</div>
+							
+							<div class="field-wrapper" id="name4_wrapper">
+								<label for="name4">Name<span class=red>*</span></label>
+								<input id="name4" type="text" class="input-field" name="name4" data-required="1">
+								<div id="error-name4" class="error-balloon">Please, enter name</div>
+							</div>
+							
+							<div class="field-wrapper" id="email_wrapper">
+								<label for="email3">Email<span class=red>*</span></label>
+								<input id="email3" type="email" class="input-field" name="email3"  data-required="1">
+								<div id="error-email3" class="error-balloon">Please, enter email</div>
+							</div>
+							<div class="fields-row">
+								<div class="field-wrapper" id="phone_wrapper">
+									<label for="phone3">Phone</label>
+									<input id="phone3" type="text" class="input-field" name="phone3">
+									<div id="error-phone3" class="phone-balloon"></div>
+								</div>
+								<div class="field-wrapper" id="ext_wrapper">
+									<label for="extension3">Ext</label>
+									<input id="extension3" type="text" class="input-field" name="extension3">
+									<div id="error-extension3" class="extension-balloon"></div>
+								</div>
+							</div>
+							
+							<div class="field-wrapper" id="message_wrapper">
+								<label for="message_textarea">Message<span class=red>*</span></label>
+								<textarea id="message_textarea" class="input-field" name="message_textarea" data-required="1">I'd like more information about available apartments at Jefferson Stonebriar.</textarea>
+								<div id="error-message" class="error-balloon">Please, enter message</div>
+							</div>
+							
+							<div class="field-wrapper" id="copy_wrapper">
+								<input id="copy" type="checkbox" class="input-field" name="copy"><label for="copy">Send a copy to my email address.</label>
+							</div>
+							
+							<div class="buttons">
+								<a id="submit5" href="mailto:mail@digiterra.pro?subject=The%20subject%20of%20the%20mail&amp;body=I'd%20like%20more%20information%20about%20available%20apartments%20at%20Jefferson%20Stonebriar." class="pseudobutton servicepatternBtn accept">Send Email</a>
+							</div>
+
+						</div>
+					
+					</div>
+					<div id=footer>
+							<div id=copy><span>Powered by</span> <div id=rentjoy></div></div>
+							<a id=terms href=#>Terms of Use</a>
+							<a id=privacy href=#>Privacy Policy</a>
+						</div>
+					
+					
+					
+				</div>
+				<div id="unavailableForm">
+					<div id="offline-form-fields">
+						<div class="description big">Uh oh...</div>
+						<div class="description">Something went<br/>wrong and we<br/>couldn't connect.</div>
+
+						
+
+						<div class="buttons">
+<!-- 							<div class="left-button">
+								<a id="uncancel" class="servicepatternBtn cancel" href="#">Cancel</a>
+							</div> -->
+							<div>
+								<input id="unsubmit" type="button" value="Try Chatting Again" class="servicepatternBtn">
+							</div>
+						</div>
+
+						<div class="clear"></div>
+					</div>
+				</div>
+
+				<div id="surveyForm">
+					<div class="content">
+						<div class=description>
+							<span class=big>How'd we do?</span><br/>
+
+							<div class="avatar-image" id="manager-pic2"></div>
+							<br/>
+							Rate your conversation with <br/>
+							<strong class=agent-name></strong>
+							<br/>
+						</div>
+						<p id=rates>
+							<input type="radio" name="helpful" id="helpful-1" value="1"><label for="helpful-1"></label>
+							<input type="radio" name="helpful" id="helpful-2" value="2"><label for="helpful-2"></label>
+							<input type="radio" name="helpful" id="helpful-3" value="3"><label for="helpful-3"></label>
+							<input type="radio" name="helpful" id="helpful-4" value="4"><label for="helpful-4"></label>
+							<input type="radio" name="helpful" id="helpful-5" value="5"><label for="helpful-5"></label>
+						</p>
+
+						<br/>
+
+						<div class="description">We appreciate your feedback, which helps us give you the best possible Renter Experience.</div>
+						<div class="description"><strong>Your feedback is completly private and anonymous.</strong></div>
+
+
+						<div class="pseudolink">Skip this</div>
+					</div>
+					<div class="buttons">
+						<div class=big id=thanks><div class=ico></div><div class=big	>Thanks for feedback!</div></div>
+						<div class="description">We really appreciate it</div>
+						<div>
+							<input id="submitSurvey" type="button" value="Return To Property" class="servicepatternBtn">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+
+		
+	</div>
+</div>
+<form name="file-upload-form" id="file-upload-form" target="_blank" method="post" enctype="multipart/form-data" style="display:none;">
+
+</form>
+
+</body>
+</html>
