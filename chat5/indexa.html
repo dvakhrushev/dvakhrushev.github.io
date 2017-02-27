@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Test Page1</title>
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="MobileOptimized" content="320px" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+</head>
+<body>
+
+<style>
+body{background:url(images/bg.jpg) center top no-repeat;background-size: cover;}
+ul{
+    position: absolute;
+    background: #fff;
+    width: 283px;
+    left: 50%;
+    margin-left: -161px;
+    top: 352px;
+}
+ul a{line-height:32px}
+</style>
+
+<!-- You have to put this piece of JavaScript code into your web page -->
+
+<script type="text/javascript">
+    SERVICE_PATTERN_CHAT_CONFIG = {
+        appId: 'new',
+        clientId: 'WebChat',
+        apiUrl: 'https://alexei-500.bugfocus.com/clientweb/api/v1',
+        tenantUrl: 'new.brightpattern.com',
+        width: 300,
+        chatPath: 'https://dvakhrushev.github.io/chat5/',
+        email: 'ya@sergem.net'
+    };
+</script>
+<script type="text/javascript" src="js/snippet.js"></script>
+<ul>
+    <li><a href=indexa.html>Page1</a>
+    <li><a href=page2a.html>Page2 (Navigation test)</a>
+</ul>
+</body>
+</html>
