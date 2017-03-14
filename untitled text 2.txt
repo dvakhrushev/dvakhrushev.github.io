@@ -1,0 +1,38 @@
+- Nicopure chat
+- 
+
+
+
+SMART goals:
+- Specific
+- Measurable
+- Agreed-upon
+- Reasonable
+- Time-bound
+
+Goal for Software Engineering department:
+Increase the quality of software product named ABC by 20% (comparing to Feb 2017 release) by the end of August 2017.
+The quality of each software release of ABC is measured by it's Quality Factor = (number of defects found in production use) per (1000 lines of code added or changed in the release).
+Software Engineering is delivering new release every month and the quality metrics are collected for each release.
+Also we have historical data for the releases that have been delivered within last few years.
+The team is currently working on 3 different software products and two other products have Quality Factor higher than the goal target of ABC
+Improvement of the product quality will:
+- Increase our customer satisfaction (and as a result increase customer retention)
+- Reduce development costs (fixing defects on later stages is much more expensive)
+- Position or products as the best in the market (great marketing message, increase of sales)
+
+
+Risks:
+Engineering performance degradation. Engineers could become too cautious about the product changes they are making and thus spend unreasonable time double- and triple-thinking about
+- Mitigation: 
+Unethical behavior. It is possible to fake the Quality Factor improvement by adding "safe" unnecessary code lines. (1 defect per 1000 code lines compared to 1 defect per 1500 lines of code).
+- Mitigation: Peer code reviews will make it less possible to fake code changes and will also improve the product 
+Dissatisfaction: Quality improvement often involves a lot of rutine work suche as defect fixes which is less exciting for software engineers (comparing to the new functionality development). This can lead to lowered motivation.
+- Mitigation: Feedback loop from the satisfied customers back to engineering. Provide clear vision of the quality metrics on every produced product release, show gradual improvement.
+
+Strategies:
+- Clearly communicate to all involved personal the impact of the product quality on business. Explain how achieving the goal will make the company closer to the company's long term goals.
+- Explain to every involved team (product management, software development, QA, release management) how their respective team can influence the resulting product quality.
+- Ask each involved team (product management, software development, QA, release management) to develop their own plan of actions on how their team to achieve the goal.
+- Empower senior employees to mentor junior engineers.
+- Provide continous feedback loop of release quality metrics to all involved personal.
