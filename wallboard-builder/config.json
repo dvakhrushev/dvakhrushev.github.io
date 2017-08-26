@@ -1,0 +1,229 @@
+{
+    "widgets": [
+    {
+        "config": {
+          "id": "1",
+          "type": "single",
+          "title": "Total Interactions",
+          "show_settings": true,
+          "subscription": {
+            "type": "stats_total",
+            "req": [
+              "in_calls_queued_per_day"
+            ]
+          },
+
+          "value": "in_calls_queued_per_day"
+        }
+      },
+      {
+        "config": {
+          "id": "2",
+          "type": "grid",
+          "title": "Queued Interactions",
+          "show_settings": true,
+          "subscription": {
+            "type": "service_grid",
+            "req": {
+              "id": "2",
+              "columns": [
+                {
+                  "id": "1",
+                  "statName": "name"
+                },
+                {
+                  "id": "2",
+                  "statName": "in_calls_waiting"
+                }
+              ],
+              "limit": 6,
+              "order_by": "2",
+              "order_dir": "DESC"
+            }
+          }
+        }
+      },
+      {
+        "config": {
+          "id": "3",
+          "type": "grid",
+          "title": "Long Calls",
+          "show_settings": true,
+          "subscription": {
+            "type": "agent_grid",
+            "req": {
+              "id": "3",
+              "columns": [
+                {
+                  "id": "1",
+                  "statName": "firstname"
+                },
+                {
+                  "id": "2",
+                  "statName": "lastname"
+                },
+                {
+                  "id": "3",
+                  "statName": "active_item_talk_duration"
+                },
+                {
+                  "id": "4",
+                  "statName": "active_item_hold_duration"
+                }
+              ],
+              "limit": 6,
+              "order_by": "3",
+              "order_dir": "DESC"
+            }
+          }
+          
+        }
+      },
+      {
+        "config": {
+          "id": "4",
+          "type": "single",
+          "title": "Short Abandons",
+          "show_settings": true,
+          "subscription": {
+            "type": "stats_total",
+            "req": [
+              "in_calls_short_abandoned_in_queue_per_day",
+              "in_calls_short_abandoned_in_queue_ratio_per_day"
+            ]
+          },
+
+          "value": "in_calls_short_abandoned_in_queue_per_day",
+          "optValue": "in_calls_short_abandoned_in_queue_ratio_per_day | sp_percent"
+        }
+      },
+      {
+        "config": {
+          "id": "5",
+          "type": "grid",
+          "title": "Leaderboard",
+          "show_settings": true,
+          "subscription": {
+            "type": "agent_grid",
+            "req": {
+              "id": "5",
+              "columns": [
+                {
+                  "id": "1",
+                  "statName": "firstname"
+                },
+                {
+                  "id": "2",
+                  "statName": "lastname"
+                },
+                {
+                  "id": "3",
+                  "statName": "calls_dispositions_per_day",
+                  "dispositions": []
+                }
+              ],
+              "limit": 6,
+              "order_by": "3",
+              "order_dir": "DESC"
+            }
+          }
+          
+        }
+      },
+      {
+        "config": {
+          "id": "6",
+          "type": "grid",
+          "title": "Service Level Tracker",
+          "show_settings": true,
+          "subscription": {
+            "type": "service_grid",
+            "req": {
+              "id": "6",
+              "columns": [
+                {
+                  "id": "1",
+                  "statName": "name"
+                },
+                {
+                  "id": "2",
+                  "statName": "service_level_target"
+                },
+                {
+                  "id": "3",
+                  "statName": "service_level_threshold_time"
+                },
+                {
+                  "id": "4",
+                  "statName": "service_level"
+                }
+              ],
+              "limit": 6,
+              "order_by": "4",
+              "order_dir": "ASC"
+            }
+          }
+          
+        }
+      },
+      {
+        "config": {
+          "id": "7",
+          "type": "single",
+          "show_settings": true,
+          "title": "Long Abandons",
+          "subscription": {
+            "type": "stats_total",
+            "req": [
+              "in_calls_abandoned_in_queue_per_day",
+              "in_calls_abandoned_in_queue_ratio_per_day"
+            ]
+          },
+
+          "value": "in_calls_abandoned_in_queue_per_day",
+          "optValue": "in_calls_abandoned_in_queue_ratio_per_day | sp_percent"
+        }
+      },
+      {
+      "config": {
+        "id": "8",
+          "type": "single",
+          "show_settings": true,
+          "title": "Total in Queue",
+          "subscription": {
+            "type": "stats_total",
+            "req": [
+              "in_calls_waiting",
+              "in_max_wait_time"
+            ]
+          },
+
+          "value": "in_calls_waiting",
+          "optValue": "in_max_wait_time | sp_duration",
+          "alert": {
+             "blink": "true",
+             "sound": "true",
+             "blink_condition":"(value > 0) && (optValue > '00:05')",
+             "sound_condition": "optValue > '00:10'"
+          }
+        }
+      },
+      
+      {
+        "config": {
+          "id": "9",
+          "type": "news",
+          "title": "Daily Updates",
+          "show_settings": true,
+          "subscription": {
+            "type": "chat_messages",
+            "req": {
+              "filter": "",
+              "limit": 6
+            }
+          }
+        },
+        "data": []
+      }
+    ]
+}
