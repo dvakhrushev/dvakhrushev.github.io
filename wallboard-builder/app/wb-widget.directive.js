@@ -1198,7 +1198,7 @@
 
                                     pane: {
                                         center: ["50%", "60%"],
-                                        size: '120%',
+                                        size: '100%',
                                         startAngle: -120,
                                         endAngle: 120,
                                         background: {
