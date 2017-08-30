@@ -135,7 +135,7 @@ angular.module('app')
                 },
                 WidgetDonutPie: {
                     fontFamily: 'Muli',
-                    color: '#fff'
+                    color: '#848585'
                 },
                 WidgetDonutBorder: {
                     borderWidth: 2,

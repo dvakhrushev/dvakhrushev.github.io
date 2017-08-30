@@ -98,7 +98,7 @@
                             return _.assign({},
                                 $scope.themeStyle.WidgetHeaderHeight,
                                 $scope.themeStyle.WidgetHeaderLine,
-                                $scope.themeStyle.WidgetHeaderBackground,
+                                $scope.themeStyle.WidgetHeaderBackground
                             );
                         };
 
@@ -385,7 +385,7 @@
                         }
 
                         if ($scope.config.type === 'grid') {
-                            $scope.tabletitl = true;
+                            $scope.tabletitl = false;
                             $scope.config.coltitle = [];
                             $scope.state_icon = false;
 
@@ -1198,7 +1198,7 @@
 
                                     pane: {
                                         center: ["50%", "60%"],
-                                        size: '100%',
+                                        size: '120%',
                                         startAngle: -120,
                                         endAngle: 120,
                                         background: {
@@ -1227,7 +1227,7 @@
                                         ],
                                         lineWidth: 0,
                                         minorTickInterval: null,
-                                        tickAmount: 2,                                        
+                                        tickAmount: 2,
                                         labels: {
                                             y: 16,
                                             style: {
@@ -1257,9 +1257,9 @@
                                         data: [80],
                                         dataLabels: {
                                             format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                                            ($scope.themeStyle.WidgetGauge.color) + '">{y}</span>' 
+                                            ($scope.themeStyle.WidgetGauge.color) + '">{y}</span>'
                                         },
-                                        
+
                                     }]
                                 });
 
@@ -1323,19 +1323,12 @@
                         }
 
                         // style cell in grid widget
-                        $scope.getGridCellStyle = function (index, data, row, cell) {
+                        $scope.getGridCellStyle = function (index, data, row, cell, config) {
                             index = parseInt(index);
-                            if (index > 1) {
-                                return _.assign({
-                                        'font-size': '2vmin',
-                                    },
-                                    $scope.themeStyle.WidgetListColumnDivider
-                                );
+                            if(config.subscription.req.columns[index].statName == "name") {
+                              return "font-size: 2vmin;text-align:left;";
                             } else {
-                                return _.assign({
-                                        'font-size': '2vmin',
-                                    }
-                                );
+                              return "font-size: 2vmin";
                             }
                         }
 

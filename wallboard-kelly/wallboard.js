@@ -1,7 +1,7 @@
 /* ___PRODUCT_BUILD___ (___PRODUCT_COMMENTS___) ___PRODUCT_DATE___ */
 
 var soundAlertTimer = null;
-function myTimer() 
+function myTimer()
 {
     var thissound = document.getElementById( "alert" );
     thissound.play();
@@ -35,15 +35,15 @@ angular.module('app', [])
             datagridservice: '='
         },
         template: '<ng-include src="getTemplateUrl()"/>',
-        
-        controller: ['$scope', '$parse', '$filter', '$compile', 
+
+        controller: ['$scope', '$parse', '$filter', '$compile',
         function($scope, $parse, $filter, $compile){
 
             var selectedStat;
             $scope.config.temptype = $scope.config.subscription.type;
 
-            // IT'S A HACK !!! We select widget by name here 
-            if($scope.config.title === 'Leaderboard'){ 
+            // IT'S A HACK !!! We select widget by name here
+            if($scope.config.title === 'Leaderboard'){
             //if($scope.config.type === 'grid'){
 
                 $scope.dispositions = [];
@@ -124,7 +124,7 @@ angular.module('app', [])
                 }
                 else $scope.config.tempvaluesec = "";
                 $scope.config.tempvaluefilt = "sp_percent";
-                
+
 
                 $scope.updateDispositions = function(){
                     $scope.$emit('RecreateSubscription');
@@ -135,8 +135,8 @@ angular.module('app', [])
                     $scope.$emit('LoadDispositions');
                 }
 
-                $scope.applySettings = function(){ 
-                    
+                $scope.applySettings = function(){
+
                     $scope.show_settings = false;
                     //console.log("Apply Settings Single");
                     if($scope.config.subscription.type == $scope.config.temptype){
@@ -167,7 +167,7 @@ angular.module('app', [])
                                 $scope.config.subscription.type = "agent_grid";
                                 $scope.config.subscription.req = undefined;
                                 $scope.config.subscription.req = {};
-                                
+
                                 $scope.config.subscription.req.id = $scope.config.id;
                                 $scope.config.subscription.req.columns = [];
                                 $scope.config.subscription.req.columns[0] = {};
@@ -194,7 +194,7 @@ angular.module('app', [])
                                 $scope.config.subscription.type = "service_grid";
                                 $scope.config.subscription.req = undefined;
                                 $scope.config.subscription.req = {};
-                                
+
                                 $scope.config.subscription.req.id = $scope.config.id;
                                 $scope.config.subscription.req.columns = [];
                                 $scope.config.subscription.req.columns[0] = {};
@@ -222,7 +222,7 @@ angular.module('app', [])
                         }
                         $scope.$emit('Rebuild');
                     }
-                    
+
                     $scope.updateDispositions();
                 }
 
@@ -245,7 +245,7 @@ angular.module('app', [])
                     $scope.$emit('LoadDispositions');
                 }
 
-                
+
 
                 $scope.applySettings = function(){
                     $scope.show_settings = false;
@@ -272,7 +272,7 @@ angular.module('app', [])
                                     $scope.config.subscription.type = "agent_grid";
                                     $scope.config.subscription.req = undefined;
                                     $scope.config.subscription.req = {};
-                                    
+
                                     $scope.config.subscription.req.id = $scope.config.id;
                                     $scope.config.subscription.req.columns = [];
                                     $scope.config.subscription.req.columns[0] = {};
@@ -295,7 +295,7 @@ angular.module('app', [])
                                     $scope.config.subscription.type = "service_grid";
                                     $scope.config.subscription.req = undefined;
                                     $scope.config.subscription.req = {};
-                                    
+
                                     $scope.config.subscription.req.id = $scope.config.id;
                                     $scope.config.subscription.req.columns = [];
                                     $scope.config.subscription.req.columns[0] = {};
@@ -319,7 +319,7 @@ angular.module('app', [])
                         $scope.$emit('Rebuild');
                     }
                     $scope.updateDispositions();
-                    
+
                 }
 
                 $scope.cancelSettings = function(){
@@ -330,7 +330,7 @@ angular.module('app', [])
                 $scope.delCol = function(column){
                     //console.log("Delete "+ column.id +" column!");
                     var i = 1;
-                    var index = $scope.config.subscription.req.columns.indexOf(column); 
+                    var index = $scope.config.subscription.req.columns.indexOf(column);
                     $scope.config.subscription.req.columns.splice(index, 1);
                     $scope.config.subscription.req.columns.forEach(function(col){
                         col.id = i.toString();
@@ -343,11 +343,11 @@ angular.module('app', [])
                     //console.log($scope.config.subscription.req.columns);
                     var newCol = {};
                     var i = 1;
-                    newCol.id = ($scope.config.subscription.req.columns.length + 1).toString(); 
+                    newCol.id = ($scope.config.subscription.req.columns.length + 1).toString();
                     if($scope.config.subscription.type == "agent_grid"){newCol.statName = "firstname";}
                     if($scope.config.subscription.type == "service_grid"){newCol.statName = "name";}
                     //console.log(newCol);
-                    $scope.config.subscription.req.columns.push(newCol); 
+                    $scope.config.subscription.req.columns.push(newCol);
                     $scope.config.subscription.req.columns.forEach(function(col){
                         col.id = i.toString();
                         i++;
@@ -360,16 +360,16 @@ angular.module('app', [])
             }
 
             $scope.isDataEmpty = function(){
-                return angular.isUndefined($scope.data) || 
-                    angular.equals($scope.data, []) || 
+                return angular.isUndefined($scope.data) ||
+                    angular.equals($scope.data, []) ||
                     angular.equals($scope.data, {});
             }
 
             $scope.getTemplateUrl = function(){
                 return 'partials/widgets/' + $scope.config.type + '.html';
             }
-            
-            $scope.getGridCellStyle = function(index, data, row, cell){
+
+            $scope.getGridCellStyle = function(index, data, row, cell, config){
                 index = parseInt(index);
                 return {
                     'font-size': '' + (0.9 + 7 / (Math.max(data.length, row.length))) + 'vh',
@@ -390,13 +390,13 @@ angular.module('app', [])
             $scope.getOptValue = function(){
                 return $parse($scope.config.optValue)($scope.data);
             }
-            
+
             $scope.getWidgetMode = function(){
                 return $scope.config.mode;
             }
-            
-            
-            
+
+
+
         }]
     }
 })
@@ -407,7 +407,7 @@ angular.module('app', [])
         restrict: 'EA',
         scope: {},
         templateUrl: 'partials/login_form.html',
-        
+
         controller: ['$scope', 'StatsApi', function($scope, StatsApi){
 
             $scope.show_login_form = false;
@@ -421,8 +421,8 @@ angular.module('app', [])
 
             $scope.onLogin = function(){
                 StatsApi.authenticate(
-                    $scope.tenant_url, 
-                    $scope.username, 
+                    $scope.tenant_url,
+                    $scope.username,
                     $scope.password)
                     .then(function(){
                         localStorage.setItem('tenant_url', $scope.tenant_url);
@@ -556,7 +556,7 @@ angular.module('app', [])
 
                 } else if(w.config.subscription.type === 'service_grid'){
                     req.data.service_grids.push(w.config.subscription.req);
-                
+
                 } else if(w.config.subscription.type === 'chat_messages'){
                     req.data.chat_messages = w.config.subscription.req;
                 }
@@ -605,7 +605,7 @@ angular.module('app', [])
                     processChatMessagesData(w, data);
                 }
             }
-            
+
         })
     }
 
@@ -619,7 +619,7 @@ angular.module('app', [])
 
                   var value = $parse(w.config.value)(w.data);
                   var optValue = $parse(w.config.optValue)(w.data);
-                  w.config.mode = ""; 
+                  w.config.mode = "";
 
                   if ((w.config.alert.sound === "true") && eval(w.config.alert.sound_condition)){
 
@@ -637,10 +637,10 @@ angular.module('app', [])
 
 
                    	if ((w.config.alert.blink === "true") && eval(w.config.alert.blink_condition)){
-                   		w.config.mode = "alerted";            		
+                   		w.config.mode = "alerted";
                    	}
 
-                } 
+                }
             }
         })
     }
@@ -659,7 +659,7 @@ angular.module('app', [])
 */
         widget.config.subscription.req.forEach(function(k){
             widget.data = widget.data || {};
-            
+
             if(data.data && data.data.stats_totals){
                 widget.data[k] = data.data.stats_totals[k];
                 //console.log(widget.data[k]);
@@ -747,8 +747,8 @@ angular.module('app', [])
         compileFn($scope);
 
         body.after(newBoard);
-        
-        
+
+
     })
 
     function bootstrap(){
@@ -819,7 +819,7 @@ angular.module('app', [])
     }
 
     return {
-        
+
         authenticate: function(tenantUrl, username, password){
             STATS_CFG.tenantUrl = tenantUrl;
             STATS_CFG.loginId = username;
@@ -848,10 +848,3 @@ angular.module('app', [])
 
     }
 }])
-
-
-
-
-
-
-

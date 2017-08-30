@@ -28,168 +28,170 @@ angular.module('app')
             $scope.Wallboards = [];
 
             //empty WB default config
-            $scope.NewBoard = {};
-            $scope.NewBoard.widgets = [];
-            $scope.NewBoard.widgets = [
-                {
-                    "config": {
-                        "id": "1",
-                        "type": "empty",
-                        "title": "",
-                        "x": 0,
-                        "y": 0,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "2",
-                        "type": "empty",
-                        "title": "",
-                        "x": 3,
-                        "y": 0,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "3",
-                        "type": "empty",
-                        "title": "",
-                        "x": 6,
-                        "y": 0,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "4",
-                        "type": "empty",
-                        "title": "",
-                        "x": 9,
-                        "y": 0,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "5",
-                        "type": "empty",
-                        "title": "",
-                        "x": 0,
-                        "y": 4,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "6",
-                        "type": "empty",
-                        "title": "",
-                        "x": 3,
-                        "y": 4,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "7",
-                        "type": "empty",
-                        "title": "",
-                        "x": 6,
-                        "y": 4,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "8",
-                        "type": "empty",
-                        "title": "",
-                        "x": 9,
-                        "y": 4,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "9",
-                        "type": "empty",
-                        "title": "",
-                        "x": 0,
-                        "y": 8,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "10",
-                        "type": "empty",
-                        "title": "",
-                        "x": 3,
-                        "y": 8,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "11",
-                        "type": "empty",
-                        "title": "",
-                        "x": 6,
-                        "y": 8,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                },
-                {
-                    "config": {
-                        "id": "12",
-                        "type": "empty",
-                        "title": "",
-                        "x": 9,
-                        "y": 8,
-                        "width": 3,
-                        "height": 4,
-                        "show_settings": true
-                    }
-                }
-            ];
+            $scope.emptyDefaultBoard = function () {
+              $scope.NewBoard = {};
+              $scope.NewBoard.widgets = [];
+              $scope.NewBoard.widgets = [
+                  {
+                      "config": {
+                          "id": "1",
+                          "type": "empty",
+                          "title": "",
+                          "x": 0,
+                          "y": 0,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "2",
+                          "type": "empty",
+                          "title": "",
+                          "x": 3,
+                          "y": 0,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "3",
+                          "type": "empty",
+                          "title": "",
+                          "x": 6,
+                          "y": 0,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "4",
+                          "type": "empty",
+                          "title": "",
+                          "x": 9,
+                          "y": 0,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "5",
+                          "type": "empty",
+                          "title": "",
+                          "x": 0,
+                          "y": 4,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "6",
+                          "type": "empty",
+                          "title": "",
+                          "x": 3,
+                          "y": 4,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "7",
+                          "type": "empty",
+                          "title": "",
+                          "x": 6,
+                          "y": 4,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "8",
+                          "type": "empty",
+                          "title": "",
+                          "x": 9,
+                          "y": 4,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "9",
+                          "type": "empty",
+                          "title": "",
+                          "x": 0,
+                          "y": 8,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "10",
+                          "type": "empty",
+                          "title": "",
+                          "x": 3,
+                          "y": 8,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "11",
+                          "type": "empty",
+                          "title": "",
+                          "x": 6,
+                          "y": 8,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  },
+                  {
+                      "config": {
+                          "id": "12",
+                          "type": "empty",
+                          "title": "",
+                          "x": 9,
+                          "y": 8,
+                          "width": 3,
+                          "height": 4,
+                          "show_settings": true
+                      }
+                  }
+              ];
 
-            // empty cells default create 12x12
-            $scope.emptycells = [];
-            for (var i = 0; i < 12; i++) {
-                $scope.emptycells[i] = [];
-                for (var j = 0; j < 12; j++) {
-                    $scope.emptycells[i][j] = {};
-                    $scope.emptycells[i][j].y = i;
-                    $scope.emptycells[i][j].x = j;
-                    $scope.emptycells[i][j].status = "empty";
-                    $scope.emptycells[i][j].id = "x" + j + "y" + i;
-                }
+              // empty cells default create 12x12
+              $scope.emptycells = [];
+              for (var i = 0; i < 12; i++) {
+                  $scope.emptycells[i] = [];
+                  for (var j = 0; j < 12; j++) {
+                      $scope.emptycells[i][j] = {};
+                      $scope.emptycells[i][j].y = i;
+                      $scope.emptycells[i][j].x = j;
+                      $scope.emptycells[i][j].status = "empty";
+                      $scope.emptycells[i][j].id = "x" + j + "y" + i;
+                  }
+              }
             }
-
+            $scope.emptyDefaultBoard();
             $scope.editmode = false;
             $scope.globalmode = false;
             $scope.selectmode = false;
@@ -688,14 +690,20 @@ angular.module('app')
                 });
 
                 $scope.editmode = true;
-                var editId = WallboardStorage.createEditCopy($scope.CurrentBoard.id);
-                $scope.CurrentBoard.editId = editId;
+                if($scope.CurrentBoard.id != undefined){
+                  var editId = WallboardStorage.createEditCopy($scope.CurrentBoard.id);
+                  $scope.CurrentBoard.editId = editId;
+                } else {
+                  $scope.CurrentBoard.editId = undefined;
+                }
                 $scope.$broadcast('onEditMode');
             }
 
             // off(ok) edit mode
             $scope.offEditMode = function () {
-                WallboardStorage.applyEditCopy($scope.CurrentBoard.editId);
+                if($scope.CurrentBoard.editId != undefined){
+                  WallboardStorage.applyEditCopy($scope.CurrentBoard.editId);
+                }
                 $('#body').removeClass("editmod");
                 $('.empty').each(function () {
                     $(this).removeClass("edit");
@@ -1042,6 +1050,7 @@ angular.module('app')
                 $scope.CurrentBoard.name = "New Wallboard";
                 $scope.CurrentBoard.is_global = false;
                 $scope.CurrentBoard.is_default = true;
+                $scope.emptyDefaultBoard();
                 $scope.CurrentBoard.widgets = $scope.NewBoard.widgets;
                 $scope.reBuild();
                 $scope.onEditMode();
@@ -1474,12 +1483,6 @@ angular.module('app')
                                     d.values.forEach(function (val) {
                                         val[tempId] = val[tempId] + " " + val[(parseInt(tempId) + 1).toString()];
                                         delete val[(parseInt(tempId) + 1).toString()];
-                                        for (var i = parseInt(tempId) + 1; i < Object.keys(val).length; i++) {
-                                            val[i] = val[(parseInt(i) + 1).toString()];
-                                        }
-                                        ;
-                                        delete val[Object.keys(val).length];
-
                                     });
                                 }
                                 ;
@@ -1613,7 +1616,11 @@ angular.module('app')
                 req.config.widgets = tempArr;
 
                 req.config.style = $scope.colstyle;
-                req.config.colorScheme = WallboardStorage.getTheme($scope.CurrentBoard.id);
+                if($scope.CurrentBoard.id != undefined){
+                  req.config.colorScheme = WallboardStorage.getTheme($scope.CurrentBoard.id);
+                } else {
+                  req.config.colorScheme = $scope.getCurrentTheme();
+                }
 
                 return req;
             }
