@@ -1,0 +1,108 @@
+<div class="widget-heading {{ getWidgetMode()}}" ng-style="getWidgetHeaderStyle()">
+    <h1 class="title" ng-style="getWidgetHeaderTitleStyle()">{{config.title}}</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 26 26" ng-class="settings"
+         ng-style="getWidgetHeaderIcons()" ng-mouseover="fSettHover()" ng-mouseleave="offSettHover()"
+         ng-show="true" ng-click="showSettings()">
+        <path d="M26 14.973v-3.998l-3.818-.623c-.199-.69-.473-1.352-.819-1.978l2.225-3.171-2.828-2.826-3.131 2.25c-.631-.351-1.299-.628-1.991-.828l-.666-3.799h-3.999l-.617 3.786c-.699.198-1.368.473-1.996.82l-3.122-2.231-2.827 2.826 2.196 3.14c-.354.635-.634 1.308-.835 2.007l-3.772.628v3.997l3.767.667c.2.699.479 1.371.834 2.007l-2.226 3.112 2.825 2.829 3.145-2.202c.634.351 1.304.627 2 .825l.63 3.789h3.997l.674-3.799c.696-.203 1.362-.482 1.99-.834l3.164 2.221 2.828-2.829-2.261-3.139c.347-.626.62-1.289.817-1.978l3.816-.669zm-13 1.667c-2.007 0-3.64-1.633-3.64-3.64s1.633-3.64 3.64-3.64 3.641 1.633 3.641 3.64-1.634 3.64-3.641 3.64z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 26 26" class="delete"
+         ng-style="getWidgetHeaderIcons()" ng-show="editmode" ng-click="showDelDial()"
+         ng-mouseover="addHoverDelete()" ng-mouseleave="addNoHoverDelete()">
+        <g enable-background="new">
+            <path d="M10.818.019c-.911 0-1.804.18-2.452.763-.648.583-.865 1.409-.865 2.266v1.426h2.271v-1.426c0-.557.121-.729.188-.788.067-.061.264-.167.859-.167h4.365c.595 0 .792.108.859.167.067.06.188.23.188.788v1.426h2.271v-1.426c0-.858-.218-1.684-.865-2.266-.648-.582-1.541-.763-2.452-.763h-4.365z"/>
+            <path d="M23.909 4.047c0-.549-.489-.997-1.091-.997h-19.635c-.601 0-1.091.448-1.091.997h-1.092v1.994h24v-1.994h-1.091z"/>
+            <path d="M3.183 7.037v15.953c0 1.648 1.467 2.99 3.273 2.99h13.091c1.804 0 3.273-1.342 3.273-2.99v-15.953h-19.636zm6.545 14.955h-2.182v-11.963h2.182v11.963zm4.364 0h-2.183v-11.963h2.183v11.963zm4.364 0h-2.182v-11.963h2.182v11.963z"/>
+        </g>
+    </svg>
+</div>
+
+<div class="widget-content {{ getWidgetMode()}}" ng-if="!isDataEmpty()">
+    <span class="widget-content-value" ng-style="getWidgetBodyMainFont()">
+        {{ getValue() }}
+    </span>
+    <span class="widget-content-opt-value" ng-style="getWidgetBodySecondFont()">
+        {{ getOptValue() }}
+    </span>
+</div>
+
+<div class="widget-content" ng-if="isDataEmpty()">
+    <span class="no-data">No data</span>
+</div>
+
+<div class="popup" ng-show="show_deldial">
+    <div class="widget-deldial">
+        <div class="widget-heading">
+            <h1 class="title">Delete Widget?</h1>
+        </div>
+        <div class="footer">
+            <button ng-click="delWidget()">Delete</button>
+            <button ng-click="cancelDel()" class="buttCanc">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="popup" ng-show="show_settings">
+    <div class="widget-settings" style="width: 640px; height: 260px;">
+        <div class="widget-heading">
+            <h1 class="title">Single Statistic</h1>
+        </div>
+        <div class="widget-content" style="height: 100px; overflow: hidden; display: table; margin: 0px;">
+            <div class="sett-str" style="height: 30px; display: table-row;">
+                <div class="sett-title"
+                     style="display: table-cell; vertical-align: middle; transform: translateY(0%); font-weight: bold;">
+                    Title:
+                </div>
+                <div class="sett-opt" style="display: table-cell; vertical-align: middle; transform: translateY(0%);">
+                    <input type="text" ng-model="config.title">
+                </div>
+            </div>
+
+            <div class="sett-str" style="height: 30px; display: table-row;">
+                <div class="sett-title"
+                     style="display: table-cell; vertical-align: middle; transform: translateY(0%); font-weight: bold;">
+                    Primary Statistic:
+                </div>
+                <div class="sett-opt" style="display: table-cell; vertical-align: middle; transform: translateY(0%);">
+                    <select ng-model="config.tempvalue" style="width: 220px;">
+                        <option ng-repeat="(key, value) in datasingle" value={{key}}>{{value}}</option>
+                    </select>
+                    <div class="sett-opt-link" style="margin-left: 15px;" ng-click="openOptions()">options</div>
+                    <div class="sett-opt-link" style="position: absolute;right: 5px;top: 7px;">alert conditions</div>
+                </div>
+            </div>
+
+            <div class="sett-str" style="height: 30px; display: table-row;">
+                <div class="sett-title"
+                     style="display: table-cell; vertical-align: middle; transform: translateY(0%); font-weight: bold;">
+                    Secondary Statistic:
+                </div>
+                <div class="sett-opt" style="display: table-cell; vertical-align: middle; transform: translateY(0%);">
+                    <select ng-model="config.tempvaluesec" style="width: 220px;">
+                        <option ng-repeat="(key, value) in datasingle" value={{key}}>{{value}}</option>
+                    </select>
+                    <div class="sett-opt-link" style="margin-left: 15px;" ng-click="openOptions()">options</div>
+                    <div class="sett-opt-link" style="position: absolute;right: 5px;top: 7px;">alert conditions</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" style="">
+            <button ng-click="applySettings()">OK</button>
+            <button class="buttCanc" ng-click="cancelSettings()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="popup" ng-show="show_options">
+    <div class="widget-options">
+        <div class="widget-heading">
+            <h1 class="title">Options</h1>
+        </div>
+        <div class="widget-content">
+
+        </div>
+        <div class="footer">
+            <button ng-click="closeOptions()">Ok</button>
+            <button ng-click="closeOptions()" class="buttCanc">Cancel</button>
+        </div>
+    </div>
+</div>
