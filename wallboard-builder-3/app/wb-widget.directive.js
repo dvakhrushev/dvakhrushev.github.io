@@ -1462,9 +1462,10 @@
                         $scope.getGridCellStyle = function (index, data, row, cell, config) {
                             index = parseInt(index);
                             if(config.subscription.req.columns[index] != undefined && config.subscription.req.columns[index].statName == "name") {
-                              return "font-size: 2vmin;text-align:left;";
+                              
+                              return "text-align:left;";
                             } else {
-                              return "font-size: 2vmin";
+                              return "";
                             }
                         }
 

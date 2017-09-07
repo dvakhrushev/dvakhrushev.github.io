@@ -16,9 +16,9 @@
     </svg>
 </div>
 
-<div class="widget-content gird-widget" ng-if="!isDataEmpty()">
-    <table>
-        <tr ng-if="config.columtitle">
+<div class="widget-content gird-widget" ng-if="!isDataEmpty()" data-limit="{{config.subscription.req.limit}}">
+    <table style="height:{{100/config.subscription.req.limit*data.length}}%">
+        <tr class="thead" ng-if="config.columtitle">
             <td ng-repeat="col in config.subscription.req.columns" ng-style="getGridTitleStyle($index, config)">
                 {{col.coltitle}}
             </td>
