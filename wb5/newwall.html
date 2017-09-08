@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<!-- ___PRODUCT_BUILD___ (___PRODUCT_COMMENTS___) ___PRODUCT_DATE___ -->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Service Pattern Wallboard</title>
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  -->
+    <link href="bower_components/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
+    <link href="bower_components/angular-dropdown/angular-dropdowns.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <link href="newwall.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<html>
+<body ng-app="app" ng-controller="AppController" scroll="no" id="body" class="{{getCurrentTheme().bodyClass.themeClass}}" ng-style="getCurrentTheme().Background">
+
+<audio src="elevator-ding-01.wav" id="alert" autostart="false"></audio>
+
+<div class="wall-title" ng-mouseenter="showArrows()" ng-mouseleave="hideArrows()">
+    <div ng-if="!editmode">
+        <span class="wall-title-name" ng-style="getCurrentTheme().WidgetHeaderFontColor" id="wall-name">{{CurrentBoard.name}}</span>
+        <span id="wall-title-bot" class="wall-title-bot glyphicon glyphicon-triangle-bottom"
+              dropdown-menu="ddWallSelectOptions" dropdown-model="ddWallSelectSelected" dropdown-item-label="text"
+              ng-mousedown="loadWallboards()" dropdown-onchange="changeWall(selected)"></span>
+
+        <span id="wall-title-menu" class="wall-title-menu glyphicon glyphicon-menu-hamburger"
+              dropdown-menu="ddMenuSelectOptions" dropdown-model="ddMenuSelectSelected" dropdown-item-label="text"
+              dropdown-onchange="menuWall(selected)"></span>
+        <span id="wall-title-rig" class="wall-title-arrow glyphicon glyphicon-triangle-right"
+              ng-click="setWallboardPlus()"></span>
+        <span id="wall-title-lef" class="wall-title-arrow glyphicon glyphicon-triangle-left"
+              ng-click="setWallboardMinus()"></span>
+    </div>
+    <div ng-if="editmode">
+        <input type="text" ng-model="CurrentBoard.name" class="wall-title-name-in" ng-style="getCurrentTheme().WidgetHeaderFontColor">
+        <span id="wall-title-menu" class="wall-title-menu glyphicon glyphicon-menu-hamburger"
+              dropdown-menu="ddMenuSelectOptions" dropdown-model="ddMenuSelectSelected" dropdown-item-label="text"
+              dropdown-onchange="menuWall(selected)"></span>
+        <div class="change-theme" wallboard-id="CurrentBoard.editId"></div>
+        <!--
+        <img class="wall-title-cs" style="width:56px; height:56px;margin-top:3px;" src="picture/ic_color.svg"
+             ng-click="onColorDial()">
+        -->
+    </div>
+    <input type="file" id="fileInput" ng-model="fileInput"
+           onchange="angular.element(this).scope().processFiles(this.files)">
+</div>
+
+<div class="wall-field">
+    <div class="grid">
+        <div class="grid-row" ng-repeat="line in emptycells">
+            <div class="grid-cell empty" ng-repeat="e in line" ng-style="{{getEmptyStyle(e)}}"
+                 ng-click="onEmptyClick(e)" id="{{e.id}}"
+                 ng-mousedown="onStartSelect(e)" ng-mouseup="onStopSelect(e)" ng-mouseover="hoverIn(e)"
+            >
+            </div>
+        </div>
+    </div>
+    <div class="board-ancer">
+        <div ng-include="'partials/board.html'"></div>
+    </div>
+</div>
+
+
+<div class="edit-dialog" ng-show="editmode" id="edit_dialog" ng-cloak>
+    <div class="edit-dialog-title"></div>
+    <div class="edit-dialog-content">
+        <svg style="width: 40px; height: 40px; position: absolute; right: 61px; top: 14px; cursor: pointer;"
+             ng-click="offEditMode()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384.97 384.97">
+            <g id="Check_Circle">
+                <path d="M192.485,0C86.173,0,0,86.173,0,192.485S86.173,384.97,192.485,384.97c106.3,0,192.485-86.185,192.485-192.485    C384.97,86.173,298.785,0,192.485,0z M192.485,360.909c-93.018,0-168.424-75.406-168.424-168.424S99.467,24.061,192.485,24.061    s168.424,75.406,168.424,168.424S285.503,360.909,192.485,360.909z" fill="#6f9cbd"/>
+                <path d="M280.306,125.031L156.538,247.692l-51.502-50.479c-4.74-4.704-12.439-4.704-17.179,0c-4.752,4.704-4.752,12.319,0,17.011    l60.139,58.936c4.932,4.343,12.307,4.824,17.179,0l132.321-131.118c4.74-4.692,4.74-12.319,0-17.011    C292.745,120.339,285.058,120.339,280.306,125.031z" fill="#6f9cbd"/>
+            </g>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384.97 384.97"
+             style="width: 40px; height: 40px; position: absolute; right: 0px; top: 14px; cursor: pointer;"
+             ng-click="cancelEditMode()">
+            <g id="Cancel">
+                <path d="M192.485,0C86.173,0,0,86.173,0,192.485c0,106.3,86.173,192.485,192.485,192.485c106.3,0,192.485-86.173,192.485-192.485    S298.785,0,192.485,0z M192.485,360.909c-93.018,0-168.424-75.406-168.424-168.424S99.467,24.061,192.485,24.061    s168.424,75.406,168.424,168.424S285.503,360.909,192.485,360.909z" fill="#6f9cbd"/>
+                <path d="M273.437,255.897l-63.376-63.388l63.015-62.497c4.752-4.704,4.752-12.319,0-17.011c-4.74-4.692-12.439-4.692-17.179,0    l-62.931,62.413l-63.869-63.881c-4.74-4.764-12.439-4.764-17.179,0c-4.74,4.752-4.74,12.475,0,17.227l63.773,63.785    l-64.134,63.604c-4.74,4.704-4.74,12.319,0,17.011c4.74,4.704,12.439,4.704,17.191,0l64.049-63.52l63.472,63.472    c4.74,4.764,12.439,4.764,17.179,0C278.177,268.372,278.177,260.661,273.437,255.897z" fill="#6f9cbd"/>
+            </g>
+        </svg>
+    </div>
+</div>
+
+<div class="popup" ng-show="show_del" ng-cloak>
+    <div class="widget-del">
+        <div class="widget-heading">
+            <h1 class="title">Delete Wallboard?</h1>
+        </div>
+        <div class="footer">
+            <button ng-click="DelWB()">Delete</button>
+            <button ng-click="cancDelWB()" class="buttCanc">Cancel</button>
+        </div>
+    </div>
+</div>
+<wb-login-form></wb-login-form>
+
+<div class="popup" ng-show="show_colordial" ng-cloak>
+    <div class="widget-colordial">
+        <div class="widget-heading">
+            <h1 class="title">Colors and Style</h1>
+        </div>
+        <div class="widget-content">
+            <div class="sett-str" style="">
+                <div class="sett-title">Background:</div>
+                <div class="sett-opt">
+                    <button class="jscolor {valueElement:'BGcolor', value: 'F8F8F8'}"></button>
+                    <span class="bgColorPrefix">#</span><input id="BGcolor" class="bgColor" value=""
+                                                               ng-model="colstyle.bgcolor"
+                                                               ng-change="changeColorDial()">
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title">&nbsp;</div>
+                <div class="sett-opt">&nbsp;
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title">Card</div>
+                <div class="sett-opt">
+                    <div class="sett-alert">Alert</div>
+                </div>
+            </div>
+            <div class="sett-str">
+                <div class="sett-title" style="padding-left: 20px;">Face:</div>
+                <div class="sett-opt">
+                    <div class="sett-color">
+                        <button class="jscolor {valueElement:CardColor,value:'ffffff'}"></button>
+                        <span class="bgColorPrefix">#</span><input id="CardColor" value="" class="bgColor"
+                                                                   ng-model="colstyle.cardcolor"
+                                                                   ng-change="changeColorDial()">
+                    </div>
+                    <div class="sett-alert-color">
+                        <button class="jscolor {valueElement:AlertBG,value:'A11D3B'}"></button>
+                        <span class="bgColorPrefix">#</span><input id="AlertBG" value="" class="bgColor"
+                                                                   ng-model="colstyle.alertbg"
+                                                                   ng-change="changeColorDial()">
+                    </div>
+
+                </div>
+            </div>
+            <div class="sett-str">
+                <div class="sett-title" style="padding-left: 20px;">Border Style:</div>
+                <div class="sett-opt">
+                    <select id="CardBorder" style="height: 30px;">
+                        <option value="none">none</option>
+                        <option value="solid  1px" data-imagesrc="picture/solid_1.png" selected="selected"></option>
+                        <option value="solid  2px" data-imagesrc="picture/solid_2.png"></option>
+                        <option value="solid  4px" data-imagesrc="picture/solid_4.png"></option>
+                        <option value="solid  8px" data-imagesrc="picture/solid_8.png"></option>
+                        <option value="dotted 1px" data-imagesrc="picture/doted_1.png"></option>
+                        <option value="dotted 2px" data-imagesrc="picture/doted_2.png"></option>
+                        <option value="dotted 4px" data-imagesrc="picture/doted_4.png"></option>
+                        <option value="dotted 8px" data-imagesrc="picture/doted_8.png"></option>
+                        <option value="dashed 1px" data-imagesrc="picture/dashed_1.png"></option>
+                        <option value="dashed 2px" data-imagesrc="picture/dashed_2.png"></option>
+                        <option value="dashed 4px" data-imagesrc="picture/dashed_4.png"></option>
+                        <option value="dashed 8px" data-imagesrc="picture/dashed_8.png"></option>
+                        <option value="double 1px" data-imagesrc="picture/double_1.png"></option>
+                        <option value="double 2px" data-imagesrc="picture/double_2.png"></option>
+                        <option value="double 4px" data-imagesrc="picture/double_4.png"></option>
+                        <option value="double 8px" data-imagesrc="picture/double_8.png"></option>
+                    </select>
+                    <input id="CardBorderVal" value="" style="display: none;" ng-model="colstyle.cardborder"
+                           ng-change="changeColorDial()">
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title" style="padding-left: 20px;">Border Color:</div>
+                <div class="sett-opt">
+                    <div class="sett-color">
+                        <button class="jscolor {valueElement:CardBorderColor,value:'D3D3D3'}"></button>
+                        <span class="bgColorPrefix">#</span><input id="CardBorderColor" value="" class="bgColor"
+                                                                   ng-model="colstyle.cardbordercolor"
+                                                                   ng-change="changeColorDial()">
+                    </div>
+                    <div class="sett-alert-color">
+                        <button class="jscolor {valueElement:AlertBorderColor,value:'8D1427'}"></button>
+                        <span class="bgColorPrefix">#</span><input id="AlertBorderColor" value="" class="bgColor"
+                                                                   ng-model="colstyle.alertborder"
+                                                                   ng-change="changeColorDial()">
+                    </div>
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title">&nbsp;</div>
+                <div class="sett-opt">&nbsp;
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title">Font Color:</div>
+                <div class="sett-opt">
+                    <div class="sett-color">
+                        <button class="jscolor {valueElement:FontColor,value:'333333'}"></button>
+                        <span class="bgColorPrefix">#</span><input id="FontColor" value="" class="bgColor"
+                                                                   ng-model="colstyle.fontcolor"
+                                                                   ng-change="changeColorDial()">
+                    </div>
+                    <div class="sett-alert-color">
+                        <button class="jscolor {valueElement:AlertFont,value:'ffffff'}"></button>
+                        <span class="bgColorPrefix">#</span><input id="AlertFont" value="" class="bgColor"
+                                                                   ng-model="colstyle.alertfont"
+                                                                   ng-change="changeColorDial()">
+                    </div>
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title">&nbsp;</div>
+                <div class="sett-opt">&nbsp;
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title">Underlined Rows:</div>
+                <div class="sett-opt">
+                </div>
+            </div>
+            <div class="sett-str">
+                <div class="sett-title" style="padding-left: 20px;">Style:</div>
+                <div class="sett-opt">
+                    <select id="UnderLineStyle" style="height: 30px;">
+                        <option value="none">none</option>
+                        <option value="solid  1px" data-imagesrc="picture/solid_1.png" selected="selected"></option>
+                        <option value="solid  2px" data-imagesrc="picture/solid_2.png"></option>
+                        <option value="solid  4px" data-imagesrc="picture/solid_4.png"></option>
+                        <option value="solid  8px" data-imagesrc="picture/solid_8.png"></option>
+                        <option value="dotted 1px" data-imagesrc="picture/doted_1.png"></option>
+                        <option value="dotted 2px" data-imagesrc="picture/doted_2.png"></option>
+                        <option value="dotted 4px" data-imagesrc="picture/doted_4.png"></option>
+                        <option value="dotted 8px" data-imagesrc="picture/doted_8.png"></option>
+                        <option value="dashed 1px" data-imagesrc="picture/dashed_1.png"></option>
+                        <option value="dashed 2px" data-imagesrc="picture/dashed_2.png"></option>
+                        <option value="dashed 4px" data-imagesrc="picture/dashed_4.png"></option>
+                        <option value="dashed 8px" data-imagesrc="picture/dashed_8.png"></option>
+                        <option value="double 1px" data-imagesrc="picture/double_1.png"></option>
+                        <option value="double 2px" data-imagesrc="picture/double_2.png"></option>
+                        <option value="double 4px" data-imagesrc="picture/double_4.png"></option>
+                        <option value="double 8px" data-imagesrc="picture/double_8.png"></option>
+                    </select>
+                    <input id="UnderLineStyleVal" value="" style="display: none;"
+                           ng-model="colstyle.underline" ng-change="changeColorDial()">
+                </div>
+            </div>
+            <div class="sett-str" style="">
+                <div class="sett-title" style="padding-left: 20px;">Color:</div>
+                <div class="sett-opt">
+                    <button class="jscolor {valueElement:UnderLineColor,value:'333333'}"></button>
+                    <span class="bgColorPrefix">#</span><input id="UnderLineColor" value="" class="bgColor"
+                                                               ng-model="colstyle.underlinecolor"
+                                                               ng-change="changeColorDial()">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button ng-click="okColorDial()">OK</button>
+            <button ng-click="offColorDial()" class="buttCanc">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/FileSaver.js-master/FileSaver.min.js"></script>
+<script src="bower_components/jscolor/jscolor.js"></script>
+<script src="bower_components/jquery.ddslick.min.js"></script>
+<script src="bower_components/angular-dropdown/angular-dropdowns.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/backbone/backbone-min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+
+
+<script src="newwall.js"></script>
+<script src="app/wb-widget.directive.js"></script>
+<script src="app/wb-login-form.directive.js"></script>
+<script src="app/app-controller.controller.js"></script>
+<script src="app/sp-duration.filter.js"></script>
+<script src="app/sp-percent.filter.js"></script>
+<script src="app/stats-api.factory.js"></script>
+<script src="app/style-api.factory.js"></script>
+<script src="app/wallboard.factory.js"></script>
+<script src="app/directives/change-theme/change-theme.js"></script>
+
+<script>
+    function handleDragStop(event, ui) {
+        var offsetXPos = parseInt(ui.offset.left);
+        var offsetYPos = parseInt(ui.offset.top);
+        localStorage.setItem('editx', offsetXPos);
+        localStorage.setItem('edity', offsetYPos);
+        //console.log( "Смещение: (" + offsetXPos + ", " + offsetYPos + ")");
+    }
+
+    $('#CardBorder').ddslick({
+        width: 120,
+        height: 250,
+        background: '#F8F8F8',
+        onSelected: function (data) {
+            //console.log(data.selectedData.value);
+            $('#CardBorderVal').val(data.selectedData.value);
+            $("#CardBorderVal").change();
+
+        }
+    });
+
+    $('#UnderLineStyle').ddslick({
+        width: 120,
+        height: 150,
+        background: '#F8F8F8',
+        onSelected: function (data) {
+            //console.log(data.selectedData.value);
+            $('#UnderLineStyleVal').val(data.selectedData.value);
+            $("#UnderLineStyleVal").change();
+        }
+    });
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.wall-title-coltheme')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

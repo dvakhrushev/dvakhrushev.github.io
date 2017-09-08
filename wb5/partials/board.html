@@ -1,0 +1,27 @@
+<div class="board">
+    <div
+        ng-repeat="w in CurrentBoard.widgets"
+        ng-style="getWidgetStyle(w, getCurrentTheme())"
+        theme-style="getCurrentTheme()"
+        ng-class="w.mode"
+        class="widget ui-widget-content {{w.config.type}} {{getAlertedStatus()}}"
+        id="{{w.config.id}}"
+        wb-widget
+        config="w.config"
+        data="w.data"
+        datasingle="dataAllSingle"
+        datagridagent="dataGridAgent"
+        datagridservice="dataGridService"
+        editmode="editmode"
+        addwidget="addWidgetData"
+        globalmode="globalmode"
+        on-resize="widResized($evt,$ui)"
+        on-drag="widDragged($evt,$ui)"
+        ng-mouseover="fWidgetHover(w)"
+        ng-mouseleave="offWidgetHover(w)"
+        ng-mousedown="mouseShift($event)"
+        ng-mouseup="onStopSelect()"
+    >
+
+    </div>
+</div>
