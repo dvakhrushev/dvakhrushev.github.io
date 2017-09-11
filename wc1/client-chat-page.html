@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<!-- ___PRODUCT_BUILD___ (___PRODUCT_COMMENTS___) ___PRODUCT_DATE___ -->
+
+<html>
+<head>
+    <title>Chat</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Libraries -->
+    <link href="js/libraries/emoji/css/emoji.css" rel="stylesheet">
+    <script type="text/javascript" src="js/libraries/jquery-1.11.0/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/libraries/jquery-ui-1.11.1/jquery-ui-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/libraries/json2/json2.min.js"></script>
+    <script type="text/javascript" src="js/libraries/XDomainRequest/jQuery.XDomainRequest.min.js"></script>
+    <script type="text/javascript" src="js/libraries/datetime/datetime.min.js"></script>
+    <script type="text/javascript" src="js/libraries/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <!--<script type="text/javascript" src="js/libraries/platform/platform.min.js"></script>-->
+    <script type="text/javascript" src="js/libraries/emoji/js/config.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/util.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/jquery.emojiarea.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/emoji-picker.js"></script>
+
+    <!-- Custom scripts & styles -->
+    <link href="css/wrong.css" rel="stylesheet" type="text/css">
+    <link href="css/chat.css" rel="stylesheet" type="text/css">
+    <link href="css/proactive-offer.css" rel="stylesheet" type="text/css">
+    <link href="css/override.css" rel="stylesheet" type="text/css">
+    <script src="js/require.js" data-main="js/chat-api-session"></script>
+</head>
+
+<body class="inside-chat-frame-body">
+<div id="inner-chat" class="widget-border-radius base-font">
+
+    <div id="servicepatternsite-iframe-chat">
+        <div id="header-avatar" class="main-background-color">
+            <div id="header-avatar-container">
+                <div class="has-avatar">
+                    <div class="avatar">
+                        <img class="avatar-image" src="images/logo-big.png">
+                    </div>
+                    <div class="info second-color title-font">
+                        <div id="agent-name" class="agent-name">New Chat</div>
+                        <div id="agent-title" class="title" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="sound_player"></div>
+            <div id="callme" style="display: none;">
+                <div></div>
+            </div>
+            <div id="shareScreen" style="display: none;">
+                <div></div>
+            </div>
+            <div id="endChat" style="display: none;">
+                <div></div>
+            </div>
+        </div>
+
+        <form id="content-form" method="POST"></form>
+
+        <div id="offline-form" style="display: none;">
+            <div id="offline-form-inner">
+
+                <div id="preChatForm" style="display: none;" class="question__chat-tab_active agent-message">
+
+                    <div class="tabs">
+                        <div class="tab tab_active tabChat main-color widget-background">Chat</div>
+                        <div class="tab tabChat">Chat</div>
+                        <div class="tab tab_active tabPhone main-color widget-background">Phone</div>
+                        <div class="tab tabPhone">Phone</div>
+                    </div>
+                    <div class="questionFormInner widget-background">
+                        <div class="commonFields"></div>
+                        <div class="chatFields"></div>
+                        <div class="phoneFields"></div>
+
+                        <div class="prechat__action-buttons">
+                            <input id="cancelPreChatForm" type="button" value="Cancel" class="servicepatternBtn cancel main-background-color second-color">
+                            <input id="submitChat" type="button" value="Chat" class="servicepatternBtn accept main-background-color second-color">
+                            <input id="submitPhone" type="button" value="Phone" class="servicepatternBtn phone main-background-color second-color">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="questionForm" style="display: none;">
+                    <div class="description">Please fill the following information:</div>
+
+                    <div class="field-wrapper">
+                        <input id="first_name" type="text" class="input-field" name="first_name" placeholder="First name*" required>
+                        <div id="error-first_name" class="error-balloon">Please, enter first name</div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <input id="last_name" type="text" class="input-field" name="last_name" placeholder="Last name*" required>
+                        <div id="error-last_name" class="error-balloon">Please, enter last name</div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <input id="account_number" type="text" class="input-field" placeholder="Account id">
+                    </div>
+
+                    <div class="field-wrapper">
+                        <input id="email" type="text" class="input-field" placeholder="Your email*" required>
+                        <div id="error-email" class="error-balloon">Please, enter valid email</div>
+                    </div>
+
+                    <div class="field-wrapper message">
+                        <textarea id="question" class="input-field" placeholder="Your message*" required></textarea>
+                        <div id="error-question" class="error-balloon multiline">Please, enter message</div>
+                    </div>
+
+                    <div class="buttons">
+                        <div>
+                            <input id="submit" type="button" value="Send" class="servicepatternBtn accept">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="callbackForm" style="display: none;">
+                    <div>
+                        <div class="field-wrapper">
+                            <input id="cb-FIRST_NAME" type="text" class="input-field" placeholder="Your first name*" required>
+                            <div id="error-cb-FIRST_NAME" class="error-balloon">Please, enter first name</div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-LAST_NAME" type="text" class="input-field" placeholder="Your last name*" required>
+                            <div id="error-cb-LAST_NAME" class="error-balloon">Please, enter last name</div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-PHONE" type="text" class="input-field" placeholder="Your phone number*" required>
+                            <div id="error-cb-PHONE" class="error-balloon">Please, enter phone number</div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-EMAIL" type="email" class="input-field" placeholder="Your email" >
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-ACCOUNT" type="text" class="input-field" placeholder="Your account">
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-COMPANY" type="text" class="input-field" placeholder="Your company">
+                        </div>
+
+                        <div class="field-wrapper message">
+                            <textarea id="cb-TEXT" style="height: 65px;" class="input-field" placeholder="Your message"></textarea>
+                        </div>
+
+                        <div class="buttons">
+                            <div class="left-button">
+                                <a id="cb-cancel" class="servicepatternBtn cancel" href="#">Cancel</a>
+                            </div>
+                            <div>
+                                <input id="cb-submit" type="button" value="Call me when ready" class="servicepatternBtn accept">
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div id="unavailableForm" style="display: none;">
+                    <div id="offline-form-fields">
+                        <div class="description headerDescription">
+                            Sorry, no one is available for chat right now.
+                            Please leave us a message, we will get in touch soon.
+                        </div>
+
+                        <div class="offlineFields"></div>
+
+                        <div class="buttons">
+                            <div class="left-button">
+                                <a id="uncancel" class="servicepatternBtn cancel" href="#">Cancel</a>
+                            </div>
+                            <div>
+                                <input id="unsubmit" type="button" value="Send" class="servicepatternBtn">
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div id="surveyForm" style="display: none;">
+                    <div class="description small">Did we provide the service you were looking for?</div>
+
+                    <div class="field-wrapper">
+                        <input type="radio" name="service" id="service-1" value="1" checked="checked">
+                        <label for="service-1">yes</label>
+                        <input type="radio" name="service" id="service-0" value="0">
+                        <label for="service-0">no</label>
+                    </div>
+
+                    <br/>
+
+                    <div class="description small">How helpful was our representative?</div>
+                    <p>
+                        <div class="thumbUp"></div>
+                        <div class="thumbDown"></div>
+
+                        <input type="radio" name="helpful" id="helpful-1" value="1">
+                        <input type="radio" name="helpful" id="helpful-2" value="2">
+                        <input type="radio" name="helpful" id="helpful-3" value="3">
+                        <input type="radio" name="helpful" id="helpful-4" value="4">
+                        <input type="radio" name="helpful" id="helpful-5" value="5">
+                        <input type="radio" name="helpful" id="helpful-6" value="6">
+                        <input type="radio" name="helpful" id="helpful-7" value="7">
+                        <input type="radio" name="helpful" id="helpful-8" value="8">
+                        <input type="radio" name="helpful" id="helpful-9" value="9">
+                    </p>
+
+                    <br/>
+
+                    <div class="description small">
+                        How likely are you recommend our products and services in the future?
+                    </div>
+                    <p>
+                        <div class="thumbUp"></div>
+                        <div class="thumbDown"></div>
+                        <input type="radio" name="recommend" id="recommend-1" value="1">
+                        <input type="radio" name="recommend" id="recommend-2" value="2">
+                        <input type="radio" name="recommend" id="recommend-3" value="3">
+                        <input type="radio" name="recommend" id="recommend-4" value="4">
+                        <input type="radio" name="recommend" id="recommend-5" value="5">
+                        <input type="radio" name="recommend" id="recommend-6" value="6">
+                        <input type="radio" name="recommend" id="recommend-7" value="7">
+                        <input type="radio" name="recommend" id="recommend-8" value="8">
+                        <input type="radio" name="recommend" id="recommend-9" value="9">
+                    </p>
+
+                    <br/>
+
+                    <input type="checkbox" name="transcript" id="transcript" value="1">
+                    <label for="transcript" class="description small">Send me transcript of the chat by email?</label>
+                    <input type="text" name="transcriptEmail" id="transcriptEmail"/>
+
+                    <div class="buttons" style="margin-top: -10px;">
+                        <div>
+                            <input id="submitSurvey" type="button" value="Submit" class="servicepatternBtn">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="chat-body" class="widget-background" style="display: none;">
+            <div class="chat-body__content">
+                <video id="video" style="display: none; height: 100px; width: 100%" autoplay></video>
+                <div id="notification-prompt" style="display: none;" class="promptMessage">
+                    When prompted, please allow notifications from this window,
+                    so you could see responses when this window is hidden.
+                </div>
+                <div id="call-prompt" style="display: none;" class="promptMessage">
+                    When prompted, please allow access to your camera and microphone.
+                </div>
+                <div id="servicepattern-chat">
+                    <div id="scrollbar-container">
+                        <div id="messages-div" class="viewport">
+                            <div id="messages-div-outer">
+                                <div id="messages-div-inner" class="overview messages-div-inner">
+                                    <div id="messages-div-inner-clear"></div>
+                                </div>
+                            </div>
+                            <div id="agent-typing" style="display: none;">
+                                <div class="agent-typing-wrapper"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="input-div" class="chat-body__input agent-message">
+                <div class="input-div-table">
+                    <div class="td-textarea">
+                    <textarea
+                            id="input-field"
+                            data-emojiable="true"
+                            rows="1"
+                            name="input-field"
+                            maxlength="1000"
+                            placeholder="Text..."
+                            autocomplete="off"
+                            style="resize: none;"
+                    ></textarea>
+                    </div>
+                    <div id="attachFile"></div>
+                    <div class="td-button">
+                        <input id="input-button" type="button" value="Send" class="servicepatternBtn accept">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form name="file-upload-form" id="file-upload-form" target="_blank" method="post" enctype="multipart/form-data"
+          style="display:none;">
+    </form>
+</div>
+</body>
+</html>

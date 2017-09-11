@@ -1,0 +1,28 @@
+.proactive-offer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.proactive-offer__body {
+    position: relative;
+}
+
+.proactive-offer__button-wrapper {
+    margin-top: 35px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.proactive-offer__close_hide_yes,
+.proactive-offer__button_hide_yes {
+    display: none;
+}
+
+.proactive-offer__close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+}
