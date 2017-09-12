@@ -6,8 +6,6 @@ define(function (require, exports, module) {
 
     $.support.cors = true;
 
-    var config = getConfObject();
-
     var variables = {
         cp: {},
         currentFormName: '',
@@ -24,7 +22,7 @@ define(function (require, exports, module) {
                     window.parent.postMessage('sp-chat-init', '*');
 
                     $('#offline-form').css('display', 'block');
-                    $('#agent-name').text(config.definition.preChat.title);
+                    $('#agent-name').text(getConfObject().definition.preChat.title);
 
                     if (window.chatSession) {
                         window.chatSession.reassignUICallbacks({
@@ -73,6 +71,7 @@ define(function (require, exports, module) {
                                 } else {
                                     $('#agent-name').text('Waiting for agent...');
                                     $('#agent-name').attr('title', $('#agent-name').text());
+                                    var config = getConfObject();
                                     var src = config.definition.chatWidgetStyling.logoUrl ? config.definition.chatWidgetStyling.logoUrl : 'images/logo-big.png';
                                     $('.avatar-image').attr('src', src);
                                 }
@@ -139,6 +138,7 @@ define(function (require, exports, module) {
                     window.parent.postMessage('sp-get-status-together', '*');
 
                     if (window.chatSession) {
+                        var config = getConfObject();
                         if (config.definition.chatWidgetStyling.webNotificationsEnabled != 'false') {
                             window.parent.postMessage('sp-session-start', '*');//request web notifications
                         }
@@ -203,6 +203,7 @@ define(function (require, exports, module) {
                     $('#callme').css('display', 'none');
                     $('#shareScreen').css('display', 'none');
                     $('#agent-title').text("");
+                    var config = getConfObject();
                     var src = config.definition.chatWidgetStyling.logoUrl ? config.definition.chatWidgetStyling.logoUrl : 'images/logo-big.png';
                     $('.avatar-image').attr('src', src);
                     updateScrollbar();
