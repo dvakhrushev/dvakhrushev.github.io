@@ -161,6 +161,16 @@
                                    ng-change="fInputTitle(column)">
                         </div>
                         <div class="sett-table-td" style="width: 20%;">
+                            <span ng-if="column.statName == 'calls_dispositions_per_day'">
+                                <div class="sett-opt-link" ng-click="onDispositionsDial()">options</div>
+                                <list-select-dialog visibility="show_dispositions"
+                                                    src-list-loader="dispositionsLoader()"
+                                                    dst-list="column.col.dispositions"
+                                                    dialog-title="Select Dispositions"
+                                                    on-cancel="show_dispositions = false"
+                                                    on-ok="show_dispositions = false">
+                                </list-select-dialog>
+                            </span>
                             <button ng-click="delCol(column)" class="sett-table-but" style="float: right;">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>

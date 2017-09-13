@@ -108,7 +108,6 @@
                                 $scope.themeStyle.WidgetHeaderFontColor
                             );
                         };
-
                         //source code remainder
 
                         if ($scope.config.type === 'empty') {
@@ -304,6 +303,10 @@
 
                         $scope.servicesLoader = function () {
                             return StatsApi.loadServices();
+                        }
+
+                        $scope.dispositionsLoader = function () {
+                            return StatsApi.loadDispositions();
                         }
 
                         if ($scope.config.type === 'single') {
@@ -683,6 +686,10 @@
                                     //$scope.config.subscription.req.columns[$scope.config.subscription.req.columns.indexOf(col)].statName = "state";
                                     $scope.state_icon = true;
                                     $scope.icon_col_id = col.id;
+                                } else if (col.statName == "calls_dispositions_per_day") {
+                                    if (col.dispositions == null) {
+                                        col.dispositions = [];
+                                    }
                                 }
                             }
 

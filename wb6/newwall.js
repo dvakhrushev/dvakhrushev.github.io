@@ -2,7 +2,7 @@
 //build RedFoxRus 2016
 
 var soundAlertTimer = null;
-function myTimer() 
+function myTimer()
 {
     var thissound = document.getElementById( "alert" );
     thissound.play();

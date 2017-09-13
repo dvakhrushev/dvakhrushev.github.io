@@ -213,7 +213,6 @@ angular.module('app')
             $scope.dataGridAgent = StatsDef.dataGridAgent;
 
             $scope.dataGridService = StatsDef.dataGridService;
-
             // dropdown select WB
             $scope.ddWallSelectOptions = [
                 {
@@ -756,7 +755,7 @@ angular.module('app')
             //cancel edit widget
             $scope.cancelEditWidget = function () {
                 if($scope.tempboard2 != undefined){
-                    $scope.CurrentBoard.widgets = JSON.parse(JSON.stringify($scope.tempboard2));
+                $scope.CurrentBoard.widgets = JSON.parse(JSON.stringify($scope.tempboard2));
                 }
                 $scope.reBuild();
             }
@@ -1798,14 +1797,15 @@ angular.module('app')
                 if (a.is_global < b.is_global) return -1;
             }
 
-            // STEP: RUN
-            $scope.loadWallboards();
+            setTimeout(function() {
+                // STEP: RUN
+                $scope.loadWallboards();
 
-            $scope.changeColorDial();
+                $scope.changeColorDial();
 
-            $('#wall-name').css("color", "#" + $scope.colstyle.fontcolor);
+                $('#wall-name').css("color", "#" + $scope.colstyle.fontcolor);
 
-            getSizes();
-            bootstrap();
-
+                getSizes();
+                bootstrap();
+            }, 1);
         }])
