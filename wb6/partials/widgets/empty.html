@@ -1,0 +1,65 @@
+<div class="widget-heading {{ getWidgetMode()}}" ng-style="getWidgetHeaderStyle()">
+    <h1 class="title" ng-style="getWidgetHeaderTitleStyle()">&nbsp;</h1>
+    <!-- <span class="delete glyphicon glyphicon-trash" ng-show="editmode" ng-click="showDelDial()" ></span>  -->
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 26 26" class="delete"
+         ng-style="getWidgetHeaderIcons()" ng-show="editmode" ng-click="showDelDial()"
+         ng-mouseover="addHoverDelete()" ng-mouseleave="addNoHoverDelete()">
+        <g enable-background="new">
+            <path d="M10.818.019c-.911 0-1.804.18-2.452.763-.648.583-.865 1.409-.865 2.266v1.426h2.271v-1.426c0-.557.121-.729.188-.788.067-.061.264-.167.859-.167h4.365c.595 0 .792.108.859.167.067.06.188.23.188.788v1.426h2.271v-1.426c0-.858-.218-1.684-.865-2.266-.648-.582-1.541-.763-2.452-.763h-4.365z"/>
+            <path d="M23.909 4.047c0-.549-.489-.997-1.091-.997h-19.635c-.601 0-1.091.448-1.091.997h-1.092v1.994h24v-1.994h-1.091z"/>
+            <path d="M3.183 7.037v15.953c0 1.648 1.467 2.99 3.273 2.99h13.091c1.804 0 3.273-1.342 3.273-2.99v-15.953h-19.636zm6.545 14.955h-2.182v-11.963h2.182v11.963zm4.364 0h-2.183v-11.963h2.183v11.963zm4.364 0h-2.182v-11.963h2.182v11.963z"/>
+        </g>
+    </svg>
+</div>
+
+<div class="widget-content {{ getWidgetMode()}}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62" id="addbut{{config.id}}"
+         ng-click="showSettings()" ng-class="addbut"
+         ng-mouseover="addHover()" ng-mouseleave="addNoHover()">
+        <path fill="#D9D9D9"
+              d="M0 23h8v-15h15v-8h-23v23zm8 16h-8v23h23v-8h-15v-15zm31-39v8h15v15h8v-23h-23zm15 54h-15v8h23v-23h-8v15z"/>
+    </svg>
+</div>
+<div class="popup" ng-show="show_deldial">
+    <div class="widget-deldial">
+        <div class="widget-heading">
+            <h1 class="title">Delete Widget?</h1>
+        </div>
+        <div class="footer">
+            <button ng-click="delWidget()">Delete</button>
+            <button ng-click="cancelDel()" class="buttCanc">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="popup" ng-show="show_settings">
+    <div class="widget-select">
+        <div class="widget-heading">
+            <h1 class="title">Select a Widget</h1>
+        </div>
+
+        <div class="widget-content">
+            <div ng-switch on="show_add" style="padding-top: 10px;">
+                <div ng-switch-when="new">
+                    <div ng-repeat="n in addwidget.new" class="widget-select-type"
+                         ng-click="selectWidgetType(n.type)">
+                        <img class="widget-select-type-img" ng-src="{{n.pict}}">
+                        <div class="widget-select-type-title">{{n.title}}</div>
+                    </div>
+                </div>
+                <div ng-switch-when="del">
+                    <div ng-repeat="d in addwidget.del" class="widget-select-type"
+                         ng-click="selectWidgetType(d.config.subscription.type, d)">
+                        <img class="widget-select-type-img" ng-src="picture/{{d.config.subscription.type}}.png">
+                        <div class="widget-select-type-title">{{d.config.title}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button ng-click="cancelSettings()">Cancel</button>
+        </div>
+    </div>
+</div>

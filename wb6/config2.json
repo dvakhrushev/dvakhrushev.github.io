@@ -1,0 +1,149 @@
+{
+    "widgets": [
+    {
+        "config": {
+          "id": "1",
+          "type": "empty",
+          "title": "",
+          "x": 0,
+          "y": 0,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "2",
+          "type": "empty",
+          "title": "",
+          "x": 3,
+          "y": 0,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "3",
+          "type": "empty",
+          "title": "",
+          "x": 6,
+          "y": 0,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "4",
+          "type": "empty",
+          "title": "",
+          "x": 9,
+          "y": 0,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "5",
+          "type": "empty",
+          "title": "",
+          "x": 0,
+          "y": 4,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "6",
+          "type": "empty",
+          "title": "",
+          "x": 3,
+          "y": 4,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "7",
+          "type": "empty",
+          "title": "",
+          "x": 6,
+          "y": 4,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "8",
+          "type": "empty",
+          "title": "",
+          "x": 9,
+          "y": 4,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "9",
+          "type": "empty",
+          "title": "",
+          "x": 0,
+          "y": 8,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "10",
+          "type": "empty",
+          "title": "",
+          "x": 3,
+          "y": 8,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "11",
+          "type": "empty",
+          "title": "",
+          "x": 6,
+          "y": 8,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      },
+      {
+        "config": {
+          "id": "12",
+          "type": "empty",
+          "title": "",
+          "x": 9,
+          "y": 8,
+          "width": 3,
+          "height": 4,
+          "show_settings": true
+        }
+      }
+
+    ]
+}

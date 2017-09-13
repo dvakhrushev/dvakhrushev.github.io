@@ -1,0 +1,19 @@
+<div class="popup" ng-show="show_login_form">
+<div class="login-form" >
+    <div class="header">
+        Login
+    </div>
+    <form class="content">
+        <div>
+            <input type="text" placeholder="Tenant URL" ng-model="tenant_url" ng-class="{inputFill: tenant_url.length > 0}"  ></input>
+        </div>
+        <div>
+            <input type="text" placeholder="Username" ng-model="username" ng-class="{inputFill: username.length > 0}"></input>
+        </div>
+        <div>
+            <input type="password" placeholder="Password" ng-model="password" ng-class="{inputFill: password.length > 0}"></input>
+        </div>
+        <button btn btn-default ng-click="onLogin()" ng-disabled="!isFormValid()">Login</button>
+    </form>
+</div>
+</div>

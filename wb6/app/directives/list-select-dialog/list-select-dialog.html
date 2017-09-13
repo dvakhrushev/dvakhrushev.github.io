@@ -1,0 +1,35 @@
+<div class="popup" ng-show="innerVisibility">
+    <div class="widget-listdial">
+        <div class="widget-heading">
+            <h1 class="title">{{dialogTitle}}</h1>
+        </div>
+        <div class="widget-content">
+            <span>Avaliable</span>
+            <span style="padding-left: 290px;">Included</span>
+            <div class="list1">
+                <select multiple ng-model="fromSelected" ng-options="elem as elem.name for elem in fromList"></select>
+            </div>
+            <div class="list2">
+                <select multiple ng-model="toSelected" ng-options="elem as elem.name for elem in toList"></select>
+            </div>
+            <button style="top: 115px; left: 310px;" ng-click="moveTo()">
+                <span class="glyphicon glyphicon-menu-right" style="transform: translateY(1px);"></span>
+            </button>
+            <button style="top: 155px; left: 310px;" ng-click="moveFrom()">
+                <span class="glyphicon glyphicon-menu-left" style="transform: translateY(1px);"></span>
+            </button>
+            <button style="top: 195px; left: 310px;" ng-click="moveToAll()">
+                <span class="glyphicon glyphicon-menu-right" style="transform: translateY(1px);"></span>
+                <span class="glyphicon glyphicon-menu-right" style="transform: translateY(1px);"></span>
+            </button>
+            <button style="top: 235px; left: 310px;" ng-click="moveFromAll()">
+                <span class="glyphicon glyphicon-menu-left" style="transform: translateY(1px);"></span>
+                <span class="glyphicon glyphicon-menu-left" style="transform: translateY(1px);"></span>
+            </button>
+        </div>
+        <div class="footer">
+            <button ng-click="ok()">OK</button>
+            <button ng-click="cancel()" class="buttCanc">Cancel</button>
+        </div>
+    </div>
+</div>
