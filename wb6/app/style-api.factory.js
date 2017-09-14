@@ -61,7 +61,7 @@ angular.module('app')
                     color: '#000'
                 },
                 WidgetListColumnDivider: {
-                    'border-left': '1px solid #4c4c4c'
+                    'border-left': '1px solid #ddd'
                 },
                 WidgetDonutPie: {
                     fontFamily: 'Muli',
@@ -79,6 +79,10 @@ angular.module('app')
                 },
                 WidgetHeaderIconsHover: {
                     fill: '#27b5e1'
+                },
+                WidgetTableBorderColor: {
+                    borderColor : '#ddd',
+                    borderTopWidth: 0
                 }
             },
             black: {
@@ -161,6 +165,9 @@ angular.module('app')
                 },
                 WidgetHeaderIconsHover: {
                     fill: '#27b5e1'
+                },
+                WidgetTableBorderColor: {
+                    borderColor : '#4c4c4c'
                 }
             }
         };

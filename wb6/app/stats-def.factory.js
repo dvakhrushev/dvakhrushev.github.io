@@ -7,7 +7,7 @@ angular.module('app')
                 in_calls_abandoned_in_queue_per_day: {name : "In interactions abandoned per day"},
                 in_calls_abandoned_in_queue_ratio_per_day: {name : "In interactions abandoned in queue ratio per day", format : "percent"},
                 in_calls_short_abandoned_in_queue_ratio_per_day: {name : "In interactions abandoned ratio per day", format : "percent"},
-                in_calls_waiting: {name : "In interactions waiting", format : "duration"},
+                in_calls_waiting: {name : "In interactions waiting"},
                 in_max_wait_time: {name : "In max wait time", format : "duration"},
                 service_level_threshold_time: {name : "Inbound Service Level threshold", format : "duration"},
                 service_level: {name : "Percentage of inbound interactions answered in Service Level", format : "percent"},
@@ -32,7 +32,8 @@ angular.module('app')
                 agent_total_ACW_time: {name : "ACW Time", format : "duration"},
                 agent_total_ready_time: {name : "Ready Time", format : "duration"},
                 calls_average_handling_time_per_day: {name : "IN Avg Handle Time", format : "duration"},
-                active_item_media_type : {name : "Active Media"}
+                active_item_media_type : {name : "Active Media"},
+                calls_dispositions_per_day : {name : "Count of interactions"}
             },
 
             dataGridService : {

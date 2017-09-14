@@ -213,6 +213,7 @@ angular.module('app')
             $scope.dataGridAgent = StatsDef.dataGridAgent;
 
             $scope.dataGridService = StatsDef.dataGridService;
+
             // dropdown select WB
             $scope.ddWallSelectOptions = [
                 {
@@ -755,56 +756,10 @@ angular.module('app')
             //cancel edit widget
             $scope.cancelEditWidget = function () {
                 if($scope.tempboard2 != undefined){
-                $scope.CurrentBoard.widgets = JSON.parse(JSON.stringify($scope.tempboard2));
+                    $scope.CurrentBoard.widgets = JSON.parse(JSON.stringify($scope.tempboard2));
                 }
                 $scope.reBuild();
             }
-
-            // open colors and styles dialog
-            $scope.onColorDial = function () {
-                $scope.show_colordial = true;
-                tempColors = JSON.parse(JSON.stringify($scope.colstyle));
-                $('.widget-colordial').show();
-                $('.widget-colordial').draggable({
-                    //containment: "parent",
-                    scroll: false
-                });
-
-                $('.widget-colordial .bgColor').each(function () {
-                    $(this).parent().find('button').css("background-color", "#" + $(this).val())
-                })
-            };
-
-            // ok colors and styles dialog
-            $scope.okColorDial = function () {
-                $scope.show_colordial = false;
-                $scope.changeColorDial();
-            };
-
-            // apply colors and styles
-            $scope.changeColorDial = function () {
-                // $('#body').css("background-color", "#"+$scope.colstyle.bgcolor);
-                // $('.widget').css("background-color", "#"+$scope.colstyle.cardcolor);
-                // $('.widget').css("border", ''+$scope.colstyle.cardborder+' #'+$scope.colstyle.cardbordercolor);
-                // $('.widget .ng-scope > .widget-heading').css("color", "#"+$scope.colstyle.fontcolor);
-                // $('.widget .ng-scope > .widget-content').css("color", "#"+$scope.colstyle.fontcolor);
-                //
-                // $('#wall-name').css("color", "#"+$scope.colstyle.fontcolor);
-                // $('#wall-title-bot').css("color", "#"+$scope.colstyle.fontcolor);
-                $('#apply_config').css("fill", "#" + $scope.colstyle.fontcolor);
-                $('#cancel_config').css("fill", "#" + $scope.colstyle.fontcolor);
-                // $('.wall-title-arrow').css("color", "#"+$scope.colstyle.fontcolor);
-                // $('.wall-title-menu').css("color", "#"+$scope.colstyle.fontcolor);
-                //
-                // $('.widget .widget-content td, th').css("border-bottom", ''+$scope.colstyle.underline+' #'+$scope.colstyle.underlinecolor);
-            };
-
-            // off colors and styles dialog
-            $scope.offColorDial = function () {
-                $scope.show_colordial = false;
-                $scope.colstyle = tempColors;
-                $scope.changeColorDial();
-            };
 
             $scope.getWidgetMode = function (widget) {
                 return widget.config.mode;
@@ -1475,8 +1430,8 @@ angular.module('app')
                 var req_id = widget.config.subscription.req.id;
                 var nameDetected = 0;
                 widget.config.subscription.req.columns.forEach(function (k) {
-                 if(widget.config.temptype == "agent_grid" && StatsDef.dataGridAgent[k.statName].format == "duration" ||
-                     widget.config.temptype == "service_grid" && StatsDef.dataGridService[k.statName].format == "duration"){
+                 if(widget.config.subscription.type == "agent_grid" && StatsDef.dataGridAgent[k.statName].format == "duration" ||
+                     widget.config.subscription.type == "service_grid" && StatsDef.dataGridService[k.statName].format == "duration"){
                     var tempId = parseInt(k.id) + nameDetected;
                     data_grids.forEach(function (d) {
                         if (d.id == widget.config.subscription.req.id) {
@@ -1490,8 +1445,8 @@ angular.module('app')
                     });
                   }
 
-                  if(widget.config.temptype == "agent_grid" && StatsDef.dataGridAgent[k.statName].format == "percent" ||
-                     widget.config.temptype == "service_grid" && StatsDef.dataGridService[k.statName].format == "percent"){
+                  if(widget.config.subscription.type == "agent_grid" && StatsDef.dataGridAgent[k.statName].format == "percent" ||
+                     widget.config.subscription.type == "service_grid" && StatsDef.dataGridService[k.statName].format == "percent"){
                     var tempId = parseInt(k.id) + nameDetected;
                     data_grids.forEach(function (d) {
                         if (d.id == widget.config.subscription.req.id) {
@@ -1797,8 +1752,8 @@ angular.module('app')
                 if (a.is_global < b.is_global) return -1;
             }
 
+            // STEP: RUN
             setTimeout(function() {
-                // STEP: RUN
                 $scope.loadWallboards();
 
                 $scope.changeColorDial();

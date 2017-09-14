@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-    line-height: 1;
+    line-height: 1.2;
 }
 
 ol, ul {
@@ -187,7 +187,7 @@ button:focus {
 
 
 .lightStyle .widget.grid{
-	border-bottom: 1px solid #4c4c4c!important;
+	border-bottom: 1px solid #ddd!important;
 }
 
 .lightStyle .widget.grid.alerted{
@@ -1697,6 +1697,14 @@ div.gird-widget {
     top: 70px;
 }
 
+.popup .widget-listdial .widget-content select.list-select-list {
+    overflow: auto;
+    border-radius: 0;
+    border:none;
+    height: 100%;
+    width:100%;
+}
+
 .widget-listdial .widget-content .list1 {
     left: 40px;
 }
@@ -1707,15 +1715,6 @@ div.gird-widget {
 .widget-listdial .widget-content .list2 {
     left: 390px;
 }
-
-.widget-listdial .widget-content select {
-    overflow: auto;
-    border-radius: 0;
-    border:none;
-    height: 100%;
-    width:100%;
-}
-
 
 .widget-listdial > .widget-content button {
     position: absolute;

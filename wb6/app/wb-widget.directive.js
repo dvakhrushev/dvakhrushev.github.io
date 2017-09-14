@@ -97,7 +97,6 @@
                         $scope.getWidgetHeaderStyle = function () {
                             return _.assign({},
                                 $scope.themeStyle.WidgetHeaderHeight,
-                                $scope.themeStyle.WidgetHeaderLine,
                                 $scope.themeStyle.WidgetHeaderBackground
                             );
                         };
@@ -108,6 +107,12 @@
                                 $scope.themeStyle.WidgetHeaderFontColor
                             );
                         };
+                        $scope.getBorderColor = function () {
+                            return _.assign({},
+                                $scope.themeStyle.WidgetTableBorderColor
+                            );
+                        }
+
                         //source code remainder
 
                         if ($scope.config.type === 'empty') {
@@ -306,13 +311,20 @@
                         }
 
                         $scope.dispositionsLoader = function () {
-                            return StatsApi.loadDispositions();
+                            return StatsApi.loadDispositions()
+                                .then(function(response) {
+                                    var newData = response.data.map(function(item) {
+                                        return {id:item, name:item};
+                                    });
+                                    response.data = newData;
+                                    return response;
+                                });
                         }
 
                         if ($scope.config.type === 'single') {
 
                             if ($scope.config.value != undefined) {
-                                $scope.config.tempvalue = $scope.config.value;
+                                $scope.config.tempvalue = $scope.config.subscription.req[0];
                             }
 
                             if ($scope.config.optValue != undefined) {
@@ -352,7 +364,7 @@
                             $scope.showSettings = function () {
                                 if ($scope.globalmode) return;
                                 if ($scope.config.value != undefined) {
-                                    $scope.config.tempvalue = $scope.config.value;
+                                    $scope.config.tempvalue = $scope.config.subscription.req[0];
                                 }
                                 if ($scope.config.optValue != undefined) {
                                     $scope.config.tempvaluesec = $scope.config.subscription.req[1];
@@ -397,11 +409,17 @@
                                             $scope.$destroy();
                                         }
                                     });
+                                    $scope.$on('$destroy', function () {
+                                        try{
+                                            if(gaugeChart){
+                                                gaugeChart.destroy();
+                                            }
+                                        } catch(error){
+                                            console.error(error);
+                                        }
+                                    });
                                 }, 2000);
 
-                                $scope.$on('$destroy', function () {
-                                    gaugeChart.destroy();
-                                });
                               }
                             }
 
@@ -467,15 +485,17 @@
                                         $scope.$destroy();
                                     }
                                 });
+                                $scope.$on('$destroy', function () {
+                                    try{
+                                        if(gaugeChart){
+                                            gaugeChart.destroy();
+                                        }
+                                    } catch(error){
+                                        console.error(error);
+                                    }
+                                });
                             }, 2000);
 
-                            $scope.$on('$destroy', function () {
-                              try{
-                                gaugeChart.destroy();
-                              } catch(error){
-                                console.error(error);
-                              }
-                            });
                         }
 
                         if ($scope.config.type === 'grid') {
@@ -987,13 +1007,13 @@
                                         $scope.$destroy();
                                     }
                                 });
+                                $scope.$on('$destroy', function () {
+                                    if(chart != undefined){
+                                        chart.destroy();
+                                    }
+                                });
                             }, 2000);
 
-                            $scope.$on('$destroy', function () {
-                              if(chart != undefined){
-                                chart.destroy();
-                              }
-                            });
 
                             //open widget settins dialog
                             $scope.showSettings = function () {
@@ -1206,7 +1226,7 @@
 
                         if ($scope.config.type === 'gauge') {
                             if ($scope.config.value != undefined) {
-                              $scope.config.tempvalue = $scope.config.value;
+                              $scope.config.tempvalue = $scope.config.subscription.req[0];
                             }
                             if ($scope.config.optValue != undefined) {
                               $scope.config.tempvaluesec = $scope.config.subscription.req[1];
@@ -1247,7 +1267,7 @@
                             $scope.showSettings = function () {
                                 if ($scope.globalmode) return;
                                 if ($scope.config.value != undefined) {
-                                    $scope.config.tempvalue = $scope.config.value;
+                                    $scope.config.tempvalue = $scope.config.subscription.req[0];
                                 }
                                 if ($scope.config.optValue != undefined) {
                                     $scope.config.tempvaluesec = $scope.config.subscription.req[1];
@@ -1304,11 +1324,17 @@
                                             $scope.$destroy();
                                         }
                                     });
+                                    $scope.$on('$destroy', function () {
+                                        try{
+                                            if(gaugeChart){
+                                                gaugeChart.destroy();
+                                            }
+                                        } catch(error){
+                                            console.error(error);
+                                        }
+                                    });
                                 }, 2000);
 
-                                $scope.$on('$destroy', function () {
-                                    gaugeChart.destroy();
-                                });
                               }
                             }
 
@@ -1364,15 +1390,17 @@
                                         $scope.$destroy();
                                     }
                                 });
+                                $scope.$on('$destroy', function () {
+                                    try{
+                                        if(gaugeChart){
+                                            gaugeChart.destroy();
+                                        }
+                                    } catch(error){
+                                        console.error(error);
+                                    }
+                                });
                             }, 2000);
 
-                            $scope.$on('$destroy', function () {
-                              try{
-                                gaugeChart.destroy();
-                              } catch(error){
-                                console.error(error);
-                              }
-                            });
                         }
 
                         // clear data
@@ -1401,7 +1429,7 @@
                               var width = getTextWidth(value,"18px Muli");
                               if(width > highestWidth) highestWidth = width;
                             })
-                            var padding = 0;
+                            var padding = 15;
                             if(index == config.subscription.req.columns.length - 1 || index == 0){
                               padding = (myElement[0].clientWidth * 0.033);
                             }

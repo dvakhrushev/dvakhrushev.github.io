@@ -17,19 +17,19 @@
 </div>
 
 <div class="widget-content gird-widget" ng-if="!isDataEmpty()" data-limit="{{config.subscription.req.limit}}">
-  <table id="t{{config.id}}">
+  <table id="t{{config.id}}" ng-style="getBorderColor()">
     <colgroup>
       <col ng-repeat="col in config.subscription.req.columns" ng-style="getGridColumnStyle($index, config, data)">
       </col>
     </colgroup>
-        <tr class="thead" ng-if="config.columtitle">
-            <td ng-repeat="col in config.subscription.req.columns" ng-style="getGridTitleStyle($index, config)">
+        <tr class="thead" ng-if="config.columtitle" ng-style="getBorderColor()">
+            <td ng-repeat="col in config.subscription.req.columns" ng-style="getGridTitleStyle($index, config);getBorderColor()">
                 {{col.coltitle}}
             </td>
         </tr>
         <tr ng-repeat="row in data" ng-init="rowIndex = $index">
             <td ng-repeat="cell in row track by $index"
-                style="{{getGridCellStyle($index, data, row, cell, config)}}">
+                style="{{getGridCellStyle($index, data, row, cell, config)}}" ng-style="getBorderColor()">
                 <div ng-if="!(icon_col_id == $index +1)" style="{{getNoWrapForNames($index, data, row, cell, config)}}">{{cell}}</div>
                 <div ng-if="(icon_col_id == $index +1)"><img ng-src="{{arrCircle[rowIndex]}}"
                                                              ng-style="{{getCircleStyle(rowIndex,data,row)}}"></div>
@@ -37,7 +37,7 @@
         </tr>
 
         <tr ng-repeat="i in getNumber(35)">
-            <td ng-repeat="i in getNumber(data[0].length)">&nbsp;</td>
+            <td ng-repeat="i in getNumber(data[0].length)" ng-style="getBorderColor()">&nbsp;</td>
         </tr>
     </table>
 </div>
@@ -162,10 +162,10 @@
                         </div>
                         <div class="sett-table-td" style="width: 20%;">
                             <span ng-if="column.statName == 'calls_dispositions_per_day'">
-                                <div class="sett-opt-link" ng-click="onDispositionsDial()">options</div>
+                                <div class="sett-opt-link" ng-click="show_dispositions = true">options</div>
                                 <list-select-dialog visibility="show_dispositions"
                                                     src-list-loader="dispositionsLoader()"
-                                                    dst-list="column.col.dispositions"
+                                                    dst-list="column.dispositions"
                                                     dialog-title="Select Dispositions"
                                                     on-cancel="show_dispositions = false"
                                                     on-ok="show_dispositions = false">

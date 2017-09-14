@@ -7,10 +7,10 @@
             <span>Avaliable</span>
             <span style="padding-left: 290px;">Included</span>
             <div class="list1">
-                <select multiple ng-model="fromSelected" ng-options="elem as elem.name for elem in fromList"></select>
+                <select class="list-select-list" multiple ng-model="fromSelected" ng-options="elem as elem.name for elem in fromList"></select>
             </div>
             <div class="list2">
-                <select multiple ng-model="toSelected" ng-options="elem as elem.name for elem in toList"></select>
+                <select class="list-select-list" multiple ng-model="toSelected" ng-options="elem as elem.name for elem in toList"></select>
             </div>
             <button style="top: 115px; left: 310px;" ng-click="moveTo()">
                 <span class="glyphicon glyphicon-menu-right" style="transform: translateY(1px);"></span>
