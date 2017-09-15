@@ -12,12 +12,14 @@ define(function (require, exports, module) {
         checkAvailability().then(function () {
             helpers.showChat();
             helpers.applyConfiguration();
-            window.emojiPicker = new EmojiPicker({
-                emojiable_selector: '[data-emojiable=true]',
-                assetsPath: '../js/libraries/emoji/img',
-                popupButtonClasses: 'fa fa-smile-o'
-            });
-            window.emojiPicker.discover();
+            if (typeof EmojiPicker === 'function'){
+                window.emojiPicker = new EmojiPicker({
+                    emojiable_selector: '[data-emojiable=true]',
+                    assetsPath: '../js/libraries/emoji/img',
+                    popupButtonClasses: 'fa fa-smile-o'
+                });
+                window.emojiPicker.discover();
+            }
         });
     });
 });

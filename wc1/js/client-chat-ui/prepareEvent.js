@@ -7,18 +7,17 @@ define(function (require, exports, module) {
 
         switch (event.event) {
             case 'chat_session_party_joined':
-                event.msg = event.fromName + ' ' + i18n.joinedTheChat;
+                event.msg = i18n.joinedTheChat;
                 event.originalMsg = event.msg;
                 break;
             case 'chat_session_party_left':
-                event.msg = event.fromName + ' ' + i18n.leftTheChat;
+                event.msg = i18n.leftTheChat;
                 event.originalMsg = event.msg;
                 break;
             case 'chat_session_ended':
                 event.msg = i18n.sessionEndedMessage;
                 event.originalMsg = event.msg;
                 break;
-
             case 'chat_session_timeout_warning':
                 event.fromClass = 'agent';
                 event.msg = event.msg ? escapeHtml(event.msg) : i18n.inactivityWarningMessage;

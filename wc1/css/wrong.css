@@ -170,7 +170,6 @@ table {
 
 #servicepattern-chat #messages-div .new-msg-container.clientMessage,#servicepattern-chat #messages-div .new-msg-container.agentMessage,#servicepattern-chat #messages-div .new-msg-container.agentHighlight {
     transition: padding-top .1s ease,padding-bottom .1s ease;
-    padding: 0 8px 0 7px
 }
 
 #servicepattern-chat #messages-div .new-msg-container.clientMessage .pip,#servicepattern-chat #messages-div .new-msg-container.agentMessage .pip,#servicepattern-chat #messages-div .new-msg-container.agentHighlight .pip {
@@ -190,15 +189,12 @@ table {
 }
 
 #servicepattern-chat #messages-div .new-msg-container.clientMessage .new-msg-text,#servicepattern-chat #messages-div .new-msg-container.agentMessage .new-msg-text,#servicepattern-chat #messages-div .new-msg-container.agentHighlight .new-msg-text {
-    margin: 0 3px
+    margin: 0
 }
 
-#servicepattern-chat #messages-div .new-msg-container.clientMessage.new-msg-animate,#servicepattern-chat #messages-div .new-msg-container.agentMessage.new-msg-animate,#servicepattern-chat #messages-div .new-msg-container.agentHighlight.new-msg-animate {
-    padding: 4px 8px 2px 7px
-}
 
 #servicepattern-chat #messages-div .new-msg-container.clientMessage.new-msg-animate .new-msg-text,#servicepattern-chat #messages-div .new-msg-container.agentMessage.new-msg-animate .new-msg-text,#servicepattern-chat #messages-div .new-msg-container.agentHighlight.new-msg-animate .new-msg-text {
-    margin: 3px 3px 4px 3px;
+    margin: 0;
     -webkit-transition: height .1s ease,margin .1s ease;
     -moz-transition: height .1s ease,margin .1s ease;
     -ms-transition: height .1s ease,margin .1s ease;
@@ -624,8 +620,6 @@ html {
 }
 
 *,body,div {
-    font-family: Arial,sans-serif;
-    font-size: 13px;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased!important;
@@ -635,53 +629,44 @@ html {
 }
 
 .placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
     font-size: 13px!important
 }
 
 input,textarea,#current-department {
     margin-bottom: 10px;
-    padding: 6px 10px;
-    border: solid 1px #a8a8a9;
+    padding: 5px 10px;
+    border: none;
     outline: 0;
-    color: #000;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    -khtml-border-radius: 5px 5px 5px 5px;
-    -moz-border-radius: 5px 5px 5px 5px;
-    -ms-border-radius: 5px 5px 5px 5px;
-    -o-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
-    font-family: Arial,sans-serif;
-    font-size: 13px
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -khtml-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    -ms-border-radius: 2px 2px 2px 2px;
+    -o-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
 }
 
 input.placeholder,textarea.placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
     font-size: 13px!important
 }
 
 input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
     font-size: 13px!important
 }
 
 input:-moz-placeholder,textarea:-moz-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
     font-size: 13px!important
 }
 
 input::-moz-placeholder,textarea::-moz-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
     font-size: 13px!important
 }
 
 input:-ms-input-placeholder,textarea:-ms-input-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
     font-size: 13px!important
 }
@@ -691,8 +676,9 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 .servicepatternBtn {
-    height: 43px;
-    padding: 10px 15px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
     font-size: 15px;
     cursor: pointer;
     border-radius: 5px;
@@ -709,10 +695,17 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 .prechat__action-buttons {
     display: flex;
     justify-content: space-around;
-    position: fixed;
-    bottom: 0px;
+    position: absolute;
+    bottom: 15px;
     left: 10px;
     right: 10px;
+}
+
+.prechat__action-buttons input{
+    height:40px;
+    line-height: 40px;
+    padding:0 15px;
+    font-size:15px;
 }
 
 .servicepatternBtn:hover {
@@ -796,15 +789,27 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     border-radius: 20px
 }
 
-#header-avatar .agent-name {
+#header-avatar .agent-name,
+#header-avatar .screen-title {
     margin-bottom: 3px;
     text-overflow: ellipsis;
-    white-space: nowrap;
     max-width: 180px;
     overflow: hidden;
     font-size: 16px;
     line-height: 20px;
-    font-weight: 600;
+    font-weight: 400;
+}
+
+#screen-title {
+    display:none;
+}
+
+.leave_msg_form #screen-title {
+    display:block;
+}
+
+.leave_msg_form #agent-name {
+    display:none;
 }
 
 #header-avatar #header-avatar div {
@@ -984,8 +989,18 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 62px;
-    overflow: hidden;
+    bottom: 0;
+    overflow: hidden; 
+}
+
+.fieldsWrapper{
+    padding:15px 0 0;
+    position: relative;
+    
+}
+.fieldsWrapper>div{
+    position:relative;
+    top:10px;
 }
 
 .questionFormInner {
@@ -993,9 +1008,13 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    padding:10px;
+    bottom: 90px;
+    padding:0 20px 0;
     overflow: hidden;
+}
+
+.widget-border-radius {
+    border-radius:7px;
 }
 
 #offline-form-fields {
@@ -1003,13 +1022,29 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    padding: 10px;
-    overflow: hidden;
+    bottom: 90px;
+    padding: 20px 20px 0;
 }
 
-#offline-form #offline-form-inner #offline-form-fields {
-    height: 100%
+#offline-form-fields .buttons {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: -75px;
+    left: 10px;
+    right: 10px;
+}
+
+#offline-form-fields .buttons a{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: opacity 1s ease-in-out;
+    border: none;
 }
 
 #offline-form #offline-form-inner.system-message-container {
@@ -1105,10 +1140,9 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 
 #offline-form .description {
     margin-bottom: 20px;
-    color: #7b7c7c;
-    font-size: 16px;
-    line-height: 19px;
-    font-family: Arial,sans-serif;
+    color: #2b2b2b;
+    font-size: 15px;
+    line-height: 21px;
 }
 
 #offline-form .description.message {
@@ -1126,13 +1160,113 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     display: block
 }
 
+.emoji-wysiwyg-editor{
+    border:none!important;
+    outline: none!important;
+    padding-right: 65px!important;
+}
+
+#surveyForm{
+    padding:20px 20px 0;
+    position: absolute;
+    top:0;
+    bottom:90px;
+    overflow:hidden;
+}
+
+#surveyForm .field-wrapper {
+    margin-bottom:20px;
+}
+
+.serviceSurvey.field-wrapper input[type=radio] {
+    display:none!important;
+}
+
+.serviceSurvey label {
+    position: relative;
+    padding:0 25px 0 21px;
+    cursor:pointer;
+}
+
+.serviceSurvey input + label::before {
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:11px;
+    height:11px;
+    border-radius: 50%;
+    background:#fff;
+    border:2px solid #aaa;
+}
+.serviceSurvey input:checked + label::after {
+    content:"";
+    position:absolute;
+    left:4px;
+    top:4px;
+    width:7px;
+    height:7px;
+    border-radius: 50%;
+    background:#fdbf44;
+}
+
+.radioStars .stars{
+    text-align:center;
+}
+
+.radioStars input{
+    display:none!important;
+}
+
+.stars[data-rated="2"] input[value="1"] + label,
+.stars[data-rated="3"] input[value="1"] + label,
+.stars[data-rated="3"] input[value="2"] + label,
+.stars[data-rated="4"] input[value="1"] + label,
+.stars[data-rated="4"] input[value="2"] + label,
+.stars[data-rated="4"] input[value="3"] + label,
+.stars[data-rated="5"] input[value="1"] + label,
+.stars[data-rated="5"] input[value="2"] + label,
+.stars[data-rated="5"] input[value="3"] + label,
+.stars[data-rated="5"] input[value="4"] + label {
+    background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNGREJGNDQiIGQ9Ik0xNC45OTggMGw0Ljk0MyA5LjQyOCAxMC4wNTUgMi4wMzEtNi45OTkgNy44NTcgMS4yNzEgMTAuNjgzLTkuMjctNC41NzEtOS4yNyA0LjU3MSAxLjI3MS0xMC42ODMtNi45OTktNy44NTcgMTAuMDU0LTIuMDMxIDQuOTQ0LTkuNDI4Ii8+PC9zdmc+') center center no-repeat/contain;
+}
+
+.radioStars label {
+    width:30px;
+    height:30px;
+    padding:0 10px;
+    display:inline-block!important;
+    cursor:pointer;
+    background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOS45OTYiIGhlaWdodD0iMjkuOTk5Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iI0Y0RjdGOSIgZD0iTTE0Ljk5OCAwbDQuOTQzIDkuNDI4IDEwLjA1NSAyLjAzMS02Ljk5OSA3Ljg1NyAxLjI3MSAxMC42ODMtOS4yNy00LjU3MS05LjI3IDQuNTcxIDEuMjcxLTEwLjY4My02Ljk5OS03Ljg1NyAxMC4wNTQtMi4wMzEgNC45NDQtOS40MjgiLz48L3N2Zz4=') center center no-repeat/contain;
+}
+
+.radioStars input:checked + label {
+    background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNGREJGNDQiIGQ9Ik0xNC45OTggMGw0Ljk0MyA5LjQyOCAxMC4wNTUgMi4wMzEtNi45OTkgNy44NTcgMS4yNzEgMTAuNjgzLTkuMjctNC41NzEtOS4yNyA0LjU3MSAxLjI3MS0xMC42ODMtNi45OTktNy44NTcgMTAuMDU0LTIuMDMxIDQuOTQ0LTkuNDI4Ii8+PC9zdmc+') center center no-repeat/contain;
+}
+
+.emailSurvey{
+    margin-bottom:0;
+}
+.emailSurvey .description{
+    margin-bottom:10px!important;
+}
+
+#surveyForm .buttons {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+}
+
 .offline #header-avatar {
     height: 60px
 }
 
 .offline #header-avatar .info {
     height: 60px
-}
+}`
 
 .offline #header-avatar .agent-name {
     margin-bottom: 0
@@ -1196,7 +1330,6 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     left: 0;
     bottom: 0;
     /*need to repeat border radius to prevent mouse move coners appear*/
-    border-radius: 10px;
     overflow: hidden;
     background: white;
 }
@@ -1243,7 +1376,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     position: absolute;
     padding: 0;
     top: 0;
-    bottom: 58px;
+    bottom: 83px;
     left: 10px;
     right: 10px
 }
@@ -1270,8 +1403,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     position: absolute;
     left: 0;
     width: 100%;
-    font-family: Arial,sans-serif;
-    font-size:13px;
+    font-size:15px;
 }
 
 #servicepattern-chat #messages-div-inner-clear {
@@ -1283,7 +1415,6 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     margin-bottom: 10px;
     max-width: 170px;
     width: 100%;
-    padding: 4px 8px 2px 7px;
 }
 
 #servicepattern-chat #messages-div .new-msg-container.new-msg-container-history {
@@ -1300,7 +1431,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 
 #servicepattern-chat #messages-div .new-msg-container.clientMessage {
     float: right;
-    margin-right: 15px;
+    margin-right: 10px;
     text-align: right;
     line-height: 16px
 }
@@ -1341,7 +1472,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 
 #servicepattern-chat #messages-div .new-msg-container.agentMessage {
     float: left;
-    margin-left: 5px;
+    margin-left: 55px;
     text-align: left;
 }
 
@@ -1437,7 +1568,6 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     text-align: center;
     cursor: pointer;
     text-transform: uppercase;
-    font-family: Arial;
     font-size: 12px;
     font-weight: 700;
     -webkit-border-radius: 4px;
@@ -1553,7 +1683,6 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 #servicepattern-chat #messages-div .new-msg-container.evaluationMessage .new-msg-body-inner .button {
-    font-family: Arial;
     text-transform: uppercase;
     font-weight: 700;
     width: auto;
@@ -1595,10 +1724,17 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     padding-left: 8px
 }
 
+#servicepattern-chat #messages-div .new-msg-container.systemMessage svg{
+    opacity:.25;
+    padding-right:5px;
+    display:inline-block;
+    vertical-align:baseline;
+}
+
 #servicepattern-chat #messages-div .new-msg-container.systemMessage,#servicepattern-chat #messages-div .new-msg-container.introduceMessage,#servicepattern-chat #messages-div .new-msg-container.receiveFile {
     max-width: 214px;
     float: left;
-    padding: 0 8px;
+    padding: 5px 20px; 
     text-align: center
 }
 
@@ -1612,7 +1748,6 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 #servicepattern-chat #messages-div .new-msg-container .button {
-    font-family: Arial;
     text-transform: uppercase;
     font-weight: 700;
     width: auto;
@@ -1650,7 +1785,7 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 #servicepattern-chat #messages-div .new-msg-container .new-msg-text {
-    padding: 3px;
+    padding: 0;
     word-wrap: break-word;
     line-height: 16px
 }
@@ -1662,12 +1797,22 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
     color: #bbb
 }
 
+#sp-chat-frame .system-message {
+    display: inline-block;
+    padding: 5px 20px;
+}
+
+.new-msg-text-inner{
+    overflow:hidden;
+}
+
 #servicepattern-chat #agent-typing {
     position: absolute;
     left: 0;
     right: 5px;
     bottom: 0;
     top: auto;
+    font-size: 11px;
     padding: 0 29px 3px 2px;
     display: none;
     background: #fff;
@@ -1723,48 +1868,46 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
 }
 
 #input-field {
-    width: 100%;
-    resize: none;
-    font-size: 13px;
-    color: #000;
-    overflow: hidden;
-    height: 16px;
-    margin-bottom: 5px;
-    line-height: 15px;
-    left: 9px;
-    top: 5px;
-    position: relative;
-    z-index: 2
+    padding: 6px;
+    padding-right: 35px;
+    margin-bottom: 0px;
+    min-height: 35px;
+    height: 30px;
+    max-height: 284px;
+    overflow: auto;
+    line-height: 17px;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-user-select: text;
+    word-wrap: break-word;
+    background:none;
+    font-size:15px;
 }
 
 #input-field.placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
-    font-size: 13px!important
+    font-size: 15px!important
 }
 
 #input-field::-webkit-input-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
-    font-size: 13px!important
+    font-size: 15px!important
 }
 
 #input-field:-moz-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
-    font-size: 13px!important
+    font-size: 15px!important
 }
 
 #input-field::-moz-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
-    font-size: 13px!important
+    font-size: 15px!important
 }
 
 #input-field:-ms-input-placeholder {
-    font-family: Arial,sans-serif!important;
     color: #828484!important;
-    font-size: 13px!important
+    font-size: 15px!important
 }
 
 #input-button {
@@ -2449,4 +2592,86 @@ input:-ms-input-placeholder,textarea:-ms-input-placeholder {
         background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAQAAAACNCElAAACZ0lEQVR4AaWW305aQRDGlwRo0kPSGyG+QKU3EntTmtJHMKa9rtUbpZfyJyncfo9RfICCz6JNqdEb8Q2gSSWRUEnoZPNlc0rOzMHW72Z3Zvcnu2d2Zpz+h200cIbvmGAumsjoDA2xOk3J5gJauMJS0ZV4C+vBsjjBGMsUTWRVNg32HOdhwxQDfEIVJTwRlVCVWR/T4L/AlgXbxS8uvEUdBeUKjnAb/t2uBvuAB79khs/IwxnKy4qZX/uA/STYHhb8TTu02Nrh71tgbxVWxp13XWITbk1t4tLvuUM5Dsvy2m9QgnuEirjx+86FEGAnvKuXYdkbZFRERrzhsLy7BggrMK66YckBFugho6C+iPcgzLt+71goHtby0xFydNf4KVZxRPHaa7TkMPKWlofx4RzHNpximYgjSnQa89T5yARWYfhFcApORVERX0XFoeEHfToUnIai+t7e5AB1OAtnocJBBw5DP6jCmbiejhK99r6hY1hswFk4DUVteO/YYe4HeTgNZ6GovPfP02G9AOulw3hMG2XjwjHNDxCuXWThquAHGDD+LVRGZOGOwdBoMmgN1IqlpwdthQkuslAmLmJircQeuoGycUcID92hraSgVRRxSgpq/50cO3DUIRaJKOLEexjmHRZlJkdmDtzH6tJbM23XYmn7nmk7oaAU/6mgfEM2qdT9eFSpGzKxlv+/CI8SizC1T9wM3dT2oIMZUR+1xuUdpqFxOUKUCHoqnlFoXN5bLdUWLmIt1VfU8QpF5ERFGdXFEm+pXqzT7P1co9lrpDZ71DO0ca2Cro02VNU2mmyQf4t8g4ym1SD/AcW+nsr36vOqAAAAAElFTkSuQmCC) center right no-repeat;
         background-size: 19px 19px
     }
+}
+
+.input-div-table {
+    margin: 18px;
+    position: relative;
+}
+
+.td-textarea {
+    margin-right: -15px;
+    position: relative;
+}
+
+.button-primary {
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 15px;
+}
+
+.tabChat,
+.tabPhone,
+.question__call-tab_hide .tabs,
+.question__call-tab_hide #submitPhone,
+.question__call-tab_hide .phoneFields,
+.question__chat-tab_hide .tabs,
+.question__chat-tab_hide #submitChat,
+.question__chat-tab_hide .chatFields,
+.question__chat-tab_active #submitPhone,
+.question__chat-tab_active .phoneFields,
+.question__call-tab_active #submitChat,
+.question__call-tab_active .chatFields,
+.question__chat-tab_active .tab_active.tabPhone,
+.question__call-tab_active .tab_active.tabChat {
+    display: none;
+}
+
+
+.question__call-tab_active .tab_active.tabPhone,
+.question__call-tab_active .tabChat,
+.question__chat-tab_active .tab_active.tabChat,
+.question__chat-tab_active .tabPhone {
+    display: inline-block;
+}
+
+.question__chat-tab_active .tabChat,
+.question__call-tab_active .tabPhone {
+    cursor: default;
+}
+
+.question__chat-tab_active .tabChat {
+    border-left: none;
+}
+
+.new-msg-container {
+    position: relative;
+}
+
+.new-msg-container.agentMessage {
+    content: '';
+    left: -5px;
+}
+
+.new-msg-container.clientMessage {
+    content: '';
+    right: 5px;
+}
+
+.pip {
+    position: absolute;
+    bottom: 0px;
+    width: 6px;
+    height: 6px;
+}
+
+.agentMessage .pip {
+    transform: skew(-45deg);
+    left: -3px;
+}
+
+.clientMessage .pip {
+    transform: skew(45deg);
+    right: -3px;
 }

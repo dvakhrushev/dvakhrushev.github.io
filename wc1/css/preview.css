@@ -17,6 +17,14 @@
     margin-top: 20px;
 }
 
+#preview #preChatForm{
+    display:none;
+}
+
+#preview #unavailableForm{
+    display:none;
+}
+
 #preview.proactive_offer,
 #preview.proactive_offer .proactive-offer,
 #preview.chat_widget #sp-chat-frame,
@@ -29,6 +37,22 @@
     display: block;
 }
 
+#preview:not(.contact_tab) #sp-chat-widget{
+    display:none!important;
+}
+
+#preview:not(.contact_tab) #sp-chat-widget{
+    display:none!important;
+}
+
+#preview.pre_chat_form #preChatForm{
+    display:block;
+}
+
+#preview:not(.pre_chat_form) #preChatForm{
+    display:none!important;
+}
+
 #preview .proactive-offer,
 #preview.proactive_offer #header-avatar,
 #preview #offline-form,
@@ -37,5 +61,13 @@
 }
 
 .chat-preview-content {
+    display: none;
+}
+
+
+#preview.leave_msg_form #unavailableForm,#preview.leave_msg_form #offline-form,#preview.leave_msg_form #sp-chat-frame{
+    display: block;
+}
+#preview.leave_msg_form #chat-body{
     display: none;
 }

@@ -1,5 +1,6 @@
 define(function (require, exports, module) {
     var build = require('snippet/build');
+    var preview = require('preview');
     var loadScripts = require('snippet/loadScripts');
 
     loadScripts([
@@ -8,4 +9,4 @@ define(function (require, exports, module) {
     ], function () {
         build();
     });
-});
+}); 

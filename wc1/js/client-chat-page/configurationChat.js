@@ -25,7 +25,7 @@ define(function (require, exports, module) {
         });
 
         if (cwConfig.fileUploadEnabled === false) {
-            $('body:not(#preview) #attachFile').remove();
+            $('#attachFile:not(.preview)').remove();
             $('#input-div').addClass('without_file');
         }
 
@@ -137,8 +137,13 @@ define(function (require, exports, module) {
 
         generateInputs(lmConfig.fields, '.offlineFields');
 
-        $('.questionFormInner').perfectScrollbar({useBothWheelAxes: false});
-        $('#offline-form-fields').perfectScrollbar({useBothWheelAxes: false});
+
+        if ($.fn.perfectScrollbar) {
+            $('#surveyForm').perfectScrollbar({useBothWheelAxes: false});
+            $('.questionFormInner').perfectScrollbar({useBothWheelAxes: false});
+            $('#offline-form-fields').perfectScrollbar({useBothWheelAxes: false});
+        }
+  
 
         function generateInputs(object, parentElement) {
 
@@ -386,6 +391,10 @@ define(function (require, exports, module) {
                 $('#preChatForm').addClass('question__call-tab_active');
                 $('#preChatForm').removeClass('question__chat-tab_active');
             });
+
+            $('.radioStars input').on('change', function(){
+                $(this).parent().attr('data-rated',$(this).val());
+            })
         }
     };
 });

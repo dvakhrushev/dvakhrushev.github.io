@@ -17,6 +17,11 @@
     display: none;
 }
 
+#sp-chat-frame .dialog-shadow,
+#preview #inner-chat {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+} 
+
 .top_0 {
     top: 0 !important;
 }
@@ -105,18 +110,28 @@
     z-index: 9999;
 }
 
+#sp-chat-widget .contact-tab-border{
+    white-space: nowrap;
+}
+
 #sp-chat-label-text {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: auto;
     line-height: 34px;
-    padding: 0 35px 0 20px;
+    padding: 0 15px 0 0;
 }
 
 #sp-chat-label-icon {
     width: 34px;
     height: 34px;
-    float: left;
-    margin:0 5px;
+    margin:0 10px;
+    display: inline-block;
+    background-size:contain;
+}
+
+#sp-chat-widget .contact-tab-font {
+    display: inline-block;
+    vertical-align:top;
 }
 
 #tab_icon {
@@ -143,6 +158,30 @@
     position: relative;
 }
 
+.bottom_0 #sp-chat-iframe,
+#preview .bottom_0 #inner-chat {
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
+.top_0 #sp-chat-iframe,
+.top_0 #sp-chat-iframe2 {
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+}
+
+.left_0 #sp-chat-iframe,
+.left_0 #sp-chat-iframe2 {
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+}
+
+.right_0 #sp-chat-iframe,
+.right_0 #sp-chat-iframe2 {
+    border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
 #sp-chat-iframe, #sp-iframe-container {
     width: 100%;
     height: 100%;
@@ -164,11 +203,14 @@
 .close-icon {
     width: 20px;
     height: 20px;
-    background: url(../images/x.png) no-repeat 50% 50%;
     position: relative;
     top: 55px;
     right: 50px;
     cursor: pointer
+}
+
+#sp-chat-frame .close-icon path{
+    fill:#fff;
 }
 
 @media only screen and (min-width: 600px) and (max-device-width: 640px) {
@@ -181,10 +223,8 @@ div#togetherjs-dock.togetherjs-dock-right {
     right: -70px;
 }
 
-
-
 .position_top_middle .contact-tab-border,
-.position_top_left .contact-tab-border
+.position_top_left .contact-tab-border,
 .position_top_right .contact-tab-border
 {
     border-top-left-radius: 0!important;
@@ -194,14 +234,14 @@ div#togetherjs-dock.togetherjs-dock-right {
 
 .position_bottom_middle .contact-tab-border,
 .position_bottom_left .contact-tab-border,
-.position_bottom_top .contact-tab-border{
+.position_bottom_right .contact-tab-border{
     border-bottom-left-radius: 0!important;
     border-bottom-right-radius: 0!important;
     box-shadow:0 -2px 5px rgba(0, 0, 0, .2)
-}
+} 
 
 .position_right_middle .contact-tab-border,
-.position_right_left .contact-tab-border,
+.position_right_bottom .contact-tab-border,
 .position_right_top .contact-tab-border{
     border-bottom-left-radius: 0!important;
     border-bottom-right-radius: 0!important;
@@ -209,11 +249,10 @@ div#togetherjs-dock.togetherjs-dock-right {
 }
 
 .position_left_middle .contact-tab-border,
-.position_left_left .contact-tab-border,
+.position_left_bottom .contact-tab-border,
 .position_left_top .contact-tab-border{
     border-top-left-radius: 0!important;
     border-top-right-radius: 0!important;
     box-shadow:0 2px 5px rgba(0, 0, 0, .2)
 }
-
 

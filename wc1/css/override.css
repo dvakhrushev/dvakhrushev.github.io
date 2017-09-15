@@ -68,7 +68,6 @@ html {
 }
 
 #offline-form .description.small {
-    font-size: 14px;
     margin-bottom: 10px;
 }
 
@@ -86,12 +85,7 @@ html {
     background: url(../images/thumbUp.png) left top no-repeat;
 }
 
-#input-field {
-    padding-left: 45px;
-    box-sizing: border-box;
-    width: 262px;
-    height: 29px;
-}
+
 
 .thumb {
     max-width: 100px;
@@ -148,9 +142,20 @@ html {
 }
 
 #servicepattern-chat #messages-div .new-msg-container.clientMessage.new-msg-animate, #servicepattern-chat #messages-div .new-msg-container.agentMessage.new-msg-animate, #servicepattern-chat #messages-div .new-msg-container.agentHighlight.new-msg-animate {
-    padding: 0;
     width: auto;
     clear: both;
+}
+
+#servicepattern-chat #messages-div .new-msg-body{
+    padding:20px;
+}
+
+#servicepattern-chat #messages-div .new-msg-body.systemMessage {
+    padding:0 20px;
+}
+
+.pip.system-message {
+    display:none;
 }
 
 #servicepattern-chat #messages-div .new-msg-container.systemMessage, #servicepattern-chat #messages-div .new-msg-container.introduceMessage, #servicepattern-chat #messages-div .new-msg-container.receiveFile {
@@ -159,12 +164,17 @@ html {
 }
 
 #servicepattern-chat #messages-div .new-msg-container {
-    max-width: 66%;
+    max-width: 68%;
 }
 
 .new-msg-container .agentImage {
-    width:25px;
-    height:25px;
+    position:absolute;
+    left: -45px;
+    bottom: 5px;
+    border-radius:50%;
+    overflow:hidden;
+    width:30px;
+    height:30px;
     display: inline-block;
     margin:-4px 6px -5px -4px;
     flex-shrink: 0;
@@ -176,7 +186,7 @@ html {
 }
 
 .field-wrapper.field-label {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .field-wrapper.field-radio {
@@ -191,6 +201,9 @@ html {
     width: 100%;
     box-sizing: border-box;
     margin: 0;
+    height: 30px;
+    line-height: 30px;
+    background-color: #f4f7f9;;
 }
 
 .field-wrapper input[type=checkbox],
@@ -233,8 +246,14 @@ html {
 
 .field-wrapper label {
     display: block;
-    font-weight: 700;
+    color:#2b2b2b;
 }
+
+input[type=checkbox] + label, input[type=radio] + label{
+    display:inline;
+}
+
+
 
 .field-captcha label {
     margin-bottom: 5px;
@@ -271,15 +290,18 @@ html {
     text-align: center;
 }
 
-.question__call-tab_hide .questionFormInner,
-.question__chat-tab_hide .questionFormInner {
+
+#preChatForm .questionFormInner {
+    top: 50px;
+}
+
+
+#preChatForm.question__call-tab_hide .questionFormInner,
+#preChatForm.question__chat-tab_hide .questionFormInner {
     top: 0;
     border: none;
 }
 
-#preChatForm .questionFormInner {
-    top: 40px;
-}
 
 #preChatForm .tabs {
     position: relative;
@@ -289,9 +311,19 @@ html {
 #preChatForm .tab {
     text-align: center;
     cursor: pointer;
-    height: 30px;
-    line-height: 30px;
+    height: 50px;
+    line-height: 50px;
     padding: 0 20px;
+}
+
+#preChatForm .tab svg {
+    top: 5px;
+    margin-right: 5px;
+    position: relative;
+}
+
+.tab path {
+    fill:#d3d3d3;
 }
 
 #servicepattern_close_button {
@@ -384,7 +416,7 @@ html {
     left: 10px;
 }
 
-.chat-body__input .emoji-wysiwyg-editor {
+.chat-body__input .emoji-wysiwyg-editor, {
     padding: 0 60px 0 0;
     line-height: 18px;
     min-height: 22px;
@@ -418,6 +450,12 @@ html {
     z-index: 20;
     cursor: pointer;
     background: url(../images/smile.png) center center no-repeat;
+    display: block;
+    position: absolute;
+}
+
+#preview .fa-smile-o{
+    right:25px;
 }
 
 .fa-smile-o:before {

@@ -9,10 +9,10 @@
 <body background="bp.png">
 <script type="text/javascript">
     SERVICE_PATTERN_CHAT_CONFIG = {
-        appId: 'demochat1234',
+        appId: 'constructorTest',
         clientId: 'WebChat',
-        apiUrl: 'https://servicenow2.brightpattern.com/clientweb/api/v1',
-        tenantUrl: 'servicenow2.brightpattern.com',
+        apiUrl: 'https://new.brightpattern.com/clientweb/api/v1',
+        tenantUrl: 'new.brightpattern.com',
         width: 300,
         chatPath: window.location.origin + '/',
         email: 'ya@sergem.net',
@@ -20,5 +20,39 @@
     };
 </script>
 <script src="js/require.js" data-main="js/snippet"></script>
+
+
+<style type="text/css">
+    .sp-callback-form {
+        width: 200px;
+        display: none;
+        border: 2px solid orangered;
+        padding: 8px;
+        background: darkseagreen;
+    }
+    .sp-callback-form input {
+        margin-bottom: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .sp-callback-form button {
+        height: 28px;
+        width: 100%;
+        background: darkgreen;
+        color: white;
+        font-weight:bold;
+        border: none;
+        cursor: pointer
+    }
+</style>
+<div id="sp-callback-form" class="sp-callback-form">
+    <input type="text" id="sp-callback-first-name" placeholder="First Name"/>
+    <input type="text" id="sp-callback-last-name" placeholder="Last Name" />
+    <input type="text" id="sp-callback-phone" placeholder="Phone" />
+    <input type="text" id="sp-callback-account" placeholder="Account" />
+    <input type="text" id="sp-callback-email" placeholder="Email" />
+    <button id="sp-callback-submit">Request Call</button>
+</div>
 </body>
 </html>

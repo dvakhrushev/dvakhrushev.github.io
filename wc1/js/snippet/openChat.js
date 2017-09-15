@@ -4,6 +4,7 @@ define(function (require, exports, module) {
     var checkAddFrame = require('snippet/checkAddFrame');
     var getConfObject = require('snippet/getConfObject');
     var variables = require('snippet/variables');
+    var chatUrl = require('snippet/chatUrl');
 
     return function (open, deleteIframe) {
 
@@ -15,7 +16,8 @@ define(function (require, exports, module) {
         var fr = $('#sp-chat-frame'),
             wi = $('#sp-chat-widget'),
             fakeTo = open ? fr : wi,
-            fakeFrom = open ? wi : fr;
+            fakeFrom = open ? wi : fr,
+            def = getConfObject().definition;
 
         keepOpenedState(open);
 
@@ -32,9 +34,9 @@ define(function (require, exports, module) {
         }
 
         checkAddFrame();
+        
 
         //hot fix for safari
-
         if (navigator.userAgent.indexOf("Safari") !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
             fakeFrom.hide();
             fakeTo.toggle();
@@ -48,7 +50,6 @@ define(function (require, exports, module) {
                 location = config.definition.contactTab.location;
                 direction = (location.indexOf('right_') !== -1 || location.indexOf('left_') !== -1) ? "vertical" : "horizontal";
             }
-
             fakeTo.toggle();
             fakeTo.toggle();
 
@@ -77,13 +78,15 @@ define(function (require, exports, module) {
                 width: w,
                 height: h
             }, 400, function () {
-                fakeTo.toggle();
+                if(fakeTo == wi && def.preChat.enabled == false) {} else {
+                    fakeTo.toggle();
+                }
                 fake.toggle();
                 variables.init = true;
                 if (deleteIframe) {
                     $('#sp-chat-iframe').remove();
                 } else {
-                    document.getElementById('sp-chat-iframe').contentWindow.postMessage("sp-dragged", "*");
+                    //document.getElementById('sp-chat-iframe').contentWindow.postMessage("sp-dragged", "*"); 
                 }
             });
         }

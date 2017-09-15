@@ -1,7 +1,6 @@
 define(function (require, exports, module) {
     return function (currentWidget, styles, highlights) {
         var contactTabStyle = currentWidget.definition.contactTab.style;
-
         var contactTabCss = applyStyle('#sp-chat-widget', styles[contactTabStyle]);
 
         var chatWidgetStyle = currentWidget.definition.chatWidgetStyling.style;
@@ -13,6 +12,10 @@ define(function (require, exports, module) {
         var highlightsStyle = [
             '.main-background-color {',
             'background:#' + highlights.color,
+            '}',
+
+            '.tab_active path {',
+            'fill:#' + highlights.color,
             '}',
 
             '.main-fill-color {',
@@ -34,12 +37,23 @@ define(function (require, exports, module) {
             '.second-color {',
             'color:#' + highlights.textColor,
             '}',
+
+            '.proactive-offer {',
+            'font-family: "' + styles[Object.keys(styles)[0]].baseFont['font-family'] + '"',
+            '}',
         ].join(' ');
 
-        var font = styles.style2 ? '@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&subset=cyrillic");' : '';
-         
+
+        if(styles.style1){
+            var font1 = '@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&subset=cyrillic");';
+        }
+        if(styles.style2){
+            var font2 = '@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&subset=cyrillic");';
+        }
+
         var importFonts = [
-            font,
+            font1,
+            font2
         ].join(' ');
 
         writeStyleSheet([importFonts, highlightsStyle, contactTabCss, chatWidgetCss, proactiveOfferCss, innerChatWidgetCss].join(' '));
@@ -52,10 +66,12 @@ define(function (require, exports, module) {
             appliedStyles.push({name: 'baseFont', className: 'base-font'});
         }
 
-        appliedStyles = appliedStyles.concat([{
+        appliedStyles = appliedStyles.concat([
+        {
             name: 'agentMessage',
             className: 'agent-message'
-        }, {
+        },
+         {
             name: 'contactTabBorder',
             className: 'contact-tab-border'
         }, {

@@ -1,7 +1,12 @@
 define(function (require, exports, module) {
     var makeid = require('client-chat-page/makeid');
     var updateScrollbar = require('client-chat-page/updateScrollbar');
-    var uploadFiles = require('chat-api-session/uploadFiles');
+    var sendXhr = require('chat-api-session/sendXhr');
+    
+    var uploadFiles = function(cp, formData) {
+        var uploadFilesEndpoint = 'files?tenantUrl=' + encodeURIComponent(cp.tenantUrl);
+        return sendXhr(cp, uploadFilesEndpoint, 'POST', formData);
+    };
 
     return function (file) {
 

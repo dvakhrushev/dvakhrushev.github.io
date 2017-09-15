@@ -48,35 +48,3 @@
 .question__chat-tab_active .tabChat {
     border-left: none;
 }
-
-.new-msg-container {
-    position: relative;
-}
-
-.new-msg-container.agentMessage {
-    content: '';
-    left: -5px;
-}
-
-.new-msg-container.clientMessage {
-    content: '';
-    right: 5px;
-}
-
-.pip {
-    display: none !important;
-    position: absolute;
-    bottom: -10px;
-    border: 10px solid;
-    width: 0;
-    height: 0;
-    transform: rotate(45deg)
-}
-
-.agentMessage .pip {
-    left: -10px;
-}
-
-.clientMessage .pip {
-    right: -10px;
-}

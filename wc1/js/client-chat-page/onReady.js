@@ -180,8 +180,14 @@ define(function (require, exports, module) {
         $('body').on('keyup', '.emoji-wysiwyg-editor', function () {
             var $editor = $('.emoji-wysiwyg-editor');
             var bottom = $('.chat-body__input').height();
-
-            $editor.height($editor.prop("scrollHeight"));
+            var scrollHeight = $editor.prop("scrollHeight") - 17;
+            
+            if($editor.html().length>20){
+                $editor.height(scrollHeight + "px");
+            } else {
+                $editor.height("auto");
+                $('#messages-div').css("bottom", "auto");
+            }
 
             $('#input-field').val($editor.text());
             $('#messages-div').css("bottom", bottom + "px");

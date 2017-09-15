@@ -5,16 +5,18 @@ define(function (require, exports, module) {
 
     var helpers = {
         listener: function (event) {
-            console.log('GET MESSAGE3', event.data);
+            if (~event.origin.indexOf('brightpattern.com')) {
+                console.log('GET MESSAGE3', event.data);
 
-            if (helpers.isJsonString(event.data)) {
-                var config = JSON.parse(event.data);
+                if (helpers.isJsonString(event.data)) {
+                    var config = JSON.parse(event.data);
 
-                if (config.screen) {
-                    $('#preview').attr('class', "").addClass(config.screen);
+                    if (config.screen) {
+                        $('#preview').attr('class', "").addClass(config.screen);
 
-                    sessionStorage.setItem('confParams', JSON.stringify({widgets : [{ urls: [], definition: config.widget, styles: config.styles}]}));
-                    helpers.applyConfiguration();
+                        sessionStorage.setItem('confParams', JSON.stringify({widgets : [{ urls: [], definition: config.widget, styles: config.styles}]}));
+                        helpers.applyConfiguration();
+                    }
                 }
             }
         },

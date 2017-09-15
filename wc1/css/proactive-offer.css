@@ -2,7 +2,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    position: absolute;
+    position: fixed;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .proactive-offer__body {
@@ -10,10 +11,19 @@
 }
 
 .proactive-offer__button-wrapper {
-    margin-top: 35px;
-    text-align: center;
     display: flex;
     justify-content: space-around;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    font-size:15px;
+}
+.proactive-offer__button-wrapper button{
+    height:40px;
+    line-height:40px;
+    padding:0 15px;
+    font-size:15px;
 }
 
 .proactive-offer__close_hide_yes,
@@ -21,8 +31,27 @@
     display: none;
 }
 
-.proactive-offer__close {
+.proactive-offer .proactive-offer__close {
+    right: -30px;
+    left: unset;
     position: absolute;
-    top: 18px;
-    right: 18px;
+    top: -28px;
+}
+
+.proactive-offer__close path{
+    fill:#acc9dc;
+}
+.proactive-offer__close span{
+    position: absolute;
+    top: 0;
+    right: 30px;
+}
+
+.button-primary {
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor:pointer;
+    outline: none!important;
 }
