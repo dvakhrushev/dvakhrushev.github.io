@@ -7,7 +7,7 @@ define(function (require, exports, module) {
     } else {
         window.attachEvent("onmessage", helpers.listener);
     }
-
+/*
     $(function() {
         checkAvailability().then(function () {
             helpers.showChat();
@@ -22,5 +22,6 @@ define(function (require, exports, module) {
             }
         });
     });
+*/
 });
 
