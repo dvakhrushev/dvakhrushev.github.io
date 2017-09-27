@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title>Chat Test Page 1</title>
+    <link href="../css/constructor.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../js/libraries/jquery/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    SERVICE_PATTERN_CHAT_CONFIG = {
+        appId: 'zzzz',
+        apiUrl: 'https://new.brightpattern.com/clientweb/api/v1',
+        tenantUrl: 'new.brightpattern.com',
+        chatPath: '',
+        email: 'ya@sergem.net',
+        sms: '+1234567890123'
+    };
+</script>
+<script src="../js/require.js" data-main="../js/snippet"></script>
+
+<style type="text/css">
+
+.sp-callback-form {
+    font-family: Tahoma, Verdana, sans-serif;
+    border: 1px solid #B0B0B0;
+    padding: 16px;
+    display: inline-block;
+    border-radius: 2px;
+    -moz-box-shadow: 2px 2px 2px #B0B0B0;
+      -webkit-box-shadow: 2px 2px 2px #B0B0B0;
+          box-shadow: 2px 2px 2px #B0B0B0;
+}
+
+.sp-callback-form h1 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #696969;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.sp-callback-form label {
+    color: #696969;
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  
+.sp-callback-form input {
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  
+.sp-callback-form button {
+    background: #3B64B3;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    padding: 8px;
+  }
+</style>
+ 
+<div id="sp-callback-form" class="sp-callback-form">
+   <h1>Request a callback</h1>
+   <label>Name:</label>
+   <input type="text" id="sp-callback-name" required="">
+   <label>Phone number:</label>
+   <input type="text" id="sp-callback-phone" required="">
+   <button id="sp-callback-submit">Call me now</button>
+</div>
+<!-- <div id="sp-root-container1"><div id="sp-chat-widget"> <div id="sp-chat-label-icon"></div><div id="sp-chat-label-text"></div></div><div id="sp-chat-fake"></div><div id="sp-chat-frame"><div id="sp-drag-handle"></div><div id="sp-side-bar"><div id="sp-close-frame"></div></div><div id="sp-iframe-container"></div></div></div> -->
+
+
+
+<ol>
+    <li><a href="testing.html">Page 1</a></li>
+    <li><a href="testing2.html">Page 2</a></li>
+</ol>
+<div style="height: 1500px;">
+<h3>Welcome!</h3>
+</div>
+<h4>Welcome!</h4>
+<a href="http://www.posmotri.com">posmotri</a>
+</body>
+</html>
