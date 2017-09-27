@@ -11,8 +11,8 @@ define(function (require, exports, module) {
     } else {
 
 		loadScripts([
-		    'js/libraries/json2/json2.min.js',
-		    'js/libraries/XDomainRequest/jQuery.XDomainRequest.min.js'
+		    '../js/libraries/json2/json2.min.js',
+		    '../js/libraries/XDomainRequest/jQuery.XDomainRequest.min.js'
 		], function () {
 		    build();
 		});
