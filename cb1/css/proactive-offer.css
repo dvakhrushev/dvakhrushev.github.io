@@ -1,0 +1,52 @@
+.proactive-offer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.proactive-offer__body {
+    position: relative;
+}
+
+.proactive-offer__button-wrapper {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    font-size:15px;
+}
+.proactive-offer__button-wrapper button{
+    height:40px;
+    line-height:40px;
+    padding:0 15px;
+    font-size:15px;
+}
+
+.proactive-offer .proactive-offer__close.close-icon {
+    right: -30px;
+    left: unset;
+    position: absolute;
+    top: -28px;
+}
+
+.proactive-offer__close.close-icon path{
+    fill:#acc9dc;
+}
+
+.button-primary {
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor:pointer;
+    outline: none!important;
+}
+
+.proactive-offer .proactive-offer__close_hide_yes,
+.proactive-offer .proactive-offer__button_hide_yes {
+    display: none!important;
+}

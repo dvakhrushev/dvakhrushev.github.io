@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Libraries -->
+    <link href="js/libraries/emoji/css/emoji.css" rel="stylesheet">
+    <script type="text/javascript" src="js/libraries/jquery-1.11.0/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/libraries/jquery-ui-1.11.1/jquery-ui-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/libraries/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/config.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/util.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/jquery.emojiarea.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/emoji-picker.js"></script>
+
+    <!-- Custom scripts & styles -->
+    <link href="css/snippet.css" rel="stylesheet" type="text/css">
+    <link href="css/wrong.css" rel="stylesheet" type="text/css">
+    <link href="css/override.css" rel="stylesheet" type="text/css">
+    <link href="css/chat.css" rel="stylesheet" type="text/css">
+    <link href="css/proactive-offer.css" rel="stylesheet" type="text/css">
+    <link href="css/preview.css" rel="stylesheet" type="text/css">
+    <script src="js/require.js" data-main="js/preview"></script>
+
+    <meta name="MobileOptimized" content="320" /> 
+</head>
+<body id="preview" class="pre_chat_form">
+
+<h1>A Web Page</h1>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium, libero in tempus rutrum, erat lacus semper nunc, et
+hendrerit lorem tortor non metus. Proin fringilla eu quam eu tempus. Sed dignissim orci est, ac porta enim interdum ac.
+Vivamus convallis, est eu lobortis rhoncus, enim enim finibus nunc, et tincidunt arcu lorem eget metus. Integer quis
+fringilla orci.</p>
+
+<p>Ut et porttitor velit. Morbi tristique dolor sed sem venenatis, id rhoncus velit consectetur. Morbi porta vel nulla
+    vel finibus. Proin consectetur ex quis sem aliquet venenatis. Pellentesque et risus gravida, varius felis ac,
+    gravida risus.</p>
+
+<p>Cras varius nibh quis tellus commodo, at laoreet ipsum faucibus. Cras non dapibus nibh. Nunc faucibus, nisl in
+    laoreet lobortis, magna urna lobortis lectus, nec condimentum massa purus at odio. Duis eget sapien ligula.</p>
+
+<script>
+    SERVICE_PATTERN_CHAT_CONFIG = {
+        appId: 'constructorTest',
+        clientId: 'WebChat',
+        apiUrl: 'https://new.brightpattern.com:9443/clientweb/api/v1',
+        tenantUrl: 'new.brightpattern.com',
+        width: 300,
+        //        chatPath: 'https://tranquil-tor-40147.herokuapp.com/',
+        //        chatPath: 'http://localhost:8082/',
+        chatPath: window.location.origin + '/',
+        email: 'ya@sergem.net',
+        sms: '+1234567890123'
+    };
+</script>
+<div class="chat-preview-content">
+
+    <div id="sp-chat-widget">
+        <div class="sp-chat-widget__content main-background-color contact-tab-border">
+            <div id="sp-chat-label-icon"> 
+                <!-- <svg id="tab_icon" xmlns="http://www.w3.org/2000/svg" width="26" height="23.001">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M21.175 19.909c.272.658.971 1.665 2.825 3.091-3.34.039-5.64-1.155-6.889-2.049-.365.03-.735.049-1.111.049-2.761 0-5.26-.839-7.069-2.195.833.125 1.69.195 2.569.195 6.797 0 12.403-3.91 13.346-8.993.734 1.044 1.154 2.23 1.154 3.493 0 2.72-1.937 5.094-4.825 6.409zm-9.675-2.909c-.436 0-.865-.021-1.289-.057-1.151 1.197-3.562 3.1-7.211 3.057 2.113-1.626 2.739-3.136 2.924-4.068-3.531-1.452-5.924-4.234-5.924-7.432 0-4.694 5.148-8.5 11.5-8.5s11.5 3.806 11.5 8.5-5.148 8.5-11.5 8.5z"
+                          class="second-fill-color"></path>
+                </svg> -->
+            </div>
+            <div id="sp-chat-label-text" class="base-font contact-tab-font second-color">text</div>
+        </div>
+    </div>
+
+    <div class="proactive-offer">
+        <div class="proactive-offer__body content-margin widget-background">
+            <div class="proactive-offer__close close-icon"></div>
+            <div class="proactive-offer__content"></div>
+            <div class="proactive-offer__button-wrapper">
+                <button class="button-primary proactive-offer__button proactive-offer__button_type_chat main-background-color second-color"></button>
+                <button class="button-primary proactive-offer__button proactive-offer__button_type_call main-background-color second-color"></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sp-chat-frame" class="">
+        <div id="sp-drag-handle"></div>
+        <div id="sp-side-bar">
+            <div id="sp-close-frame" class="close-icon"></div>
+        </div>
+        <div id="sp-iframe-container">
+            <div id="sp-chat-iframe" class="widget-border widget-border-radius dialog-shadow">
+                <div id="inner-chat" class="widget-border-radius base-font">
+                    <div id="servicepatternsite-iframe-chat">
+                        <div id="header-avatar" class="main-background-color">
+                            <div id="header-avatar-container">
+                                <div class="has-avatar">
+                                    <div class="avatar">
+                                        <img class="avatar-image" src="images/logo-big.png">
+                                    </div>
+                                    <div class="info second-color title-font">
+                                        <div id="agent-name" class="agent-name"></div>
+                                        <div id="agent-title" class="title"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="sound_player"></div>
+                            <div id="callme" style="display: none;">
+                                <div></div>
+                            </div>
+                            <div id="shareScreen" style="display: none;">
+                                <div></div>
+                            </div>
+                            <div id="endChat" style="display: none;">
+                                <div></div>
+                            </div>
+                        </div>
+                        <form id="content-form" method="POST"></form>
+                        <div id="offline-form">
+                            <div id="offline-form-inner">
+
+                                <div id="questionForm" class="question__chat-tab_active agent-message">
+                                    <div class="tabs">
+                                        <div class="tab tab_active tabChat main-color widget-background">Chat</div>
+                                        <div class="tab tabChat">Chat</div>
+                                        <div class="tab tab_active tabPhone main-color widget-background">Phone</div>
+                                        <div class="tab tabPhone">Phone</div>
+                                    </div>
+                                    <div class="questionFormInner ps-container widget-background">
+                                        <div class="commonFields"></div>
+                                        <div class="chatFields"></div>
+                                        <div class="phoneFields"></div>
+
+                                        <div class="prechat__action-buttons">
+                                            <input id="cancelPreChatForm" type="button" value="Cancel" class="button-primary cancel main-background-color second-color">
+                                            <input id="submitChat" type="button" value="Call tab" class="button-primary accept main-background-color second-color">
+                                            <input id="submitPhone" type="button" value="Phone tab" class="button-primary phone main-background-color second-color">
+                                        </div>
+                                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div></div>
+                                </div>
+
+                                <div id="unavailableForm" style="display: none;">
+                                    <div id="offline-form-fields" class="ps-container">
+                                        <div class="description headerDescription">
+                                            Sorry, no one is available for chat right now.
+                                            Please leave us a message, we will get in touch soon.
+                                        </div>
+
+                                        <div class="offlineFields"></div>
+
+                                        <div class="buttons">
+                                            <div class="left-button">
+                                                <a id="uncancel" class="servicepatternBtn cancel" href="#">Cancel</a>
+                                            </div>
+                                            <div>
+                                                <input id="unsubmit" type="button" value="Send" class="servicepatternBtn">
+                                            </div>
+                                        </div>
+
+                                        <div class="clear"></div>
+                                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div></div>
+                                </div>
+
+                                <div id="surveyForm" style="display: none;">
+                                    <div class="description small">Did we provide the service you were looking for?</div>
+
+                                    <div class="field-wrapper">
+                                        <input type="radio" name="service" id="service-1" value="1" checked="checked">
+                                        <label for="service-1">yes</label>
+                                        <input type="radio" name="service" id="service-0" value="0">
+                                        <label for="service-0">no</label>
+                                    </div>
+
+                                    <br>
+
+                                    <div class="description small">How helpful was our representative?</div>
+                                    <p>
+                                    </p><div class="thumbUp"></div>
+                                    <div class="thumbDown"></div>
+
+                                    <input type="radio" name="helpful" id="helpful-1" value="1">
+                                    <input type="radio" name="helpful" id="helpful-2" value="2">
+                                    <input type="radio" name="helpful" id="helpful-3" value="3">
+                                    <input type="radio" name="helpful" id="helpful-4" value="4">
+                                    <input type="radio" name="helpful" id="helpful-5" value="5">
+                                    <input type="radio" name="helpful" id="helpful-6" value="6">
+                                    <input type="radio" name="helpful" id="helpful-7" value="7">
+                                    <input type="radio" name="helpful" id="helpful-8" value="8">
+                                    <input type="radio" name="helpful" id="helpful-9" value="9">
+                                    <p></p>
+
+                                    <br>
+
+                                    <div class="description small">
+                                        How likely are you recommend our products and services in the future?
+                                    </div>
+                                    <p>
+                                    </p><div class="thumbUp"></div>
+                                    <div class="thumbDown"></div>
+                                    <input type="radio" name="recommend" id="recommend-1" value="1">
+                                    <input type="radio" name="recommend" id="recommend-2" value="2">
+                                    <input type="radio" name="recommend" id="recommend-3" value="3">
+                                    <input type="radio" name="recommend" id="recommend-4" value="4">
+                                    <input type="radio" name="recommend" id="recommend-5" value="5">
+                                    <input type="radio" name="recommend" id="recommend-6" value="6">
+                                    <input type="radio" name="recommend" id="recommend-7" value="7">
+                                    <input type="radio" name="recommend" id="recommend-8" value="8">
+                                    <input type="radio" name="recommend" id="recommend-9" value="9">
+                                    <p></p>
+
+                                    <br>
+
+                                    <input type="checkbox" name="transcript" id="transcript" value="1">
+                                    <label for="transcript" class="description small">Send me transcript of the chat by email?</label>
+                                    <input type="text" name="transcriptEmail" id="transcriptEmail">
+
+                                    <div class="buttons" style="margin-top: -10px;">
+                                        <div>
+                                            <input id="submitSurvey" type="button" value="Submit" class="servicepatternBtn">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="chat-body" class="widget-background">
+                            <div class="chat-body__content">
+                                <video id="video" style="display: none; height: 100px; width: 100%" autoplay=""></video>
+                                <div id="notification-prompt" style="display: none;" class="promptMessage">When
+                                    prompted, please
+                                    allow notifications from this window, so you could see responses when this window is
+                                    hidden.
+                                </div>
+                                <div id="call-prompt" style="display: none;" class="promptMessage">When prompted, please
+                                    allow
+                                    access to your camera and microphone.
+                                </div>
+                                <div id="servicepattern-chat">
+                                    <div id="scrollbar-container">
+                                        <div id="messages-div" class="viewport">
+                                            <div id="messages-div-outer" class="ps-container">
+                                                <div id="messages-div-inner" class="overview messages-div-inner"
+                                                     style="bottom: 0px; top: auto;">
+
+                                                    <div class="new-msg-container agentMessage new-msg-animate agent-message">
+                                                        <div class="pip agent-message base-font"></div>
+                                                        <div class="new-msg-body agentMessage">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text" style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font">Please wait while we
+                                                                        are
+                                                                        looking for an available representative...
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time">00:00</div>
+                                                    </div>
+
+                                                    <div id=""
+                                                         class="new-msg-container agentMessage new-msg-animate agent-message">
+                                                        <div class="new-msg-body agentMessage">
+                                                            <div class="pip agent-message base-font"></div>
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font">Representative
+                                                                        found.
+                                                                        Connecting...
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time">00:00</div>
+                                                    </div>
+
+                                                    <div class="new-msg-container systemMessage new-msg-animate main-color">
+                                                        <div class="new-msg-body system-message">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font agentJoinedMessage">[Agent Name] has
+                                                                        joined the
+                                                                        chat
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time"></div>
+                                                    </div>
+
+
+                                                    <div class="new-msg-container clientMessage new-msg-animate main-background-color">
+                                                        <div class="pip main-background-color second-color"></div>
+                                                        <div class="new-msg-body clientMessage">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font second-color">User message</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time">00:00</div>
+                                                    </div>
+
+                                                    <div class="new-msg-container agentMessage new-msg-animate agent-message">
+                                                        <div class="pip agent-message base-font"></div>
+                                                        <div class="new-msg-body agentMessage">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="agentImage" style="background:url(images/man-with-glasses.jpg) center center no-repeat/contain"></div>
+                                                                    <div class="new-msg-text-inner base-font">Agent message</div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time">00:00</div>
+                                                    </div>
+
+                                                    <div class="new-msg-container systemMessage new-msg-animate main-color">
+                                                        <div class="new-msg-body system-message">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font inactivityWarningText"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time"></div>
+                                                    </div>
+
+                                                    <div class="new-msg-container systemMessage new-msg-animate main-color">
+                                                        <div class="new-msg-body system-message">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font inactivityTimeoutText"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time"></div>
+                                                    </div>
+
+                                                    <div class="new-msg-container systemMessage new-msg-animate main-color">
+                                                        <div class="new-msg-body system-message">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font agentLeftText"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time"></div>
+                                                    </div>
+
+                                                    <div class="new-msg-container systemMessage new-msg-animate main-color">
+                                                        <div class="new-msg-body system-message">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font sessionEndedText"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time"></div>
+                                                    </div>
+
+                                                    <!-- <div id="" class="new-msg-container new-msg-animate agentMessage agent-message">
+                                                        <div class="new-msg-body agentMessage">
+                                                            <div class="new-msg-body-inner">
+                                                                <div class="new-msg-text " style="height: auto;">
+                                                                    <div class="new-msg-text-inner base-font">  Sorry there are no representatives available to serve you at this time. Please try later.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="new-time">15:16</div>
+                                                    </div> -->
+
+
+                                                    <div id="messages-div-inner-clear"></div>
+                                                </div>
+                                                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
+                                                    <div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
+                                                </div>
+                                                <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;">
+                                                    <div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div>
+                                                </div>
+                                            </div>
+                                            <div id="agent-typing" style="display: none;">
+                                                <div class="agent-typing-wrapper"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="input-div" class="chat-body__input agent-message">
+                                <div class="input-div-table">
+                                    <div class="td-textarea">
+                                    <textarea
+                                            id="input-field"
+                                            data-emojiable="true"
+                                            rows="1"
+                                            name="input-field"
+                                            maxlength="1000"
+                                            placeholder="Text..."
+                                            autocomplete="off"
+                                            style="resize: none;"
+                                    ></textarea>
+                                    </div>
+                                    <div id="attachFile"></div>
+                                    <div class="td-button">
+                                        <input id="input-button" type="button" value="Send"
+                                               class="servicepatternBtn accept">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form name="file-upload-form" id="file-upload-form" target="_blank" method="post"
+                          enctype="multipart/form-data" style="display:none;"></form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

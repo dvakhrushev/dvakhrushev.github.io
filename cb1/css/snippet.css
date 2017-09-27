@@ -1,0 +1,335 @@
+/*___PRODUCT_BUILD___ (___PRODUCT_COMMENTS___) ___PRODUCT_DATE___*/
+
+#sp-root-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    z-index: 9999999;
+}
+
+#sp-chat-frame {
+    height: 420px;
+}
+
+#sp-chat-widget, #sp-chat-fake, #sp-chat-frame {
+    display: none;
+}
+
+#sp-chat-frame .dialog-shadow,
+#preview #inner-chat {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+} 
+
+.top_0 {
+    top: 0 !important;
+}
+
+.left_0 {
+    left: 0;
+}
+
+.right_0 {
+    right: 0;
+}
+
+.bottom_0 {
+    bottom: 0;
+}
+
+.top_1 {
+    top: 50px;
+}
+
+.middle_1.vertical {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bottom_1 {
+    bottom: 50px;
+}
+
+.left_1 {
+    left: 50px;
+}
+
+.middle_1.horizontal {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.right_1 {
+    right: 50px;
+}
+
+#sp-chat-widget.position_left_top {
+    transform: rotate(-90deg) translateX(-100%);
+    transform-origin: 0% 0%;
+}
+
+#sp-chat-widget.position_left_middle {
+    transform: rotate(-90deg) translateX(-50%);
+    transform-origin: 0% 0%;
+}
+
+#sp-chat-widget.position_left_bottom {
+    transform: rotate(-90deg) translateY(100%);
+    transform-origin: 0% 100%;
+}
+
+#sp-chat-widget.position_right_top {
+    transform: rotate(-90deg) translateY(-100%);
+    transform-origin: 100% 0;
+}
+
+#sp-chat-widget.position_right_middle {
+    transform: rotate(-90deg) translate(50%, -100%);
+    transform-origin: 100% 0%;
+}
+
+#sp-chat-widget.position_right_bottom {
+    transform: rotate(-90deg) translateX(100%);
+    transform-origin: 100% 100%;
+}
+
+.right_0 #sp-side-bar {
+    left: -55px;
+    right: auto;
+}
+
+#sp-chat-widget, #sp-chat-fake {
+    position: fixed;
+}
+
+#sp-chat-widget {
+    height: 33px;
+    cursor: pointer;
+    white-space: nowrap;
+    z-index: 9999;
+}
+
+#sp-chat-widget .contact-tab-border{
+    white-space: nowrap;
+}
+
+#sp-chat-label-text {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: auto;
+    line-height: 34px;
+    padding: 0 15px 0 0;
+}
+
+#sp-chat-label-icon {
+    width: 28px;
+    height: 28px;
+    margin:4px 10px;
+    display: inline-block;
+    background-size:contain;
+}
+
+#sp-chat-widget .contact-tab-font {
+    display: inline-block;
+    vertical-align:top;
+}
+
+#tab_icon {
+    padding: 5px;
+}
+
+#sp-drag-handle {
+    position: absolute;
+    top: 0;
+    width: 220px;
+    height: 75px;
+    background: none;
+    z-index: 300001;
+    cursor: move;
+}
+
+#sp-chat-frame {
+    position: fixed !important;
+    width: 300px;
+    margin-left: 0;
+    z-index: 10000;
+}
+
+#sp-chat-iframe {
+    position: relative;
+}
+
+.bottom_0 #sp-chat-iframe,
+#preview .bottom_0 #inner-chat {
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
+.top_0 #sp-chat-iframe,
+.top_0 #sp-chat-iframe2 {
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+}
+
+.left_0 #sp-chat-iframe,
+.left_0 #sp-chat-iframe2 {
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+}
+
+.right_0 #sp-chat-iframe,
+.right_0 #sp-chat-iframe2 {
+    border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+}
+
+#sp-chat-iframe, #sp-iframe-container {
+    width: 100%;
+    height: 100%;
+}
+
+#sp-iframe-container {
+    position: relative;
+    z-index: 10;
+}
+
+#sp-side-bar {
+    position: absolute;
+    top: -30px;
+    bottom: 0;
+    right: -25px;
+    z-index: 100;
+}
+
+.close-icon {
+    width: 40px;
+    height: 40px;
+    padding: 12px;
+    box-sizing: border-box;
+    position: relative;
+    top: 48px;
+    right: 30px;
+    cursor: pointer
+}
+
+#sp-chat-frame .close-icon path{
+    fill:#fff;
+}
+
+@media only screen and (min-width: 600px) and (max-device-width: 640px) {
+    #sp-root-container {
+        zoom: 3;
+    }
+}
+
+
+
+div#togetherjs-dock.togetherjs-dock-right {
+    right: -70px;
+}
+
+.position_top_middle .contact-tab-border,
+.position_top_left .contact-tab-border,
+.position_top_right .contact-tab-border
+{
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+    box-shadow:0 2px 5px rgba(0, 0, 0, .2)
+}
+
+.position_bottom_middle .contact-tab-border,
+.position_bottom_left .contact-tab-border,
+.position_bottom_right .contact-tab-border{
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+    box-shadow:0 -2px 5px rgba(0, 0, 0, .2)
+} 
+
+.position_right_middle .contact-tab-border,
+.position_right_bottom .contact-tab-border,
+.position_right_top .contact-tab-border{
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+    box-shadow:0 -2px 5px rgba(0, 0, 0, .2)
+}
+
+.position_left_middle .contact-tab-border,
+.position_left_bottom .contact-tab-border,
+.position_left_top .contact-tab-border{
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+    box-shadow:0 2px 5px rgba(0, 0, 0, .2)
+}
+
+#sp-root-container.mobile-version {
+        zoom: 1;
+}
+
+.mobile-version .left_1{
+    left:0;
+}
+.mobile-version #sp-chat-iframe {
+    box-sizing:border-box;
+}
+
+
+#sp-callback-form.sended {
+    position:relative;
+}
+
+#sp-callback-form.sended *{
+    visibility: hidden;
+}
+
+#sp-callback-form.sended::before{
+    visibility: visible;
+    position:absolute;
+    content:"We will call you soon";
+    max-width:100%;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.sp-callback-form {
+    font-family: Tahoma, Verdana, sans-serif;
+    border: 1px solid #B0B0B0;
+    padding: 16px;
+    display: inline-block;
+    border-radius: 2px;
+    -moz-box-shadow: 2px 2px 2px #B0B0B0;
+      -webkit-box-shadow: 2px 2px 2px #B0B0B0;
+          box-shadow: 2px 2px 2px #B0B0B0;
+}
+
+.sp-callback-form h1 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #696969;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.sp-callback-form label {
+    color: #696969;
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  
+.sp-callback-form input {
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  
+.sp-callback-form button {
+    background: #3B64B3;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    padding: 8px;
+  }
