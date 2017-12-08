@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<link type="text/css" rel="stylesheet" href="https://delta.brightpattern.com/clientweb/chat-client-v4/css/form.css">
+<script type="text/javascript">
+    SERVICE_PATTERN_CHAT_CONFIG = {
+        appId: 'eea57cc6d9274b1ba72f22bb7b1a35a4',
+        apiUrl: 'https://delta.brightpattern.com/clientweb/api/v1',
+        tenantUrl: 'delta.brightpattern.com',
+        chatPath: 'https://delta.brightpattern.com/clientweb/chat-client-v4/'
+
+        /*        
+         // Default customer data, it can be collected on current site's context
+         first_name: '',
+         last_name: '',
+         email: '',
+         phone_number: ''
+ 		*/
+    };
+</script>
+<script src="https://delta.brightpattern.com/clientweb/chat-client-v4/js/init.js"></script> 
+<!--script type="text/javascript">
+	// query string parameter extractor
+	function getUrlParameter(name) {
+		name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+		var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+		var results = regex.exec(location.search);
+		return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+	}
+
+	var bp_session_id=getUrlParameter("session");
+	SERVICE_PATTERN_CHAT_CONFIG['account_number']=bp_session_id;
+
+	// get zingtree form & session data
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open('GET', "https://zingtree.com/api/session/"+bp_session_id+"/get_form_data", true);
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4) {
+		    if(xmlhttp.status == 200) {
+			var data = JSON.parse(xmlhttp.responseText);
+			//console.log(data);
+			SERVICE_PATTERN_CHAT_CONFIG['first_name']=data["name"];
+			// get zingtree session steps data
+			var xmlhttp2 = new XMLHttpRequest();
+			xmlhttp2.open('GET', "https://zingtree.com/api/session/"+bp_session_id+"/get_session_data", true);
+			xmlhttp2.onreadystatechange = function() {
+				if (xmlhttp2.readyState == 4) {
+					if(xmlhttp2.status == 200) {
+						var data2 = JSON.parse(xmlhttp2.responseText);
+						//console.log(data2);
+						var history = "";
+						for(item in data2.path){
+							history += data2.path[item].question +": "+data2.path[item].button_text+"\r\n";
+							//console.log(data2.path[item].question);
+							//console.log(data2.path[item].button_text);
+						}
+						SERVICE_PATTERN_CHAT_CONFIG['email']=history;
+					 }
+				}
+			};
+			xmlhttp2.send(null);
+		     }
+		}
+	};
+	xmlhttp.send(null);
+
+	// auto-click the chat tab
+	document.addEventListener("DOMContentLoaded", function(event) { 
+		setTimeout(function(){ document.getElementById('sp-chat-label-text').click();}, 1000);
+	});
+</script-->
+
+ </body>
+ 
+ </html>
+

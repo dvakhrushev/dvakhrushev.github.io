@@ -1,0 +1,225 @@
+.proactive-offer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    display:none;
+}
+
+.proactive-offer__body {
+    position: relative;
+}
+.proactive-offer__content {
+    transform-origin: 0% 0%
+}
+
+.proactive-offer__button-wrapper {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    font-size:15px;
+    transform-origin: 50% 100%;
+}
+.proactive-offer__button-wrapper button{
+    height:40px;
+    line-height:40px;
+    padding:0 15px;
+    margin: 0 5px;
+    font-size:15px;
+    border:none;
+}
+
+.proactive-offer .proactive-offer__close.close-icon {
+    right: -30px;
+    left: unset;
+    position: absolute;
+    top: -28px;
+}
+
+.proactive-offer__close.close-icon path{
+    fill:#acc9dc;
+}
+
+.button-primary {
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor:pointer;
+    outline: none!important;
+}
+
+.proactive-offer .proactive-offer__close_hide_yes,
+.proactive-offer .proactive-offer__button_hide_yes {
+    display: none!important;
+}
+
+.proactive-offer{
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#preview .proactive-offer[data-animationIn=pop]{
+    animation-name: pop;
+    animation-timing-function: step-end
+}
+
+.proactive-offer[data-animationIn=slide_from_left]{
+    animation-name: slide_from_left;
+}
+
+.proactive-offer[data-animationIn=slide_from_top]{
+    animation-name: slide_from_top;
+}
+
+.proactive-offer[data-animationIn=slide_from_right]{
+    animation-name: slide_from_right;
+}
+
+.proactive-offer[data-animationIn=slide_from_bottom]{
+    animation-name: slide_from_bottom;
+}
+
+
+#preview .proactive-offer[data-animationOut=disappear]{
+    animation-name: disappear;
+    animation-timing-function: step-start
+}
+
+.proactive-offer.removing[data-animationOut=slide_left]{
+    animation-name: slide_left;
+}
+
+.proactive-offer.removing[data-animationOut=slide_top]{
+    animation-name: slide_top;
+}
+
+.proactive-offer.removing[data-animationOut=slide_right]{
+    animation-name: slide_right;
+}
+
+.proactive-offer.removing[data-animationOut=slide_bottom]{
+    animation-name: slide_bottom;
+}
+.proactive-offer.removing[data-animationOut=fade_out]{
+    animation-name: fade_out;
+}
+
+@keyframes pop {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@keyframes slide_from_left {
+    from {
+        opacity:0;
+        transform:translate(-200%, -50%);
+    }
+    to {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+}
+
+@keyframes slide_from_top {
+    from {
+        opacity:0;
+        transform:translate(-50%, -200%);
+    }
+    to {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+}
+
+@keyframes slide_from_right {
+    from {
+        opacity:0;
+        transform:translate(200%, -50%);
+    }
+    to {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+}
+
+@keyframes slide_from_bottom {
+    from {
+        opacity:0;
+        transform:translate(-50%, 200%);
+    }
+    to {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+}
+
+@keyframes disappear {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+
+@keyframes slide_left {
+    from {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+    to {
+        opacity:0;
+        transform:translate(-200%, -50%);
+    }
+}
+
+@keyframes slide_top {
+    from {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+    to {
+        opacity:0;
+        transform:translate(-50%, -200%);
+    }
+}
+
+@keyframes slide_right {
+    from {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+    to {
+        opacity:0;
+        transform:translate(200%, -50%);
+    }
+}
+
+@keyframes slide_bottom {
+    from {
+        opacity:1;
+        transform:translate(-50%, -50%);
+    }
+    to {
+        opacity:0;
+        transform:translate(-50%, 200%);
+    }
+}
+
+@keyframes fade_out {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}

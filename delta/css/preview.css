@@ -1,0 +1,86 @@
+#preview {
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    padding: 50px 30px;
+}
+
+#preview.form{
+    display:block;
+}
+/*
+#preview h1 {
+    font-size: 34px;
+    margin-bottom: 30px;
+}*/
+/*
+#preview p + p {
+    margin-top: 20px;
+}*/
+
+#preview #preChatForm{
+    display:none;
+}
+
+#preview #unavailableForm{
+    display:none;
+}
+
+#customForm{
+    display:none;
+}
+
+#preview.proactive_offer,
+#preview.proactive_offer .proactive-offer,
+#preview.chat_widget #sp-chat-frame,
+#preview.chat_widget #chat-body,
+#preview.highlights #sp-chat-frame,
+#preview.highlights #chat-body,
+#preview.pre_chat_form #sp-chat-frame,
+#preview.pre_chat_form #offline-form,
+#preview.contact_tab #sp-chat-widget,
+#preview.on_page_form,
+#preview.form #sp-chat-frame,
+#preview.form #offline-form,
+#preview.form #customForm
+ {
+    display: block; 
+} 
+
+#preview #sp-callback-form .agent-message{
+    background:none;
+}
+
+#preview:not(.contact_tab, .chat_widget) #sp-chat-widget{
+    display:none!important;
+}
+
+#preview:not(.contact_tab, .chat_widget) #sp-chat-widget{
+    display:none!important;
+}
+
+#preview.pre_chat_form #preChatForm{
+    display:block;
+}
+
+#preview:not(.pre_chat_form) #preChatForm{
+    display:none!important;
+}
+
+#preview .proactive-offer,
+#preview.proactive_offer #header-avatar,
+#preview #offline-form,
+#preview #chat-body {
+    display: none;
+}
+
+
+#preview.leave_msg_form #unavailableForm,#preview.leave_msg_form #offline-form,#preview.leave_msg_form #sp-chat-frame{
+    display: block;
+}
+#preview.leave_msg_form #chat-body{
+    display: none;
+}

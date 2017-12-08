@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<!-- ___PRODUCT_BUILD___ (___PRODUCT_COMMENTS___) ___PRODUCT_DATE___ -->
+
+<html> 
+<head>
+    <title>Chat</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+
+    <!-- Libraries -->
+    <link href="js/libraries/emoji/css/emoji.css" rel="stylesheet">
+    <script type="text/javascript" src="js/libraries/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/libraries/jquery-ui-1.11.1/jquery-ui-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/libraries/json2/json2.min.js"></script>
+    <script type="text/javascript" src="js/libraries/XDomainRequest/jQuery.XDomainRequest.min.js"></script>
+    <script type="text/javascript" src="js/libraries/datetime/datetime.min.js"></script>
+    <script type="text/javascript" src="js/libraries/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/config.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/util.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/jquery.emojiarea.js"></script>
+    <script type="text/javascript" src="js/libraries/emoji/js/emoji-picker.js"></script>
+
+    <!-- Custom scripts & styles -->
+    <link href="css/wrong.css" rel="stylesheet" type="text/css">
+    <link href="css/chat.css" rel="stylesheet" type="text/css">
+    <link href="css/proactive-offer.css" rel="stylesheet" type="text/css">
+    <link href="css/override.css" rel="stylesheet" type="text/css">
+    <script src="js/require.js" data-main="js/chat-api-session"></script>
+</head>
+
+<body class="inside-chat-frame-body">
+<div id="inner-chat" class="base-font widget-border widget-border-radius">
+
+    <div id="servicepatternsite-iframe-chat">
+        <div id="header-avatar" class="main-background-color widget-border-radius">
+            <div id="header-avatar-container">
+                <div class="has-avatar">
+                    <div class="avatar">
+                        <div class="avatar-image-wrapper">
+                            <div class="avatar-image"></div>
+                        </div>
+                    </div>
+                    <div class="info second-color title-font">
+                        <div id="agent-name" class="agent-name">New Chat</div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="sound_player"></div>
+            <div class="conversationOptions">
+                <div id="callme" class="main-path-color hang-up" style="display: none;">
+                <div></div>
+                    <svg class="startCall" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M11.767 15.993c-.419 0-.832-.07-1.227-.21-4.89-1.727-8.763-5.698-10.362-10.621-.479-1.48.029-3.107 1.268-4.05l.789-.601c.438-.334.963-.511 1.516-.511.941 0 1.794.521 2.226 1.358l1.334 2.589c.127.246.193.521.193.797 0 .438-.163.858-.461 1.182l-.277.302c-.276.3-.337.744-.149 1.105.455.882 1.163 1.588 2.048 2.043.355.184.813.121 1.107-.148l.303-.277c.526-.483 1.348-.595 1.982-.268l2.594 1.331c.84.431 1.362 1.282 1.362 2.222 0 .66-.257 1.283-.723 1.754l-.903.912c-.686.694-1.64 1.091-2.62 1.091zm-8.016-14.495c-.222 0-.431.071-.605.204l-.789.601c-.733.558-1.034 1.521-.75 2.397 1.455 4.482 4.982 8.098 9.435 9.67.78.276 1.698.064 2.277-.521l.902-.912c.187-.189.29-.438.29-.701 0-.375-.209-.717-.546-.889l-2.594-1.332c-.105-.053-.232-.006-.281.039l-.304.277c-.747.686-1.906.842-2.81.377-1.163-.599-2.096-1.528-2.693-2.689-.475-.918-.324-2.045.377-2.805l.277-.302c.03-.033.066-.088.066-.168l-.027-.112-1.334-2.589c-.173-.336-.515-.545-.891-.545z" /></svg>
+                    <svg class="stopCall" xmlns="http://www.w3.org/2000/svg" width="17" height="17"><path clip-rule="evenodd" d="M8.93 9.376c.355.184.813.121 1.107-.148l.303-.278c.526-.483 1.348-.595 1.982-.268l2.594 1.331c.84.431 1.362 1.282 1.362 2.222 0 .66-.257 1.283-.723 1.754l-.903.912c-.687.694-1.641 1.092-2.62 1.092-.419 0-.832-.07-1.227-.21-2.237-.79-4.245-2.068-5.937-3.675l-4.162 4.162-.706-.707 4.159-4.158c-1.661-1.775-2.953-3.895-3.716-6.243-.479-1.48.029-3.107 1.268-4.05l.789-.601c.438-.334.963-.511 1.517-.511.941 0 1.794.521 2.226 1.358l1.334 2.589c.126.246.193.521.193.797 0 .438-.163.858-.461 1.182l-.278.302c-.276.3-.337.744-.149 1.105.15.292.339.557.542.807l7.426-7.426.707.707-7.424 7.425c.247.198.509.382.797.53zm2.377 4.994c.78.276 1.698.064 2.277-.521l.902-.912c.187-.189.29-.438.29-.701 0-.375-.209-.717-.546-.889l-2.594-1.332c-.105-.053-.232-.006-.281.039l-.304.277c-.747.686-1.906.842-2.81.377-.428-.22-.811-.498-1.171-.802l-1.142 1.144c1.535 1.45 3.353 2.605 5.379 3.32zm-5.382-9.156l.277-.302c.03-.033.066-.088.066-.168l-.027-.112-1.334-2.589c-.173-.336-.514-.545-.89-.545-.222 0-.431.071-.605.204l-.79.601c-.733.558-1.034 1.521-.75 2.397.688 2.121 1.854 4.036 3.348 5.645l1.144-1.144c-.311-.362-.593-.75-.815-1.182-.476-.918-.324-2.045.376-2.805z" /></svg>
+                </div>
+                <div id="shareScreen" class="main-path-color" style="display: none;">
+                    <svg class="startSharing" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M15 12h-6v2h3c.553 0 1 .447 1 1v1h-10v-1c0-.553.447-1 1-1h3v-2h-6c-.553 0-1-.447-1-1v-10c0-.552.447-1 1-1h14c.552 0 1 .448 1 1v10c0 .553-.448 1-1 1zm0-11h-14v9h14v-9z"/></svg>
+                    <svg class="stopSharing" xmlns="http://www.w3.org/2000/svg" width="20" height="19"><path clip-rule="evenodd" d="M17.557.707l-1.327 1.328.049.244v10c0 .553-.448 1-1 1h-6v2h3c.553 0 1 .447 1 1v1h-10v-1c0-.553.447-1 1-1h3v-2h-2.295l-4.277 4.277-.707-.707 3.571-3.57h-2.293c-.553 0-1-.447-1-1v-10c0-.552.447-1 1-1h14l.243.049 1.329-1.328.707.707zm-2.279 10.572v-8.294l-8.293 8.293h8.293zm-14-9v9h4.293l9-9h-13.293z" fill="none"/></svg>
+                </div>
+            </div>
+            <div id="endChat" style="display: none;">
+                <div></div>
+            </div>
+        </div>
+
+        <form id="content-form" method="POST"></form>
+
+        <div id="offline-form" style="display: none;">
+            <div id="offline-form-inner">
+
+                <div id="preChatForm" style="display: none;" class="question__chat-tab_active agent-message">
+
+                    <div class="tabs">
+                        <div class="tab tab_active tabChat main-color widget-background">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17"><path clip-rule="evenodd" d="M15.001 12.001h-3.601l-6.4 5v-5h-1c-.552 0-1-.447-1-1v-7c0-.552.448-1 1-1h11c.552 0 1 .448 1 1v7c.001.553-.447 1-.999 1zm-1-7h-9.001v5h2v3.391l3.827-3.391h3.174v-5zm-12.001 3.999h-1c-.552 0-1-.448-1-1v-7c0-.553.448-1 1-1h9c.552 0 1 .447 1 1v1h-9v7z" fill="none"/></svg>
+                            <span>Chat</span>
+                        </div>
+                        <div class="tab tabChat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17"><path clip-rule="evenodd" d="M15.001 12.001h-3.601l-6.4 5v-5h-1c-.552 0-1-.447-1-1v-7c0-.552.448-1 1-1h11c.552 0 1 .448 1 1v7c.001.553-.447 1-.999 1zm-1-7h-9.001v5h2v3.391l3.827-3.391h3.174v-5zm-12.001 3.999h-1c-.552 0-1-.448-1-1v-7c0-.553.448-1 1-1h9c.552 0 1 .447 1 1v1h-9v7z" fill="none"/></svg>
+                            <span>Chat</span>
+                        </div>
+                        <div class="tab tab_active tabPhone main-color widget-background">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"><path clip-rule="evenodd" d="M12.492 17c-.444 0-.883-.075-1.302-.224-5.191-1.836-9.303-6.056-11.001-11.289-.509-1.573.032-3.302 1.346-4.305l.838-.639c.465-.355 1.022-.543 1.609-.543 1 0 1.905.553 2.363 1.444l1.417 2.751c.134.262.206.555.206.848 0 .466-.174.912-.49 1.256l-.295.321c-.293.318-.357.791-.159 1.175.484.937 1.235 1.688 2.174 2.171.377.196.864.129 1.175-.157l.321-.295c.56-.514 1.432-.632 2.105-.285l2.754 1.415c.893.458 1.447 1.362 1.447 2.362 0 .701-.271 1.363-.768 1.865l-.958.969c-.728.738-1.742 1.16-2.782 1.16zm-8.51-15.407c-.235 0-.457.075-.642.216l-.838.639c-.777.594-1.097 1.618-.796 2.549 1.545 4.765 5.289 8.607 10.017 10.279.828.293 1.803.068 2.418-.555l.958-.97c.198-.201.308-.466.308-.745 0-.399-.223-.762-.58-.945l-2.754-1.415c-.111-.057-.246-.007-.299.041l-.321.295c-.793.728-2.025.895-2.983.4-1.235-.636-2.226-1.624-2.861-2.858-.503-.976-.342-2.173.4-2.981l.294-.32c.032-.035.07-.094.07-.179l-.029-.12-1.416-2.752c-.183-.358-.546-.579-.946-.579z" /></svg>
+                            <span>Phone</span>
+                        </div>
+                        <div class="tab tabPhone">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"><path clip-rule="evenodd" d="M12.492 17c-.444 0-.883-.075-1.302-.224-5.191-1.836-9.303-6.056-11.001-11.289-.509-1.573.032-3.302 1.346-4.305l.838-.639c.465-.355 1.022-.543 1.609-.543 1 0 1.905.553 2.363 1.444l1.417 2.751c.134.262.206.555.206.848 0 .466-.174.912-.49 1.256l-.295.321c-.293.318-.357.791-.159 1.175.484.937 1.235 1.688 2.174 2.171.377.196.864.129 1.175-.157l.321-.295c.56-.514 1.432-.632 2.105-.285l2.754 1.415c.893.458 1.447 1.362 1.447 2.362 0 .701-.271 1.363-.768 1.865l-.958.969c-.728.738-1.742 1.16-2.782 1.16zm-8.51-15.407c-.235 0-.457.075-.642.216l-.838.639c-.777.594-1.097 1.618-.796 2.549 1.545 4.765 5.289 8.607 10.017 10.279.828.293 1.803.068 2.418-.555l.958-.97c.198-.201.308-.466.308-.745 0-.399-.223-.762-.58-.945l-2.754-1.415c-.111-.057-.246-.007-.299.041l-.321.295c-.793.728-2.025.895-2.983.4-1.235-.636-2.226-1.624-2.861-2.858-.503-.976-.342-2.173.4-2.981l.294-.32c.032-.035.07-.094.07-.179l-.029-.12-1.416-2.752c-.183-.358-.546-.579-.946-.579z" /></svg>
+                            <span>Phone</span>
+                        </div>
+                    </div>
+                    <div class="questionFormInner widget-background">
+                        <div class="fieldsWrapper">
+                            <div class="commonFields"></div>
+                            <div class="chatFields"></div>
+                            <div class="phoneFields"></div>
+                        </div>
+                    </div>
+                    <div class="prechat__action-buttons">
+                        <input id="cancelPreChatForm" type="button" value="Cancel" class="servicepatternBtn cancel main-background-color second-color">
+                        <input id="submitChat" type="button" value="Chat" class="servicepatternBtn accept main-background-color second-color">
+                        <input id="submitPhone" type="button" value="Phone" class="servicepatternBtn phone main-background-color second-color">
+                    </div>
+                </div>
+
+                <div id="questionForm" style="display: none;">
+                    <div class="questionFormFieldsWrapper">
+                        <div class="description">Please fill the following information:</div>
+                        
+                        <div class="field-wrapper field-label">
+                            <label id="first_name_label">First name*</label>
+                        </div>
+
+                        <div class="field-wrapper field-name">
+                            <input id="first_name" type="text" class="input-field agent-message" name="first_name"  required="true">
+                            <div id="error-first_name" class="error-balloon">Please, enter first name</div>
+                        </div>
+
+                        <div class="field-wrapper field-label">
+                            <label id="last_name_label">Last name*</label>
+                        </div>
+
+                        <div class="field-wrapper field-name">
+                            <input id="last_name" type="text" class="input-field agent-message" name="last_name" required="true">
+                            <div id="error-last_name" class="error-balloon">Please, enter last name</div>
+                        </div>
+
+                        <div class="field-wrapper field-label">
+                            <label id="account_number_label">Account id</label>
+                        </div>
+
+                        <div class="field-wrapper field-text">
+                            <input id="account_number" type="text" class="input-field agent-message" name="account_number">
+                        </div>
+
+                        <div class="field-wrapper field-label">
+                            <label id="email_label">Your email*</label>
+                        </div>
+
+                        <div class="field-wrapper field-email">
+                            <input id="email" type="text" name="email" class="input-field agent-message" required="true">
+                            <div id="error-email" class="error-balloon">Please, enter valid email</div>
+                        </div>
+
+                        <div class="field-wrapper field-label">
+                            <label id="question_label">Your message*</label>
+                        </div> 
+
+                        <div class="field-wrapper field-multiline">
+                            <textarea id="question" name="multiline_text" class="input-field agent-message" required="true"></textarea>
+                            <div id="error-question" class="error-balloon multiline">Please, enter message</div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <div>
+                            <input id="submit" type="button" value="Send" class="servicepatternBtn accept main-background-color second-color">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="callbackForm" style="display: none;">
+                    <div>
+                        <div class="field-wrapper">
+                            <input id="cb-FIRST_NAME" type="text" class="input-field" placeholder="Your first name*" required>
+                            <div id="error-cb-FIRST_NAME" class="error-balloon">Please, enter first name</div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-LAST_NAME" type="text" class="input-field" placeholder="Your last name*" required>
+                            <div id="error-cb-LAST_NAME" class="error-balloon">Please, enter last name</div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-PHONE" type="text" class="input-field" placeholder="Your phone number*" required>
+                            <div id="error-cb-PHONE" class="error-balloon">Please, enter phone number</div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-EMAIL" type="email" class="input-field" placeholder="Your email" >
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-ACCOUNT" type="text" class="input-field" placeholder="Your account">
+                        </div>
+
+                        <div class="field-wrapper">
+                            <input id="cb-COMPANY" type="text" class="input-field" placeholder="Your company">
+                        </div>
+
+                        <div class="field-wrapper message">
+                            <textarea id="cb-TEXT" style="height: 65px;" class="input-field" placeholder="Your message"></textarea>
+                        </div>
+
+                        <div class="buttons">
+                            <div class="left-button">
+                                <a id="cb-cancel" class="servicepatternBtn cancel" href="#">Cancel</a>
+                            </div>
+                            <div>
+                                <input id="cb-submit" type="button" value="Call me when ready" class="servicepatternBtn accept">
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div> 
+
+                <div id="unavailableForm" style="display: none;">
+                    <div id="offline-form-fields">
+                        <div class="offlineFields"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="buttons">
+                            <div class="left-button">
+                                <a id="uncancel" class="servicepatternBtn cancel main-background-color second-color" href="#">Cancel</a>
+                            </div>
+                            <div>
+                                <input id="unsubmit" type="button" value="Send" class="servicepatternBtn main-background-color second-color">
+                            </div>
+                        </div>
+                </div>
+
+                <div id="surveyForm" style="display: none;">
+                    <form>
+                    <div class="field-wrapper serviceSurvey">
+                        <div class="description">Did we provide the service you were looking for?</div>
+                        <input type="radio" name="service" id="service-1" value="1" checked="checked">
+                        <label for="service-1">yes</label>
+                        <input type="radio" name="service" id="service-0" value="0">
+                        <label for="service-0">no</label>
+                    </div>
+
+                    <div class="field-wrapper helpfulSurvey radioStars">
+                        <div class="description">How helpful was our representative?</div>
+                        <div class="stars">
+                            <input type="radio" name="helpful" id="helpful-1" value="1"><label for="helpful-1"></label>
+                            <input type="radio" name="helpful" id="helpful-2" value="2"><label for="helpful-2"></label>
+                            <input type="radio" name="helpful" id="helpful-3" value="3"><label for="helpful-3"></label>
+                            <input type="radio" name="helpful" id="helpful-4" value="4"><label for="helpful-4"></label>
+                            <input type="radio" name="helpful" id="helpful-5" value="5"><label for="helpful-5"></label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper recommendSurvey radioStars">
+                        <div class="description">How likely are you recommend our products and services in the future?</div>
+                        <div class="stars">
+                            <input type="radio" name="recommend" id="recommend-1" value="1"><label for="recommend-1"></label>
+                            <input type="radio" name="recommend" id="recommend-2" value="2"><label for="recommend-2"></label>
+                            <input type="radio" name="recommend" id="recommend-3" value="3"><label for="recommend-3"></label>
+                            <input type="radio" name="recommend" id="recommend-4" value="4"><label for="recommend-4"></label>
+                            <input type="radio" name="recommend" id="recommend-5" value="5"><label for="recommend-5"></label>
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper transcriptSurvey">
+                        <input type="checkbox" name="transcript" id="transcript" value="1">
+                        <label for="transcript" class="description small">Send me transcript of the chat by email?</label>
+                    </div>
+
+                    <div class="field-wrapper emailSurvey">
+                        <div class="description">Your email*</div>
+                        <input type="email" name="transcriptEmail" pattern="\S+@[a-z]+.[a-z]+" id="transcriptEmail" class="agent-message"/>
+                        <div class="error-balloon">Wrong value</div>
+                    </div>
+
+                    <div class="buttons" style="margin-top: -10px;">
+                        <div>
+                            <input id="submitSurvey" type="button" value="Submit" class="servicepatternBtn main-background-color second-color">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+
+                
+            </div>
+        </div>
+
+        <div id="chat-body" class="widget-background" style="display: none;">
+            <div class="chat-body__content">
+                <video id="video" style="display: none; height: 100px; width: 100%" autoplay></video>
+                <div id="notification-prompt" style="display: none;" class="promptMessage second-color">
+                    <div class="background main-background-color"></div>
+                    <div class="content">When prompted, please allow notifications from this window,
+                    so you could see responses when this window is hidden.</div>
+                </div>
+                <div id="call-prompt" style="display: none;" class="promptMessage second-color">
+                    <div class="background main-background-color"></div>
+                    <div class="content">When prompted, please allow access to your camera and microphone.</div>
+                </div>
+                <div id="servicepattern-chat">
+                    <div id="scrollbar-container">
+                        <div id="messages-div" class="viewport">
+                            <div id="messages-div-outer">
+                                <div id="messages-div-inner" class="overview messages-div-inner">
+                                    <div id="messages-div-inner-clear"></div>
+                                </div>
+                            </div>
+                            <div id="agent-typing" style="display: none;">
+                                <div class="agent-typing-wrapper"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="input-div" class="chat-body__input agent-message">
+                <div class="input-div-table">
+                    <div class="td-textarea">
+                    <textarea
+                            id="input-field"
+                            data-emojiable="true"
+                            rows="1"
+                            name="input-field"
+                            maxlength="1000"
+                            placeholder="Text..."
+                            autocomplete="off"
+                            style="resize: none;"
+                    ></textarea>
+                    </div>
+                    <div id="attachFile"></div>
+                    <div class="td-button">
+                        <input id="input-button" type="button" value="Send" class="servicepatternBtn accept main-color">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="customForm" style="display: none;">
+            <div class="custom-form-fields">
+                <div class="customFormFields"></div>
+                <div class="clear"></div>
+            </div> 
+            <div class="buttons">
+                    <div class="left-button">
+                        <a id="custom_cancel" class="servicepatternBtn cancel main-background-color second-color" href="#">Cancel</a> 
+                    </div>
+                    <div>
+                        <svg class="secureIcon main-path-color" xmlns="http://www.w3.org/2000/svg" width="10.142" height="16" viewBox="-99.5 5.418 10.142 16"><path d="M-94.429 5.418c-2.801 0-5.071 2.27-5.071 5.07v10.048c0 .487.395.882.882.882h8.376c.487 0 .882-.395.882-.882l.002-10.048c0-2.8-2.271-5.07-5.071-5.07zm.606 10.949v1.588c0 .334-.271.605-.606.605-.335 0-.606-.271-.606-.605v-1.588c-.255-.188-.422-.487-.422-.828 0-.568.461-1.028 1.029-1.028.568 0 1.029.46 1.029 1.028-.002.341-.169.641-.424.828zm3.13-5.102h-7.473v-.776c0-2.06 1.676-3.736 3.736-3.736 2.061 0 3.737 1.677 3.737 3.736v.776z"/></svg>
+                        <input id="custom_submit" type="button" value="Send" class="servicepatternBtn main-background-color second-color">
+                    </div>
+                </div>
+        </div>
+    </div>
+    <form name="file-upload-form" id="file-upload-form" target="_blank" method="post" enctype="multipart/form-data"
+          style="display:none;">
+    </form>
+</div>
+</body>
+</html>
