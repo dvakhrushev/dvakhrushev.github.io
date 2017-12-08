@@ -302,7 +302,26 @@ define(function (require, exports, module) {
                     }
                 };
 
-                var pc = new PeerConnection({iceServers: []});
+                var pc = new PeerConnection({iceServers: [
+                        {
+                            "url" : "stun:ocean03.brightpattern.com:20001", 
+                            "username" : "turnserver", 
+                            "credential" : "turnserverturnserver"
+                        },
+                        {
+                            "url" : "stun:stun.l.google.com:19302"
+                        },
+                        {
+                            "url" : "turn:ocean03.brightpattern.com:20001", 
+                            "username" : "turnserver", 
+                            "credential" : "turnserverturnserver"
+                        },
+                        {
+                            "url" : "turn:ocean03.brightpattern.com:20001?transport=tcp", 
+                            "username" : "turnserver", 
+                            "credential" : "turnserverturnserver"
+                        }
+                    ]});
                 pc.onicecandidate = function (event) {
                     printToConsole("onicecandidate %o", event);
                     if (!!event.candidate) {
