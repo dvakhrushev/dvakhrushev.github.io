@@ -6,6 +6,7 @@
     function assigntocall() {
       //window.bpspat.api.dialNumber("111")
       //window.bpspat.api.postVariable("n", 'qqqqq')
+      window.parent.frames.postMessage({command: "DIAL_NUMBER", number: "111"}, "*");
       window.parent.frames.postMessage({command: "POST_VARIABLE", name: "n", value: "qqqqq"}, "*");
     }
   </script>
