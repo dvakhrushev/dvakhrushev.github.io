@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
+  <!--script type="text/javascript" src="https://new.brightpattern.com/agentdesktop/libs/servicepatternapi-dev.js">
+  </script-->
   <script type="text/javascript">
     function assigntocall() {
-      alert('qqq')
+      //window.bpspat.api.dialNumber("111")
+      //window.bpspat.api.postVariable("n", 'qqqqq')
+      window.parent.frames.postMessage({command: "POST_VARIABLE", name: "n", value: "qqqqq"}, "*");
     }
   </script>
   <body>
